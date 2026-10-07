@@ -1,0 +1,4 @@
+# Netlify, deploying from GitHub. Static site: nothing to build, publish the repository root.
+# Routing and caching rules live in _redirects and _headers next to this file.
+[build]
+  publish = "."
