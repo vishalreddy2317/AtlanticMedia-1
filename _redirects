@@ -1,2 +1,5 @@
+# The site's home page is atlantic-media.html, served at / (and at /atlantic-media).
+/  /atlantic-media.html  200
+
 # The Atlantic Globe (PRIOR) is a single-page app under /atlantic-globe/. Everything else on this site is static.
 /atlantic-globe/*  /atlantic-globe/index.html  200
