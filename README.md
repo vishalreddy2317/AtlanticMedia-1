@@ -1,16 +1,15 @@
 # Atlantic Media — website
 
-Static site for Atlantic Media (Hyderabad): design concepts, the chosen "Atlantic Way" page, its contact page and the
-Atlantic Globe (PRIOR creators). Plain HTML, CSS and JavaScript — no build step.
+Static site for Atlantic Media (Hyderabad): the home page, the contact page and the Atlantic Globe (PRIOR creators).
+Plain HTML, CSS and JavaScript — no build step.
 
 ## Pages
 
-- `index.html` — hub listing the design previews
-- `concept-a-atlantic-way.html` — the Atlantic Way page (chosen direction) · `contact-a.html` — its contact page
-- `concept-b-editorial.html`, `concept-c-signal.html` and their contact pages — the other two concepts
-- `atlantic-globe/` — the Atlantic Globe app (built output), embedded on the Atlantic Way page and served at `/atlantic-globe/`
+- `atlantic-media.html` — the home page, served at `/` (and `/atlantic-media`)
+- `contact.html` — the contact page, at `/contact`
+- `atlantic-globe/` — the Atlantic Globe app (built output), embedded on the home page and served at `/atlantic-globe/`
 
-Shared pieces: `brands.js` + `brands.css` (brand wall / brand ring), `contact.js` (enquiry form), `assets/` (images, logos),
+Shared pieces: `brands.js` + `brands.css` (brand ring), `contact.js` (enquiry form), `assets/` (images, logos),
 `_redirects` and `_headers` (Netlify routing and caching).
 
 ## Preview locally

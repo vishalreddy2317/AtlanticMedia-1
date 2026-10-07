@@ -1,4 +1,4 @@
-// Contact form + scroll reveals shared by all three concept contact pages.
+// Contact form + scroll reveals for the contact page.
 // No backend yet: a valid enquiry opens the visitor's email app, pre-filled,
 // addressed to connect@atlanticmedia.in.
 (function () {
