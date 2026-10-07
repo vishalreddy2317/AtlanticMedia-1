@@ -1,0 +1,63 @@
+/* Brand tiers — each concept sets these variables to match its theme:
+   --bt-tile (tile background), --bt-line (borders), --bt-acc (accent), --bt-text, --bt-radius */
+.bt { display: grid; gap: 34px; margin-top: 46px; }
+.bt-tier { display: grid; gap: 14px; }
+.bt-label { display: flex; align-items: center; gap: 12px; font-size: .78rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 700; color: var(--bt-text); }
+.bt-label::after { content: ''; flex: 1; height: 1px; background: var(--bt-line); }
+.bt-label small { order: 2; font-size: .72rem; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--bt-line); opacity: .75; }
+.bt-tile { list-style: none; display: flex; align-items: center; justify-content: center; box-sizing: border-box; flex: none; background: var(--bt-tile); border: 1px solid var(--bt-line); border-radius: var(--bt-radius); overflow: hidden; position: relative; }
+/* logos always fit inside the tile (flex parent has a fixed height, so % limits resolve) */
+.bt-tile img { display: block; width: auto; height: auto; max-width: 100%; max-height: 100%; min-height: 0; object-fit: contain; }
+
+/* ---- HIGH priority: large spotlight grid — float, shine sweep, lift + glow on hover ---- */
+.bt-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; padding: 0; }
+.bt-tier--high .bt-tile { height: 150px; padding: 26px 34px; animation: bt-float 6s ease-in-out infinite; animation-delay: calc(var(--i) * -0.7s); transition: transform .4s, box-shadow .4s, border-color .4s; }
+.bt-tier--high .bt-tile::after {
+  content: ''; position: absolute; inset: -40% -60%; background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,.75) 50%, transparent 60%);
+  transform: translateX(-100%); pointer-events: none;
+}
+.bt-tier--high .bt-tile.is-shine::after { animation: bt-shine 1.2s ease; }
+.bt-tier--high .bt-tile:hover { transform: translateY(-6px) scale(1.03); border-color: var(--bt-acc); box-shadow: 0 18px 40px -12px var(--bt-acc); animation-play-state: paused; }
+@keyframes bt-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -6px; } }
+@keyframes bt-shine { to { transform: translateX(100%); } }
+
+/* ---- MEDIUM priority: slow marquee, pauses on hover, tile lifts ---- */
+.bt-marquee { overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+.bt-track { display: flex; gap: 14px; width: max-content; padding: 6px 0; margin: 0; }
+.bt-tier--mid .bt-track { animation: bt-scroll 46s linear infinite; }
+.bt-tier--mid .bt-tile { width: 190px; height: 100px; padding: 18px 24px; transition: transform .3s, border-color .3s; }
+.bt-tier--mid .bt-marquee:hover .bt-track { animation-play-state: paused; }
+.bt-tier--mid .bt-tile:hover { transform: translateY(-4px); border-color: var(--bt-acc); }
+
+/* ---- SMALL priority: compact tiles, faster reverse marquee, soft zoom on hover ---- */
+.bt-tier--small .bt-track { animation: bt-scroll 34s linear infinite reverse; gap: 10px; }
+.bt-tier--small .bt-tile { width: 140px; height: 70px; padding: 12px 16px; transition: transform .3s; }
+.bt-tier--small .bt-tile:hover { transform: scale(1.08); }
+.bt-tier--small .bt-marquee:hover .bt-track { animation-play-state: paused; }
+@keyframes bt-scroll { to { transform: translateX(calc(-50% - 7px)); } }
+
+/* ---- RING (data-layout="ring"): logo tiles on a 3D ring seen from inside; drag sideways to turn it (see brands.js).
+   Every size derives from --bt-r, the ring radius. The ring is wider than its container, so the host section must clip it (overflow: hidden).
+   A tile takes its logo's own background colour (--bt-bg). ---- */
+.bt--ring { --bt-r: clamp(400px, 39.6vw, 570px); position: relative; gap: 18px; }
+.bt-ring { position: relative; height: calc(var(--bt-r) * .42); cursor: grab; touch-action: pan-y; -webkit-user-select: none; user-select: none; }
+.bt-ring.is-dragging { cursor: grabbing; }
+.bt-ring:focus-visible { outline: 2px solid var(--bt-acc); outline-offset: 10px; border-radius: var(--bt-radius); }
+.bt-ring__spin { position: absolute; left: 50%; top: 50%; width: 0; height: 0; margin: 0; padding: 0; transform-style: preserve-3d; transform: perspective(calc(var(--bt-r) * 1.228)) rotateY(var(--bt-a, 90deg)); }
+.bt--ring .bt-tile { position: absolute; left: calc(var(--bt-r) * -.228); top: calc(var(--bt-r) * -.155); width: calc(var(--bt-r) * .456); height: calc(var(--bt-r) * .31); padding: calc(var(--bt-r) * .04) calc(var(--bt-r) * .055); background: var(--bt-bg, var(--bt-tile)); transform: rotateY(calc(var(--i) * -30deg)) translateZ(calc(var(--bt-r) * -1)); -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+.bt--ring .bt-tile img { pointer-events: none; }
+.bt--ring .bt-tile--tint img { clip-path: inset(1px round 8px); } /* trims the lighter rim and rounded corners some logo files carry */
+.bt--ring .bt-tile--soft img { -webkit-mask: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent), linear-gradient(transparent, #000 12%, #000 88%, transparent); -webkit-mask-composite: source-in; mask: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent), linear-gradient(transparent, #000 12%, #000 88%, transparent); mask-composite: intersect; }
+.bt-ring__hint { text-align: center; font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 700; color: var(--bt-text); opacity: .55; }
+.bt-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+@media (max-width: 860px) {
+  .bt-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bt-tier--high .bt-tile { height: 110px; padding: 18px 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bt-tier--high .bt-tile, .bt-track { animation: none !important; }
+  .bt-track { flex-wrap: wrap; width: auto; }
+  .bt-track [aria-hidden="true"] { display: none; }
+  .bt-marquee { mask-image: none; -webkit-mask-image: none; }
+}

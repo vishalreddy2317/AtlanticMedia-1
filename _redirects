@@ -1,0 +1,2 @@
+# The Atlantic Globe (PRIOR) is a single-page app under /atlantic-globe/. Everything else on this site is static.
+/atlantic-globe/*  /atlantic-globe/index.html  200

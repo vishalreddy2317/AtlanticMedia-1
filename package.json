@@ -1,0 +1,8 @@
+{
+  "name": "livesite-funny-quokka",
+  "private": true,
+  "scripts": {
+    "dev": "node dev-server.mjs",
+    "start": "node dev-server.mjs"
+  }
+}

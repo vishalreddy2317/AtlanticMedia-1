@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Concept A — The Atlantic Way · Atlantic Media</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ocean: #0e1b2c; --ocean-2: #16283f; --sand: #f3ede3; --sand-2: #e8dfd1;
+    --terra: #a65e3f; --teal: #2f7f86; --ink: #111; --muted: rgba(243,237,227,.7);
+    --serif: 'Fraunces', Georgia, serif; --sans: 'Manrope', system-ui, sans-serif;
+    --pad: clamp(18px, 5vw, 72px); --max: 1320px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--sand); color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
+  .serif { font-family: var(--serif); }
+  .kicker { font-size: .78rem; letter-spacing: .22em; text-transform: uppercase; font-weight: 700; color: var(--terra); display: inline-flex; align-items: center; gap: 10px; }
+  .kicker::before { content: ''; width: 26px; height: 1px; background: currentColor; }
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .8s ease, transform .8s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* nav */
+  .nav { position: fixed; inset: 0 0 auto; z-index: 20; transition: background .4s; }
+  .nav.solid { background: rgba(14,27,44,.92); backdrop-filter: blur(10px); }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 78px; }
+  .nav img { height: 46px; width: auto; }
+  .nav ul { display: flex; gap: 30px; list-style: none; color: var(--sand); font-weight: 500; font-size: .95rem; }
+  .nav ul a { opacity: .8; } .nav ul a:hover { opacity: 1; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 13px 22px; border-radius: 999px; font-weight: 700; font-size: .95rem; transition: transform .3s, background .3s; }
+  .btn--terra { background: var(--terra); color: #fff; } .btn--terra:hover { background: #8e4d31; }
+  .btn--line { border: 1px solid rgba(243,237,227,.4); color: var(--sand); } .btn--line:hover { background: rgba(243,237,227,.08); }
+
+  /* hero */
+  .hero { position: relative; background: var(--ocean); color: var(--sand); }
+  .hero__sticky { position: relative; min-height: 100vh; overflow: hidden; display: flex; align-items: center; }
+  /* pinned mode (desktop, motion allowed, content fits the viewport): the voyage chart rises out of its column and fills the screen on scroll */
+  .hero--pin { height: 200vh; padding: 0; }
+  .hero--pin .hero__sticky { position: sticky; top: 0; height: 100vh; }
+  .hero--pin .hero__inner { padding-top: 96px; padding-bottom: 40px; will-change: opacity, transform; }
+  .hero__grid { position: absolute; inset: 0; opacity: .5; }
+  .hero__grid line { stroke: rgba(243,237,227,.08); }
+  .pin { position: absolute; width: 14px; height: 14px; border-radius: 50%; background: var(--terra); box-shadow: 0 0 0 6px rgba(166,94,63,.25); }
+  .pin span { position: absolute; left: 22px; top: -4px; white-space: nowrap; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .hero__inner { position: relative; display: grid; grid-template-columns: 1.2fr .8fr; gap: 60px; align-items: end; padding-top: 110px; padding-bottom: 80px; }
+  .hero__stack { display: grid; gap: 58px; justify-items: end; }
+  .hero h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(48px, 7vw, 104px); line-height: .98; letter-spacing: -.02em; }
+  .hero h1 em { font-style: italic; color: #e3b79f; }
+  .hero p.lead { margin-top: 28px; max-width: 46ch; color: var(--muted); font-size: 1.08rem; }
+  .hero .ctas { display: flex; gap: 14px; margin-top: 34px; flex-wrap: wrap; }
+  /* right column: the demo-2 "voyage plan" chart, as a printed chart of India (sand paper, ink grid, every state outlined and named, Telangana highlighted, terracotta routes from Hyderabad, chart bars, compass) */
+  .hero__slot { position: relative; width: 100%; aspect-ratio: 1 / 1; }
+  .hero--pin .hero__slot { aspect-ratio: auto; }                       /* square side set by script so the column fits one screen */
+  .chart { --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace; position: absolute; inset: 0; overflow: hidden; border-radius: .25rem; background: var(--sand-2); color: var(--ocean); box-shadow: 0 30px 60px -30px rgba(0,0,0,.6), 0 0 0 1px rgba(243,237,227,.5); animation: frame-open 1.4s cubic-bezier(.16, 1, .3, 1) both .3s; }
+  .hero__sticky > .chart { inset: auto; left: 0; top: 0; will-change: transform, width, height; }
+  .chart__grid { position: absolute; inset: 0; background-image: linear-gradient(to right, rgba(14,27,44,.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(14,27,44,.05) 1px, transparent 1px), linear-gradient(to right, rgba(14,27,44,.11) 1px, transparent 1px), linear-gradient(to bottom, rgba(14,27,44,.11) 1px, transparent 1px); background-size: 1rem 1rem, 1rem 1rem, 5rem 5rem, 5rem 5rem; }
+  .chart__map { position: absolute; inset: 48px 10px 64px; }               /* the map is fitted between the two chart bars and scales with the chart */
+  .chart__outline { position: absolute; inset: 0; background: url(assets/brand/india-states.svg) 50% / contain no-repeat; }   /* land, state borders and the Telangana highlight, colours baked into the file */
+  .chart__routes { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .chart__routes .g { stroke: var(--terra); stroke-width: .55; stroke-dasharray: 1.6 3.2; opacity: .6; }
+  .chart__routes .r { stroke: var(--terra); stroke-width: .9; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1px; animation: route-draw 2.6s cubic-bezier(.16, 1, .3, 1) forwards; }
+  .chart__routes .m { fill: var(--ocean); transform-box: fill-box; transform-origin: 50% 50%; opacity: 0; animation: mark-in .5s cubic-bezier(.16, 1, .3, 1) forwards; }
+  .chart__routes text { font-family: var(--mono); font-size: 6px; letter-spacing: .5px; fill: #2a3646; stroke: var(--sand-2); stroke-width: 1.8px; stroke-linejoin: round; paint-order: stroke; transform-box: fill-box; transform-origin: 50% 50%; opacity: 0; animation: mark-in .5s cubic-bezier(.16, 1, .3, 1) forwards; }
+  .chart__routes .ring { fill: none; stroke: var(--terra); stroke-width: .5; transform-box: fill-box; transform-origin: 50% 50%; animation: ring-out 3s ease-out infinite; }
+  .chart__routes .hq { fill: var(--terra); } .chart__routes .hq-label { fill: var(--ocean); font-size: 6.6px; font-weight: 500; opacity: 1; animation: none; letter-spacing: .6px; }
+  .chart__routes .st { text-anchor: middle; font-size: 4.6px; letter-spacing: .55px; font-weight: 500; fill: rgba(14,27,44,.74); stroke-width: 1.2px; opacity: 1; animation: none; }   /* state names */
+  .chart__routes .st--hq { fill: #6f3418; font-weight: 700; }
+  .chart__routes .ld { stroke: rgba(14,27,44,.45); stroke-width: .35; }
+  .chart__routes .sea { text-anchor: middle; font-size: 5.4px; font-style: italic; letter-spacing: 1.6px; fill: rgba(14,27,44,.32); stroke: none; opacity: 1; animation: none; }
+  .chart__bar { position: absolute; left: 0; right: 0; display: flex; flex-wrap: wrap; gap: 4px 16px; justify-content: space-between; padding: 12px 16px; background: rgba(243,237,227,.78); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); font-family: var(--mono); font-size: .6875rem; line-height: 1.4; letter-spacing: .16em; text-transform: uppercase; color: rgba(14,27,44,.72); }
+  .chart__bar--top { top: 0; align-items: center; border-bottom: 1px solid rgba(14,27,44,.16); } .chart__bar--top .t { color: var(--terra); }
+  .chart__bar--bottom { bottom: 0; align-items: flex-end; border-top: 1px solid rgba(14,27,44,.16); }
+  .chart__legend { display: grid; gap: 4px; } .chart__legend span { display: flex; align-items: center; gap: 8px; } .chart__legend i { display: inline-block; } .chart__legend .line { width: 20px; height: 1px; background: var(--terra); } .chart__legend .sq { width: 6px; height: 6px; background: var(--ocean); }
+  .chart__coords { color: var(--ocean); }
+  .chart__compass { position: absolute; right: 16px; bottom: 64px; width: 80px; height: 80px; color: var(--ocean); } @media (min-width: 640px) { .chart__compass { width: 96px; height: 96px; } }
+  @keyframes frame-open { 0% { clip-path: inset(0 100% 0 0); } 100% { clip-path: inset(0); } }
+  @media (prefers-reduced-motion: reduce) { .chart { animation: none; clip-path: none; } .chart__routes .r { stroke-dashoffset: 0; animation: none; } .chart__routes .m, .chart__routes text { opacity: 1; animation: none; } .chart__routes .ring { opacity: 0; animation: none; } }
+  @keyframes route-draw { 0% { stroke-dashoffset: 1px; } 100% { stroke-dashoffset: 0; } }
+  @keyframes mark-in { 0% { opacity: 0; transform: scale(.4); } 100% { opacity: 1; transform: none; } }
+  @keyframes ring-out { 0% { opacity: .8; transform: scale(.5); } 100% { opacity: 0; transform: scale(1.8); } }
+
+  /* proof strip */
+  .proof { background: var(--sand-2); border-bottom: 1px solid rgba(0,0,0,.06); }
+  .proof .wrap { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .proof div { padding: 34px 0; border-right: 1px solid rgba(0,0,0,.08); padding-left: 28px; }
+  .proof div:last-child { border: 0; }
+  .proof b { font-family: var(--serif); font-size: 2.6rem; font-weight: 600; color: var(--ocean); display: block; line-height: 1; }
+  .proof small { color: #5b5147; font-weight: 600; }
+
+  section { padding: clamp(80px, 10vw, 130px) 0; }
+  .h2 { font-family: var(--serif); font-weight: 600; font-size: clamp(36px, 4.6vw, 64px); line-height: 1.05; letter-spacing: -.015em; margin-top: 16px; }
+
+  /* hello */
+  .hello .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; }
+  .collage { display: grid; grid-template-columns: 1.2fr 1fr; grid-template-rows: 190px 190px 120px; gap: 12px; }
+  .collage figure { position: relative; border-radius: 16px; overflow: hidden; }
+  .collage img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s; }
+  .collage figure:hover img { transform: scale(1.06); }
+  .collage figcaption { position: absolute; left: 12px; bottom: 12px; background: var(--sand); padding: 6px 12px; border-radius: 999px; font-size: .8rem; font-weight: 700; }
+  .collage .a { grid-row: 1 / 3; } .collage .d { grid-column: 1 / 3; }
+  .hello p { margin-top: 22px; color: #3d3630; font-size: 1.05rem; }
+
+  /* journey */
+  .journey { background: var(--ocean); color: var(--sand); position: relative; overflow: hidden; }
+  .journey .h2 { max-width: 16ch; }
+  .route { position: relative; margin-top: 70px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .route::before { content: ''; position: absolute; top: 22px; left: 22px; right: 22px; border-top: 2px dashed rgba(166,94,63,.7); }
+  .stop { position: relative; }
+  .stop .dot { width: 46px; height: 46px; border-radius: 50%; border: 2px solid var(--terra); background: var(--ocean); display: grid; place-items: center; font-family: var(--serif); font-weight: 700; color: #e3b79f; position: relative; }
+  .stop h3 { font-family: var(--serif); font-size: 1.5rem; font-weight: 600; margin-top: 26px; }
+  .stop p { color: var(--muted); margin-top: 10px; font-size: .95rem; }
+  .stop img { margin-top: 20px; border-radius: 14px; aspect-ratio: 4/3; object-fit: cover; width: 100%; filter: saturate(.9); }
+  .stop a { display: inline-block; margin-top: 14px; font-weight: 700; color: #e3b79f; border-bottom: 1px solid; }
+
+  /* how we work */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 56px; border-top: 1px solid rgba(0,0,0,.12); }
+  .step { padding: 34px 30px 10px 0; border-right: 1px solid rgba(0,0,0,.12); }
+  .step + .step { padding-left: 30px; } .step:last-child { border: 0; }
+  .step i { font-style: normal; font-family: var(--serif); color: var(--terra); font-size: 3rem; line-height: 1; }
+  .step h3 { font-family: var(--serif); font-size: 1.8rem; margin-top: 16px; }
+  .step p { color: #4a423b; margin-top: 10px; }
+
+  /* clients */
+  .clients { background: var(--sand); overflow: hidden; } /* overflow: the brand ring is wider than the page */
+  .logos { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-top: 50px; }
+  .logos div { background: #fff; border-radius: 14px; height: 96px; display: grid; place-items: center; padding: 14px 18px; transition: transform .3s, box-shadow .3s; }
+  .logos div:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(14,27,44,.12); }
+  .logos img { max-height: 100%; max-width: 100%; object-fit: contain; }
+
+  /* prior */
+  .prior { background: rgba(204,90,20,.65); color: var(--ocean); }   /* see-through burnt orange over the sand page (a brighter base than --terra, which goes pink when thinned); text is dark to stay readable */
+  .prior .wrap { display: grid; grid-template-columns: .9fr 1.1fr; gap: 60px; align-items: center; }
+  .prior .kicker { color: #4a2010; }
+  .prior p { margin-top: 20px; color: rgba(14,27,44,.82); }
+  .globe-embed { position: relative; width: 660px; max-width: calc(100% + 100px); margin: -30px -50px -30px auto; aspect-ratio: 660 / 654; justify-self: end; }   /* no box: the transparent globe sits on the section. Same 560x594 globe stage as before, plus a 50px / 30px margin around it for the orbiting brand badges; the negative margins keep the section the same height */
+  .globe-embed iframe { display: block; width: 100%; height: 100%; border: 0; }
+  @media (max-width: 900px) { .globe-embed { width: calc(100% + 2 * var(--pad)); margin: -18px calc(-1 * var(--pad)); aspect-ratio: 1 / 1.1; } }
+  .passports { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .passport { background: #fff5ef; color: var(--ink); border-radius: 16px; padding: 10px 10px 14px; transform: rotate(var(--r)); box-shadow: 0 18px 40px rgba(0,0,0,.2); }
+  .passport img { border-radius: 10px; aspect-ratio: 4/5; object-fit: cover; width: 100%; }
+  .passport b { display: block; margin-top: 10px; font-family: var(--serif); font-size: 1.1rem; }
+  .passport small { color: var(--terra); font-weight: 700; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; }
+  .match { display: flex; gap: 26px; margin-top: 30px; flex-wrap: wrap; }
+  .match span { font-weight: 800; letter-spacing: .16em; font-size: .82rem; }
+
+  /* live */
+  .live .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+  .live img { border-radius: 22px; aspect-ratio: 4/5; object-fit: cover; width: 100%; }
+  .live address { font-style: normal; margin-top: 22px; color: #3d3630; }
+  .live .contacts { margin-top: 24px; display: grid; gap: 6px; font-weight: 700; color: var(--ocean); }
+
+  /* cta + footer */
+  .cta { background: var(--ocean); color: var(--sand); text-align: center; }
+  .cta .h2 { margin: 16px auto 0; max-width: 18ch; }
+  .cta .ctas { display: flex; gap: 14px; justify-content: center; margin-top: 34px; }
+  footer { background: #0a1522; color: var(--muted); padding: 60px 0 30px; font-size: .92rem; }
+  footer .wrap { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; }
+  footer img { height: 70px; width: auto; }
+  footer h4 { color: var(--sand); font-family: var(--serif); font-weight: 600; margin-bottom: 12px; }
+  footer ul { list-style: none; display: grid; gap: 6px; }
+  .legal { max-width: var(--max); margin: 40px auto 0; padding: 20px var(--pad) 0; border-top: 1px solid rgba(243,237,227,.1); display: flex; justify-content: space-between; }
+
+  @media (max-width: 900px) {
+    .nav ul { display: none; }
+    .hero__inner, .hello .wrap, .prior .wrap, .live .wrap, footer .wrap { grid-template-columns: 1fr; }
+    .hero__inner { padding-top: 90px; padding-bottom: 60px; gap: 44px; }
+    .hero__stack { gap: 44px; }
+    .proof .wrap { grid-template-columns: 1fr 1fr; }
+    .route, .steps { grid-template-columns: 1fr 1fr; } .route::before { display: none; }
+    .logos { grid-template-columns: repeat(3, 1fr); }
+    .step { border: 0; padding-left: 0 !important; }
+  }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
+</style>
+<link rel="stylesheet" href="brands.css" />
+<script>
+  // A reload starts the page from the top (the browser would otherwise restore where you left off). Links to #sections still work.
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  addEventListener('pageshow', function () { if (!location.hash) scrollTo(0, 0); });
+</script>
+<style>:root { --bt-tile: #fff; --bt-line: rgba(14,27,44,.12); --bt-acc: #a65e3f; --bt-text: #0e1b2c; --bt-radius: 14px; }</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a href='/concept-a-atlantic-way'><img src="assets/brand/logo-white.png" alt="Atlantic Media" /></a>
+    <ul><li><a href="#journey">Services</a></li><li><a href="#clients">Work</a></li><li><a href="#prior">PRIOR</a></li><li><a href="#hello">About</a></li><li><a href='/contact-a'>Contact</a></li></ul>
+    <a class='btn btn--terra' href='/contact-a'>Start a project →</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero__sticky">
+  <svg class="hero__grid" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
+    <g>
+      <line x1="0" y1="150" x2="1440" y2="150"/><line x1="0" y1="300" x2="1440" y2="300"/><line x1="0" y1="450" x2="1440" y2="450"/><line x1="0" y1="600" x2="1440" y2="600"/><line x1="0" y1="750" x2="1440" y2="750"/>
+      <line x1="240" y1="0" x2="240" y2="900"/><line x1="480" y1="0" x2="480" y2="900"/><line x1="720" y1="0" x2="720" y2="900"/><line x1="960" y1="0" x2="960" y2="900"/><line x1="1200" y1="0" x2="1200" y2="900"/>
+    </g>
+  </svg>
+
+  <div class="wrap hero__inner">
+    <div>
+      <p class="kicker reveal">The Atlantic Way</p>
+      <h1 class="reveal">Your Brand<br/><em>Amplified.</em> Elevated. Unstoppable</h1>
+      <p class="lead reveal">At Atlantic Media, we’re more than just a digital Media agency-we’re a powerhouse of creativity, strategy, and execution.</p>
+      <div class="ctas reveal"><a class='btn btn--terra' href='/contact-a'>Start a project →</a><a class="btn btn--line" href="#prior">Join PRIOR</a></div>
+    </div>
+    <div class="hero__stack">
+      <div class="hero__slot">
+        <div class="chart" aria-hidden="true">
+          <div class="chart__grid"></div>
+          <div class="chart__map">
+            <div class="chart__outline"></div>
+            <svg class="chart__routes" viewBox="-6 2 304 334" fill="none">
+              <g class="states"><text class="st" x="63.5" y="36.4"><tspan x="63.5" dy="0">JAMMU &</tspan><tspan x="63.5" dy="4.2">KASHMIR</tspan></text><text class="st" x="96.4" y="32.5">LADAKH</text><text class="st" x="91.3" y="58.4"><tspan x="91.3" dy="0">HIMACHAL</tspan><tspan x="91.3" dy="4.2">PRADESH</tspan></text><text class="st" x="72.8" y="70.5">PUNJAB</text><text class="st" x="109.9" y="79.0">UTTARAKHAND</text><text class="st" x="77.9" y="84.0">HARYANA</text><text class="st" x="47.3" y="124.0">RAJASTHAN</text><text class="st" x="121.5" y="107.4"><tspan x="121.5" dy="0">UTTAR</tspan><tspan x="121.5" dy="4.2">PRADESH</tspan></text><text class="st" x="167.8" y="121.5">BIHAR</text><line class="ld" x1="194.2" y1="94.7" x2="194.2" y2="104.0"/><text class="st" x="194.2" y="92.5">SIKKIM</text><text class="st" x="250.3" y="94.4"><tspan x="250.3" dy="0">ARUNACHAL</tspan><tspan x="250.3" dy="4.2">PRADESH</tspan></text><text class="st" x="242.5" y="111.5">ASSAM</text><line class="ld" x1="252.4" y1="118.4" x2="248.5" y2="119.0"/><text class="st" x="267.0" y="117.5">NAGALAND</text><line class="ld" x1="251.3" y1="132.0" x2="244.3" y2="132.5"/><text class="st" x="264.2" y="132.5">MANIPUR</text><line class="ld" x1="239.7" y1="146.9" x2="235.0" y2="147.0"/><text class="st" x="252.7" y="148.0">MIZORAM</text><line class="ld" x1="233.7" y1="162.1" x2="225.8" y2="147.0"/><text class="st" x="235.5" y="167.0">TRIPURA</text><text class="st" x="218.8" y="125.5">MEGHALAYA</text><text class="st" x="190.5" y="137.4"><tspan x="190.5" dy="0">WEST</tspan><tspan x="190.5" dy="4.2">BENGAL</tspan></text><text class="st" x="161.8" y="145.5">JHARKHAND</text><text class="st" x="161.3" y="179.0">ODISHA</text><text class="st" x="130.7" y="162.0">CHHATTISGARH</text><text class="st" x="115.0" y="140.9"><tspan x="115.0" dy="0">MADHYA</tspan><tspan x="115.0" dy="4.2">PRADESH</tspan></text><text class="st" x="38.0" y="152.5">GUJARAT</text><text class="st" x="72.3" y="180.0">MAHARASHTRA</text><text class="st st--hq" x="128.9" y="202.5">TELANGANA</text><text class="st" x="120.5" y="220.9"><tspan x="120.5" dy="0">ANDHRA</tspan><tspan x="120.5" dy="4.2">PRADESH</tspan></text><text class="st" x="74.2" y="234.0">KARNATAKA</text><line class="ld" x1="78.5" y1="277.2" x2="81.6" y2="277.5"/><text class="st" x="67.2" y="277.5">KERALA</text><text class="st" x="102.5" y="268.9"><tspan x="102.5" dy="0">TAMIL</tspan><tspan x="102.5" dy="4.2">NADU</tspan></text><line class="ld" x1="44.6" y1="276.5" x2="50.5" y2="276.0"/><text class="st" x="25.0" y="279.5">LAKSHADWEEP</text><line class="ld" x1="238.6" y1="233.3" x2="237.4" y2="246.0"/><text class="st" x="239.2" y="226.9"><tspan x="239.2" dy="0">ANDAMAN &</tspan><tspan x="239.2" dy="4.2">NICOBAR</tspan></text></g>
+              <g><text class="sea" x="16.7" y="218.0">ARABIAN</text><text class="sea" x="16.7" y="226.2">SEA</text><text class="sea" x="190.1" y="220.0">BAY OF</text><text class="sea" x="190.1" y="228.2">BENGAL</text><text class="sea" x="120.5" y="327.0">INDIAN OCEAN</text></g>
+              <g><path class="g" d="M100.5 205.8 Q108.7 148.6 90.0 93.9"/><path class="r" pathLength="1" d="M100.5 205.8 Q108.7 148.6 90.0 93.9" style="animation-delay:0.70s"/><rect class="m" x="88.6" y="92.5" width="2.8" height="2.8" style="animation-delay:2.40s"/><text class="city" x="93.2" y="95.5" text-anchor="start" style="animation-delay:2.60s">DELHI</text></g>
+              <g><path class="g" d="M100.5 205.8 Q100.1 155.5 76.8 110.9"/><path class="r" pathLength="1" d="M100.5 205.8 Q100.1 155.5 76.8 110.9" style="animation-delay:0.92s"/><rect class="m" x="75.4" y="109.5" width="2.8" height="2.8" style="animation-delay:2.62s"/><text class="city" x="73.6" y="112.5" text-anchor="end" style="animation-delay:2.82s">JAIPUR</text></g>
+              <g><path class="g" d="M100.5 205.8 Q139.8 167.0 193.4 154.3"/><path class="r" pathLength="1" d="M100.5 205.8 Q139.8 167.0 193.4 154.3" style="animation-delay:1.14s"/><rect class="m" x="192.0" y="152.9" width="2.8" height="2.8" style="animation-delay:2.84s"/><text class="city" x="196.6" y="155.9" text-anchor="start" style="animation-delay:3.04s">KOLKATA</text></g>
+              <g><path class="g" d="M100.5 205.8 Q77.2 191.4 49.9 189.2"/><path class="r" pathLength="1" d="M100.5 205.8 Q77.2 191.4 49.9 189.2" style="animation-delay:1.36s"/><rect class="m" x="48.5" y="187.8" width="2.8" height="2.8" style="animation-delay:3.06s"/><text class="city" x="46.7" y="190.8" text-anchor="end" style="animation-delay:3.26s">MUMBAI</text></g>
+              <g><path class="g" d="M100.5 205.8 Q104.3 229.6 118.4 249.2"/><path class="r" pathLength="1" d="M100.5 205.8 Q104.3 229.6 118.4 249.2" style="animation-delay:1.58s"/><rect class="m" x="117.0" y="247.8" width="2.8" height="2.8" style="animation-delay:3.28s"/><text class="city" x="121.6" y="250.8" text-anchor="start" style="animation-delay:3.48s">CHENNAI</text></g>
+              <g><path class="g" d="M100.5 205.8 Q92.6 227.4 93.6 250.3"/><path class="r" pathLength="1" d="M100.5 205.8 Q92.6 227.4 93.6 250.3" style="animation-delay:1.80s"/><rect class="m" x="92.2" y="248.9" width="2.8" height="2.8" style="animation-delay:3.50s"/><text class="city" x="90.4" y="251.9" text-anchor="end" style="animation-delay:3.70s">BENGALURU</text></g>
+              <g><path class="g" d="M100.5 205.8 Q81.9 220.5 58.7 225.1"/><path class="r" pathLength="1" d="M100.5 205.8 Q81.9 220.5 58.7 225.1" style="animation-delay:2.02s"/><rect class="m" x="57.3" y="223.7" width="2.8" height="2.8" style="animation-delay:3.72s"/><text class="city" x="55.5" y="226.7" text-anchor="end" style="animation-delay:3.92s">GOA</text></g>
+              <circle class="ring" cx="100.5" cy="205.8" r="5"/><rect class="hq" x="98.5" y="203.8" width="4" height="4"/><text class="hq-label city" x="105.1" y="212.0">HYDERABAD</text>
+            </svg>
+          </div>
+          <div class="chart__bar chart__bar--top"><span>Chart 01 · India</span><span class="t">The Atlantic Way</span></div>
+          <div class="chart__bar chart__bar--bottom"><div class="chart__legend"><span><i class="line"></i> Route</span><span><i class="sq"></i> Port of call</span></div><span class="chart__coords">17.42° N · 78.34° E</span></div>
+          <svg class="chart__compass" viewBox="0 0 100 100" fill="none" stroke="currentColor"><circle cx="50" cy="50" r="40" stroke-width=".75" opacity=".6"/><circle cx="50" cy="50" r="30" stroke-width=".5" stroke-dasharray="1 3" opacity=".6"/><path d="M50 10 L55 50 L50 90 L45 50 Z" fill="#a65e3f" stroke="none"/><path d="M10 50 L50 45 L90 50 L50 55 Z" fill="currentColor" stroke="none" opacity=".85"/><text x="50" y="7" text-anchor="middle" font-size="8" font-family="IBM Plex Mono, ui-monospace, monospace" fill="currentColor" stroke="none">N</text></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+</section>
+
+<section class="clients" id="clients">
+  <div class="wrap">
+    <p class="kicker reveal">Brand partnership highlights</p>
+    <h2 class="h2 reveal">Trusted across fashion, beauty, jewellery &amp; lifestyle</h2>
+    <div class="bt" id="brand-tiers" data-layout="ring" aria-label="Brand partnership highlights"></div>
+  </div>
+</section>
+
+<div class="proof">
+  <div class="wrap">
+    <div><b data-count="35">0</b><small>Brands partnered</small></div>
+    <div><b data-count="20">0</b><small>PRIOR creators</small></div>
+    <div><b data-count="4">0</b><small>Service verticals</small></div>
+    <div><b data-count="6">0</b><small>Production offerings</small></div>
+  </div>
+</div>
+
+<section class="hello" id="hello">
+  <div class="wrap">
+    <div class="collage reveal">
+      <figure class="a"><img src="assets/brand/hello-branding.jpg" alt="" /><figcaption>Branding</figcaption></figure>
+      <figure><img src="assets/brand/hello-content.jpg" alt="" /><figcaption>Content</figcaption></figure>
+      <figure><img src="assets/brand/hello-creations.jpg" alt="" /><figcaption>Creations</figcaption></figure>
+      <figure class="d"><img src="assets/brand/analytics.jpg" alt="" /><figcaption>SEO / SMM</figcaption></figure>
+    </div>
+    <div class="reveal">
+      <p class="kicker">Who we are</p>
+      <h2 class="h2">Hello There!</h2>
+      <p>Atlantic Media is your one-stop digital media wizardry hub, where creativity meets strategy. From crafting unique brand identities to capturing eye-popping photos and videos, We’ve got all the tools to make your business stand out online.</p>
+      <p>Our team is built on relentless talent, from our brand and talent managers securing impactful deals to our production crew and marketers bringing ideas to life. Together, we don’t just keep up with the industry- we set the pace.</p>
+    </div>
+  </div>
+</section>
+
+<section class="journey" id="journey">
+  <div class="wrap">
+    <p class="kicker reveal">Our services</p>
+    <h2 class="h2 reveal">One journey, four ways to grow your brand</h2>
+    <div class="route">
+      <article class="stop reveal"><div class="dot">01</div><h3>Digital Media Marketing</h3><p>Virality is a science — precision-targeted campaigns, SEO, social and ads.</p><img src="assets/brand/dmm-social.jpg" alt="" /><a href="#">Read more</a></article>
+      <article class="stop reveal"><div class="dot">02</div><h3>Integrated Brand Solutions</h3><p>The Brand Connects of Atlantic — campaigns that don’t just get seen, they get felt.</p><img src="assets/media/svc-ips.jpg" alt="" /><a href="#">Read more</a></article>
+      <article class="stop reveal"><div class="dot">03</div><h3>Talent Management</h3><p>PRIOR — the matchmaker for brands and creators, with 20+ creators on the roster.</p><img src="assets/brand/prior-3.jpg" alt="" /><a href="#prior">Read more</a></article>
+      <article class="stop reveal"><div class="dot">04</div><h3>Content &amp; Production</h3><p>YouTube CMS, pre and post production, THM Originals and The Hidden Mic podcast.</p><img src="assets/brand/camera.jpg" alt="" /><a href="#">Read more</a></article>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="kicker reveal">How we work</p>
+    <h2 class="h2 reveal">Boosting reach via a network of Influencers</h2>
+    <div class="steps">
+      <div class="step reveal"><i>i.</i><h3>Strategize</h3><p>We dive deep into understanding your brand and audience to craft tailored strategies that drive measurable results.</p></div>
+      <div class="step reveal"><i>ii.</i><h3>Secure</h3><p>Our team ensures the right partnerships, resources, and opportunities are locked in, setting you up for success from the start.</p></div>
+      <div class="step reveal"><i>iii.</i><h3>Succeed</h3><p>With our execution and expertise, we deliver impactful campaigns that elevate your brand and leave a lasting impression.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="prior" id="prior">
+  <div class="wrap">
+    <div class="reveal">
+      <img src="assets/brand/prior.jpg" alt="PRIOR" style="width:92px;border-radius:14px" />
+      <p class="kicker" style="margin-top:26px">PRIOR by Atlantic Media</p>
+      <h2 class="h2">A match made in heaven</h2>
+      <p>PRIOR is the talent management agency that turns collaborations into pure magic. We handpick the perfect creators for brands — no guesswork and no drama.</p>
+      <div class="match"><span>CONNECT</span><span>·</span><span>COLLABORATE</span><span>·</span><span>CREATE</span></div>
+      <div class="ctas" style="margin-top:30px;display:flex;gap:12px"><a class="btn" style="background:rgba(14,27,44,.92);color:var(--sand)" href="/atlantic-globe/roster">Meet the roster →</a><a class="btn" style="background:#fff;color:var(--ocean)" href="#">Apply as a creator</a></div>
+    </div>
+    <div class="globe-embed reveal">
+      <iframe src="/atlantic-globe/?embed=1&amp;on=light&amp;force3d=1" title="The Atlantic Globe — PRIOR creators (interactive)" loading="lazy" allow="fullscreen"></iframe>
+    </div>
+  </div>
+</section>
+
+<section class="live" id="live">
+  <div class="wrap">
+    <img class="reveal" src="assets/brand/office-building.jpg" alt="One West, Financial District, Hyderabad" />
+    <div class="reveal">
+      <p class="kicker">Visit us</p>
+      <h2 class="h2">This is where we Live!</h2>
+      <address>Level 19 / Unit 3, One West – A Terminus Project,<br/>Narsing Nanakramguda Service Rd, Financial District,<br/>Hyderabad, Telangana 500008</address>
+      <div class="contacts"><a href="mailto:connect@atlanticmedia.in">connect@atlanticmedia.in</a><a href="tel:+917207974343">+91 72079 74343</a><a href="tel:+919392256699">+91 93922 56699</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <p class="kicker">Let’s set sail</p>
+    <h2 class="h2">It’s your turn to join the digital revolution</h2>
+    <div class="ctas"><a class='btn btn--terra' href='/contact-a'>Start a project →</a><a class="btn btn--line" href="#">WhatsApp us</a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div><img src="assets/brand/logo-white.png" alt="Atlantic Media" /><p style="margin-top:14px">Amplified. Elevated. Unstoppable.</p></div>
+    <div><h4>Explore</h4><ul><li>Services</li><li>Work</li><li>PRIOR</li><li>Insights</li><li>About</li></ul></div>
+    <div><h4>Connect</h4><ul><li>connect@atlanticmedia.in</li><li>+91 72079 74343</li><li><a href="https://in.linkedin.com/company/atlantic-media-india">LinkedIn</a></li><li>Instagram · @prior_atlanticmedia</li></ul></div>
+  </div>
+  <div class="legal"><span>© Atlantic Media</span><span>Privacy · Terms</span></div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  const nav = document.getElementById('nav');
+  addEventListener('scroll', () => nav.classList.toggle('solid', scrollY > 40), { passive: true });
+  const co = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; const el = e.target, n = +el.dataset.count; let i = 0; const t = setInterval(() => { el.textContent = ++i + (i === n ? '+' : ''); if (i >= n) clearInterval(t); }, 1200 / n); co.unobserve(el); }));
+  document.querySelectorAll('[data-count]').forEach(el => co.observe(el));
+</script>
+<script>
+(function () {
+  var hero = document.querySelector('.hero'), stage = hero.querySelector('.hero__sticky'), inner = hero.querySelector('.hero__inner');
+  var slot = hero.querySelector('.hero__slot'), chart = hero.querySelector('.chart'), nav = document.getElementById('nav');
+  if (!chart || !slot) return;
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var clamp = function (v, a, b) { return Math.max(a, Math.min(b, v)); }, lerp = function (a, b, t) { return a + (b - a) * t; };
+  var raf = 0, pinned = false;
+  function sizeSlot() { // pinned: the chart at rest is a square that keeps the whole column inside one screen
+    var cs = getComputedStyle(inner), padT = parseFloat(cs.paddingTop) || 0, padB = parseFloat(cs.paddingBottom) || 0;
+    var avail = innerHeight - padT - padB - 24;   // 24px breathing room below the column
+    slot.style.width = ''; var side = Math.max(220, Math.min(slot.clientWidth, avail));
+    slot.style.width = slot.style.height = side + 'px';
+  }
+  function fits() {
+    if (reduced || innerWidth < 900 || innerHeight < 700) return false;
+    hero.classList.add('hero--pin'); sizeSlot(); var ok = inner.scrollHeight <= innerHeight; hero.classList.remove('hero--pin'); slot.style.width = slot.style.height = ''; return ok;
+  }
+  function setPinned(on) {
+    pinned = on; hero.classList.toggle('hero--pin', on);
+    if (on) { sizeSlot(); if (chart.parentNode !== stage) stage.appendChild(chart); }
+    else { slot.style.width = slot.style.height = ''; chart.style.cssText = ''; if (chart.parentNode !== slot) slot.appendChild(chart); inner.style.opacity = ''; inner.style.transform = ''; inner.style.visibility = ''; }
+  }
+  function layout() {
+    raf = 0; if (!pinned) return;
+    var vh = innerHeight, r = hero.getBoundingClientRect(), sr = stage.getBoundingClientRect();
+    var p = clamp(-r.top / (r.height - vh), 0, 1);                    // 0 = hero at rest, 1 = chart at full size
+    var s = slot.getBoundingClientRect();
+    var x0 = s.left - sr.left, y0 = s.top - sr.top + 40 * p, w0 = s.width, h0 = s.height; // (+40p undoes the lift applied below)
+    var box = inner.getBoundingClientRect(), pad = parseFloat(getComputedStyle(inner).paddingLeft) || 0, cw = box.width - pad * 2;
+    var navH = nav ? nav.getBoundingClientRect().height : 0;
+    var w1 = Math.min(vh - navH - 56, cw), h1 = w1, x1 = box.left - sr.left + pad + (cw - w1) / 2, y1 = navH + (vh - navH - h1) / 2;   // grows into the largest centred square
+    var w = lerp(w0, w1, p), h = lerp(h0, h1, p), x = lerp(x0, x1, p), y = lerp(y0, y1, p);
+    chart.style.width = w + 'px'; chart.style.height = h + 'px'; chart.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)';
+    inner.style.opacity = clamp(1 - p * 1.6, 0, 1);                    // hero text fades and lifts as the chart grows
+    inner.style.transform = 'translateY(' + (-40 * p) + 'px)';
+    inner.style.visibility = p > 0.7 ? 'hidden' : '';
+  }
+  function onScroll() { if (!raf) raf = requestAnimationFrame(layout); }
+  function onResize() { setPinned(fits()); onScroll(); }
+  addEventListener('scroll', onScroll, { passive: true }); addEventListener('resize', onResize);
+  addEventListener('load', onResize); onResize();
+})();
+</script>
+<script src="brands.js"></script>
+</body>
+</html>

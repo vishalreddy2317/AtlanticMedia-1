@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Contact — Concept A · Atlantic Media</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ocean: #0e1b2c; --ocean-2: #16283f; --sand: #f3ede3; --sand-2: #e8dfd1;
+    --terra: #a65e3f; --teal: #2f7f86; --ink: #111; --muted: rgba(243,237,227,.7);
+    --serif: 'Fraunces', Georgia, serif; --sans: 'Manrope', system-ui, sans-serif;
+    --pad: clamp(18px, 5vw, 72px); --max: 1320px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--sand); color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
+  .serif { font-family: var(--serif); }
+  .kicker { font-size: .78rem; letter-spacing: .22em; text-transform: uppercase; font-weight: 700; color: var(--terra); display: inline-flex; align-items: center; gap: 10px; }
+  .kicker::before { content: ''; width: 26px; height: 1px; background: currentColor; }
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .8s ease, transform .8s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* nav */
+  .nav { position: fixed; inset: 0 0 auto; z-index: 20; transition: background .4s; }
+  .nav.solid { background: rgba(14,27,44,.92); backdrop-filter: blur(10px); }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 78px; }
+  .nav img { height: 46px; width: auto; }
+  .nav ul { display: flex; gap: 30px; list-style: none; color: var(--sand); font-weight: 500; font-size: .95rem; }
+  .nav ul a { opacity: .8; } .nav ul a:hover { opacity: 1; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 13px 22px; border-radius: 999px; font-weight: 700; font-size: .95rem; transition: transform .3s, background .3s; }
+  .btn--terra { background: var(--terra); color: #fff; } .btn--terra:hover { background: #8e4d31; }
+  .btn--line { border: 1px solid rgba(243,237,227,.4); color: var(--sand); } .btn--line:hover { background: rgba(243,237,227,.08); }
+
+  /* hero */
+  .hero { position: relative; min-height: 100vh; background: var(--ocean); color: var(--sand); overflow: hidden; display: flex; align-items: center; }
+  .hero__grid { position: absolute; inset: 0; opacity: .5; }
+  .hero__grid line { stroke: rgba(243,237,227,.08); }
+  .hero__route { position: absolute; inset: 0; pointer-events: none; }
+  .hero__route path { fill: none; stroke: var(--terra); stroke-width: 2; stroke-dasharray: 6 8; stroke-dashoffset: 1400; animation: draw 4s ease forwards .6s; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  .pins circle { fill: var(--terra); } .pins .halo { fill: rgba(166,94,63,.25); }
+  .pins text { fill: rgba(243,237,227,.7); font: 600 11px var(--sans); letter-spacing: .14em; }
+  .pin { position: absolute; width: 14px; height: 14px; border-radius: 50%; background: var(--terra); box-shadow: 0 0 0 6px rgba(166,94,63,.25); }
+  .pin span { position: absolute; left: 22px; top: -4px; white-space: nowrap; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .hero__inner { position: relative; display: grid; grid-template-columns: 1.2fr .8fr; gap: 60px; align-items: end; padding-top: 120px; padding-bottom: 90px; }
+  .hero h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(48px, 7vw, 104px); line-height: .98; letter-spacing: -.02em; }
+  .hero h1 em { font-style: italic; color: #e3b79f; }
+  .hero p.lead { margin-top: 28px; max-width: 46ch; color: var(--muted); font-size: 1.08rem; }
+  .hero .ctas { display: flex; gap: 14px; margin-top: 34px; flex-wrap: wrap; }
+  .hero__card { border-radius: 22px; overflow: hidden; border: 1px solid rgba(243,237,227,.15); box-shadow: 0 30px 80px rgba(0,0,0,.4); transform: rotate(2deg); }
+  .hero__card img { aspect-ratio: 16/10; object-fit: cover; width: 100%; }
+  .hero__card figcaption { padding: 14px 18px; background: var(--ocean-2); font-size: .85rem; color: var(--muted); display: flex; justify-content: space-between; }
+
+  /* proof strip */
+  .proof { background: var(--sand-2); border-bottom: 1px solid rgba(0,0,0,.06); }
+  .proof .wrap { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .proof div { padding: 34px 0; border-right: 1px solid rgba(0,0,0,.08); padding-left: 28px; }
+  .proof div:last-child { border: 0; }
+  .proof b { font-family: var(--serif); font-size: 2.6rem; font-weight: 600; color: var(--ocean); display: block; line-height: 1; }
+  .proof small { color: #5b5147; font-weight: 600; }
+
+  section { padding: clamp(80px, 10vw, 130px) 0; }
+  .h2 { font-family: var(--serif); font-weight: 600; font-size: clamp(36px, 4.6vw, 64px); line-height: 1.05; letter-spacing: -.015em; margin-top: 16px; }
+
+  /* hello */
+  .hello .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; }
+  .collage { display: grid; grid-template-columns: 1.2fr 1fr; grid-template-rows: 190px 190px 120px; gap: 12px; }
+  .collage figure { position: relative; border-radius: 16px; overflow: hidden; }
+  .collage img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s; }
+  .collage figure:hover img { transform: scale(1.06); }
+  .collage figcaption { position: absolute; left: 12px; bottom: 12px; background: var(--sand); padding: 6px 12px; border-radius: 999px; font-size: .8rem; font-weight: 700; }
+  .collage .a { grid-row: 1 / 3; } .collage .d { grid-column: 1 / 3; }
+  .hello p { margin-top: 22px; color: #3d3630; font-size: 1.05rem; }
+
+  /* journey */
+  .journey { background: var(--ocean); color: var(--sand); position: relative; overflow: hidden; }
+  .journey .h2 { max-width: 16ch; }
+  .route { position: relative; margin-top: 70px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .route::before { content: ''; position: absolute; top: 22px; left: 22px; right: 22px; border-top: 2px dashed rgba(166,94,63,.7); }
+  .stop { position: relative; }
+  .stop .dot { width: 46px; height: 46px; border-radius: 50%; border: 2px solid var(--terra); background: var(--ocean); display: grid; place-items: center; font-family: var(--serif); font-weight: 700; color: #e3b79f; position: relative; }
+  .stop h3 { font-family: var(--serif); font-size: 1.5rem; font-weight: 600; margin-top: 26px; }
+  .stop p { color: var(--muted); margin-top: 10px; font-size: .95rem; }
+  .stop img { margin-top: 20px; border-radius: 14px; aspect-ratio: 4/3; object-fit: cover; width: 100%; filter: saturate(.9); }
+  .stop a { display: inline-block; margin-top: 14px; font-weight: 700; color: #e3b79f; border-bottom: 1px solid; }
+
+  /* how we work */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 56px; border-top: 1px solid rgba(0,0,0,.12); }
+  .step { padding: 34px 30px 10px 0; border-right: 1px solid rgba(0,0,0,.12); }
+  .step + .step { padding-left: 30px; } .step:last-child { border: 0; }
+  .step i { font-style: normal; font-family: var(--serif); color: var(--terra); font-size: 3rem; line-height: 1; }
+  .step h3 { font-family: var(--serif); font-size: 1.8rem; margin-top: 16px; }
+  .step p { color: #4a423b; margin-top: 10px; }
+
+  /* clients */
+  .clients { background: var(--sand-2); }
+  .logos { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-top: 50px; }
+  .logos div { background: #fff; border-radius: 14px; height: 96px; display: grid; place-items: center; padding: 14px 18px; transition: transform .3s, box-shadow .3s; }
+  .logos div:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(14,27,44,.12); }
+  .logos img { max-height: 100%; max-width: 100%; object-fit: contain; }
+
+  /* prior */
+  .prior { background: var(--terra); color: #fff5ef; }
+  .prior .wrap { display: grid; grid-template-columns: .9fr 1.1fr; gap: 60px; align-items: center; }
+  .prior .kicker { color: #ffd9c7; }
+  .prior p { margin-top: 20px; color: rgba(255,245,239,.85); }
+  .passports { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .passport { background: #fff5ef; color: var(--ink); border-radius: 16px; padding: 10px 10px 14px; transform: rotate(var(--r)); box-shadow: 0 18px 40px rgba(0,0,0,.2); }
+  .passport img { border-radius: 10px; aspect-ratio: 4/5; object-fit: cover; width: 100%; }
+  .passport b { display: block; margin-top: 10px; font-family: var(--serif); font-size: 1.1rem; }
+  .passport small { color: var(--terra); font-weight: 700; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; }
+  .match { display: flex; gap: 26px; margin-top: 30px; flex-wrap: wrap; }
+  .match span { font-weight: 800; letter-spacing: .16em; font-size: .82rem; }
+
+  /* live */
+  .live .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+  .live img { border-radius: 22px; aspect-ratio: 4/5; object-fit: cover; width: 100%; }
+  .live address { font-style: normal; margin-top: 22px; color: #3d3630; }
+  .live .contacts { margin-top: 24px; display: grid; gap: 6px; font-weight: 700; color: var(--ocean); }
+
+  /* cta + footer */
+  .cta { background: var(--ocean); color: var(--sand); text-align: center; }
+  .cta .h2 { margin: 16px auto 0; max-width: 18ch; }
+  .cta .ctas { display: flex; gap: 14px; justify-content: center; margin-top: 34px; }
+  footer { background: #0a1522; color: var(--muted); padding: 60px 0 30px; font-size: .92rem; }
+  footer .wrap { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; }
+  footer img { height: 70px; width: auto; }
+  footer h4 { color: var(--sand); font-family: var(--serif); font-weight: 600; margin-bottom: 12px; }
+  footer ul { list-style: none; display: grid; gap: 6px; }
+  .legal { max-width: var(--max); margin: 40px auto 0; padding: 20px var(--pad) 0; border-top: 1px solid rgba(243,237,227,.1); display: flex; justify-content: space-between; }
+
+  @media (max-width: 900px) {
+    .nav ul { display: none; }
+    .hero__inner, .hello .wrap, .prior .wrap, .live .wrap, footer .wrap { grid-template-columns: 1fr; }
+    .proof .wrap { grid-template-columns: 1fr 1fr; }
+    .route, .steps { grid-template-columns: 1fr 1fr; } .route::before { display: none; }
+    .logos { grid-template-columns: repeat(3, 1fr); }
+    .step { border: 0; padding-left: 0 !important; }
+  }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } .hero__route path { animation: none; stroke-dashoffset: 0; } }
+
+  .cf { display: grid; gap: 18px; } .cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .cf-field { display: grid; gap: 8px; border: 0; } .cf-field > span { font-size: .85rem; font-weight: 600; }
+  .cf-field small { font-weight: 400; opacity: .7; }
+  .cf input, .cf select, .cf textarea { width: 100%; font: inherit; font-size: 1rem; padding: 13px 14px; border-radius: 10px; border: 1px solid var(--cf-line); background: var(--cf-bg); color: var(--cf-fg); outline: none; transition: border-color .2s; }
+  .cf input:focus, .cf select:focus, .cf textarea:focus { border-color: var(--cf-acc); }
+  .cf [aria-invalid="true"] { border-color: #d9534f; }
+  .cf em { font-style: normal; color: #d9534f; font-size: .82rem; min-height: 0; }
+  .cf-checks { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .cf-checks label { display: flex; gap: 10px; align-items: center; padding: 11px 12px; border: 1px solid var(--cf-line); border-radius: 10px; cursor: pointer; font-size: .92rem; }
+  .cf-checks input { width: auto; accent-color: var(--cf-acc); }
+  .cf-hp { position: absolute; left: -9999px; }
+  .form-note { color: #d9534f; font-size: .9rem; } .form-note:empty { display: none; }
+  .cf-submit { justify-self: start; font: inherit; font-weight: 700; padding: 15px 28px; border: 0; border-radius: var(--cf-radius); background: var(--cf-acc); color: var(--cf-on-acc); cursor: pointer; transition: filter .2s; }
+  .cf-submit:hover { filter: brightness(1.1); }
+  .cf-done { display: none; padding: 16px; border-radius: 10px; border: 1px solid var(--cf-line); }
+  .cf.is-sent > :not(.cf-done) { display: none; } .cf.is-sent .cf-done { display: block; }
+  .cd { list-style: none; display: grid; }
+  .cd li { display: grid; gap: 4px; padding: 16px 0; border-bottom: 1px solid var(--cf-line); }
+  .cd span { font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; opacity: .65; font-weight: 600; }
+  .cd a { font-weight: 600; }
+  .c-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(32px, 5vw, 72px); align-items: start; }
+  .c-map { margin-top: 26px; border-radius: 16px; overflow: hidden; border: 1px solid var(--cf-line); height: 260px; }
+  .c-map iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .c-photo { margin-top: 18px; border-radius: 16px; overflow: hidden; aspect-ratio: 16/10; } .c-photo img { width: 100%; height: 100%; object-fit: cover; }
+  @media (max-width: 860px) { .c-grid, .cf-row, .cf-checks { grid-template-columns: 1fr; } }
+
+  :root { --cf-bg: #fff; --cf-fg: var(--ink); --cf-line: rgba(14,27,44,.16); --cf-acc: var(--terra); --cf-on-acc: #fff; --cf-radius: 999px; }
+  .nav { background: rgba(14,27,44,.92); }
+  .c-hero { background: var(--ocean); color: var(--sand); padding: 150px 0 70px; }
+  .c-hero h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(46px, 6.4vw, 92px); line-height: 1; }
+  .c-hero h1 em { color: #e3b79f; } .c-hero p { margin-top: 18px; color: var(--muted); max-width: 52ch; }
+  .c-body { padding: 80px 0 110px; } .c-body h2 { font-family: var(--serif); font-size: 2rem; margin-bottom: 20px; }
+</style>
+</head>
+<body>
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a href='/concept-a-atlantic-way'><img src="assets/brand/logo-white.png" alt="Atlantic Media" /></a>
+    <ul><li><a href='/concept-a-atlantic-way#journey'>Services</a></li><li><a href='/concept-a-atlantic-way#clients'>Work</a></li><li><a href='/concept-a-atlantic-way#prior'>PRIOR</a></li><li><a href='/concept-a-atlantic-way#hello'>About</a></li><li><a href="#enquiry">Contact</a></li></ul>
+    <a class="btn btn--terra" href="#enquiry">Start a project →</a>
+  </div>
+</header>
+<section class="c-hero"><div class="wrap"><p class="kicker reveal">Contact</p><h1 class="reveal">We are here <em>for you!</em></h1><p class="reveal">Drop us an Email or Call — or tell us about your brand below and we’ll get back within two working days.</p></div></section><section class="c-body"><div class="wrap c-grid"><div class="reveal fade up in"><h2>Drop us an Email or Call</h2><ul class="cd">
+  <li><span>Email</span><a href="mailto:connect@atlanticmedia.in">connect@atlanticmedia.in</a></li>
+  <li><span>Call</span><a href="tel:+917207974343">+91 72079 74343</a><a href="tel:+919392256699">+91 93922 56699</a></li>
+  <li><span>WhatsApp</span><a href="https://wa.me/917207974343" target="_blank" rel="noopener">Chat with us →</a></li>
+  <li><span>Visit</span>Level 19 / Unit 3, One West – A Terminus Project, Narsing Nanakramguda Service Rd, Financial District, Hyderabad, Telangana 500008</li>
+  <li><span>Follow</span><a href="https://in.linkedin.com/company/atlantic-media-india" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.instagram.com/prior_atlanticmedia/" target="_blank" rel="noopener">Instagram · @prior_atlanticmedia</a></li>
+</ul><div class="c-map"><iframe title="Atlantic Media office on Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=One%20West%20A%20Terminus%20Project%2C%20Financial%20District%2C%20Hyderabad%20500008&z=15&output=embed"></iframe></div><div class="c-photo"><img src="assets/brand/office-building.jpg" alt="One West, Financial District, Hyderabad" /></div></div><div class="reveal fade up in"><h2>Tell us about your brand</h2><form id="enquiry" class="cf" novalidate>
+  <div class="cf-row">
+    <label class="cf-field"><span>Name</span><input name="name" maxlength="80" autocomplete="name" placeholder="Your name" /><em data-err="name"></em></label>
+    <label class="cf-field"><span>Phone (+91)</span><input name="phone" type="tel" maxlength="15" inputmode="tel" autocomplete="tel-national" placeholder="98765 43210" /><em data-err="phone"></em></label>
+  </div>
+  <label class="cf-field"><span>Email</span><input name="email" type="email" maxlength="254" autocomplete="email" placeholder="you@company.com" /><em data-err="email"></em></label>
+  <label class="cf-field"><span>I am a</span><select name="type"><option value="">Select one</option><option>Brand</option><option>Creator</option><option>Agency</option><option>Job applicant</option><option>Other</option></select><em data-err="type"></em></label>
+  <fieldset class="cf-field" name="services"><span>What are you looking for?</span>
+    <div class="cf-checks">
+      <label><input type="checkbox" name="services" value="Digital Media Marketing" /> Digital Media Marketing</label>
+      <label><input type="checkbox" name="services" value="Integrated Brand Solutions" /> Integrated Brand Solutions</label>
+      <label><input type="checkbox" name="services" value="Talent Management (PRIOR)" /> Talent Management (PRIOR)</label>
+      <label><input type="checkbox" name="services" value="Content & Production" /> Content &amp; Production</label>
+    </div><em data-err="services"></em>
+  </fieldset>
+  <label class="cf-field"><span>Project details <small>(optional)</small></span><textarea name="message" rows="4" maxlength="2000" placeholder="Tell us about your brief, timeline or goals"></textarea><em data-err="message"></em></label>
+  <label class="cf-hp" aria-hidden="true">Website <input name="website" tabindex="-1" autocomplete="off" /></label>
+  <p class="form-note" role="alert"></p>
+  <button type="submit" class="cf-submit">Send enquiry →</button>
+  <div class="cf-done" role="status"><b>Thank you!</b> Your email app should open with your enquiry filled in — just hit send. If not, write to <a href="mailto:connect@atlanticmedia.in">connect@atlanticmedia.in</a>.</div>
+</form></div></div></section>
+<footer>
+  <div class="wrap">
+    <div><img src="assets/brand/logo-white.png" alt="Atlantic Media" /><p style="margin-top:14px">Amplified. Elevated. Unstoppable.</p></div>
+    <div><h4>Explore</h4><ul><li>Services</li><li>Work</li><li>PRIOR</li><li>Insights</li><li>About</li></ul></div>
+    <div><h4>Connect</h4><ul><li>connect@atlanticmedia.in</li><li>+91 72079 74343</li><li><a href="https://in.linkedin.com/company/atlantic-media-india">LinkedIn</a></li><li>Instagram · @prior_atlanticmedia</li></ul></div>
+  </div>
+  <div class="legal"><span>© Atlantic Media</span><span>Privacy · Terms</span></div>
+</footer>
+<script src="contact.js"></script>
+</body>
+</html>

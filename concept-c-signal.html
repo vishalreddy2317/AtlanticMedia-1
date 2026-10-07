@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Concept C — Signal · Atlantic Media</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+<style>
+  :root { --bg: #0b1220; --panel: #111b2e; --line: rgba(160,190,230,.14); --text: #e8eef7; --muted: #8fa3bd;
+    --teal: #19d3c5; --violet: #7c6cff; --sans: 'Space Grotesk', system-ui, sans-serif; --mono: 'JetBrains Mono', monospace;
+    --pad: clamp(18px, 5vw, 64px); --max: 1320px; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; } a { color: inherit; text-decoration: none; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
+  .mono { font-family: var(--mono); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--teal); }
+  .up { opacity: 0; transform: translateY(16px); transition: .7s ease; } .up.in { opacity: 1; transform: none; }
+  .grid-bg { background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 64px 64px; }
+
+  .nav { position: sticky; top: 0; z-index: 10; background: rgba(11,18,32,.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .nav img { height: 42px; width: auto; }
+  .nav ul { display: flex; gap: 28px; list-style: none; color: var(--muted); font-size: .95rem; }
+  .nav ul a:hover { color: var(--text); }
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 20px; border-radius: 10px; font-weight: 600; transition: .3s; }
+  .btn--teal { background: var(--teal); color: #04201d; } .btn--teal:hover { box-shadow: 0 0 0 6px rgba(25,211,197,.18); }
+  .btn--ghost { border: 1px solid var(--line); } .btn--ghost:hover { border-color: var(--teal); }
+
+  /* hero */
+  .hero { position: relative; padding: 110px 0 80px; overflow: hidden; }
+  .hero::after { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--teal), transparent); animation: scan 5s linear infinite; opacity: .6; }
+  @keyframes scan { from { transform: translateY(0); } to { transform: translateY(620px); } }
+  .hero h1 { font-size: clamp(48px, 7.4vw, 112px); line-height: .95; letter-spacing: -.035em; font-weight: 700; max-width: 12ch; }
+  .hero h1 span { background: linear-gradient(90deg, var(--teal), var(--violet)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero p { margin-top: 26px; color: var(--muted); max-width: 52ch; font-size: 1.1rem; }
+  .hero .ctas { display: flex; gap: 12px; margin-top: 32px; }
+  .meters { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 70px; }
+  .meter { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
+  .meter b { font-size: 2.8rem; font-weight: 700; display: block; line-height: 1; margin-top: 12px; }
+  .meter .bar { height: 4px; border-radius: 4px; background: rgba(160,190,230,.12); margin-top: 16px; overflow: hidden; }
+  .meter .bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--teal), var(--violet)); transition: width 1.6s ease; }
+  .meter.in .bar i { width: var(--w); }
+
+  section { padding: clamp(70px, 9vw, 120px) 0; border-top: 1px solid var(--line); }
+  .h2 { font-size: clamp(34px, 4.4vw, 60px); line-height: 1.02; letter-spacing: -.03em; font-weight: 700; margin-top: 14px; max-width: 18ch; }
+
+  /* dashboard tiles */
+  .tiles { display: grid; grid-template-columns: 1.3fr 1fr 1fr; grid-template-rows: auto auto; gap: 14px; margin-top: 50px; }
+  .tile { position: relative; background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 24px; overflow: hidden; transition: border-color .3s, transform .3s; }
+  .tile:hover { border-color: var(--teal); transform: translateY(-3px); }
+  .tile.big { grid-row: span 2; }
+  .tile h3 { font-size: 1.5rem; font-weight: 600; margin-top: 10px; }
+  .tile p { color: var(--muted); margin-top: 8px; font-size: .95rem; }
+  .tile img { margin-top: 18px; border-radius: 12px; width: 100%; aspect-ratio: 16/10; object-fit: cover; }
+  .tile.big img { aspect-ratio: 4/5; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .chips span { font-family: var(--mono); font-size: .68rem; padding: 5px 8px; border: 1px solid var(--line); border-radius: 6px; color: var(--muted); }
+
+  /* process */
+  .process { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 50px; counter-reset: s; }
+  .process div { padding: 26px; border-radius: 16px; border: 1px solid var(--line); background: linear-gradient(180deg, rgba(25,211,197,.06), transparent); }
+  .process h3 { font-size: 1.8rem; margin-top: 12px; }
+  .process p { color: var(--muted); margin-top: 8px; }
+
+  /* clients wall with spotlight */
+  .wall { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-top: 46px; }
+  .wall div { height: 92px; border-radius: 12px; background: #f4f7fb; display: grid; place-items: center; padding: 14px 18px; opacity: .55; transition: opacity .4s, transform .4s, box-shadow .4s; }
+  .wall div.on { opacity: 1; transform: scale(1.04); box-shadow: 0 0 0 3px var(--teal); }
+  .wall img { max-height: 100%; max-width: 100%; object-fit: contain; }
+
+  /* creators signal */
+  .creators { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 46px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+  .card img { aspect-ratio: 1; object-fit: cover; width: 100%; }
+  .card div { padding: 16px; }
+  .card b { display: block; font-size: 1.1rem; }
+  .sig { display: flex; gap: 3px; align-items: flex-end; height: 18px; margin-top: 10px; }
+  .sig i { width: 5px; background: var(--teal); border-radius: 2px; }
+  .sig i:nth-child(1) { height: 30%; } .sig i:nth-child(2) { height: 50%; } .sig i:nth-child(3) { height: 70%; } .sig i:nth-child(4) { height: 100%; }
+  .sig i.off { background: rgba(160,190,230,.2); }
+
+  /* contact */
+  .contact { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .terminal { background: #070c16; border: 1px solid var(--line); border-radius: 16px; padding: 24px; font-family: var(--mono); font-size: .9rem; line-height: 2; color: var(--muted); }
+  .terminal b { color: var(--teal); font-weight: 500; }
+  footer { border-top: 1px solid var(--line); padding: 36px 0; color: var(--muted); font-size: .88rem; }
+  footer .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+  footer img { height: 48px; }
+
+  @media (max-width: 900px) {
+    .nav ul { display: none; }
+    .meters, .creators { grid-template-columns: 1fr 1fr; }
+    .tiles, .process, .contact { grid-template-columns: 1fr; } .tile.big { grid-row: auto; }
+    .wall { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (prefers-reduced-motion: reduce) { .up { opacity: 1; transform: none; } .hero::after { animation: none; } }
+</style>
+<link rel="stylesheet" href="brands.css" />
+<style>:root { --bt-tile: #f4f7fb; --bt-line: rgba(160,190,230,.18); --bt-acc: #19d3c5; --bt-text: #e8eef7; --bt-radius: 12px; }</style>
+</head>
+<body>
+<header class="nav"><div class="wrap">
+  <img src="assets/brand/logo-white.png" alt="Atlantic Media" />
+  <ul><li><a href="#services">Services</a></li><li><a href="#clients">Clients</a></li><li><a href="#prior">PRIOR</a></li><li><a href='/contact-c'>Contact</a></li></ul>
+  <a class='btn btn--teal' href='/contact-c'>Start a project</a>
+</div></header>
+
+<section class="hero grid-bg" style="border:0">
+  <div class="wrap">
+    <p class="mono up">// Atlantic Media — Hyderabad</p>
+    <h1 class="up">Your Brand <span>Amplified.</span> Elevated. Unstoppable</h1>
+    <p class="up">At Atlantic Media, we’re more than just a digital Media agency-we’re a powerhouse of creativity, strategy, and execution.</p>
+    <div class="ctas up"><a class='btn btn--teal' href='/contact-c'>Start a project →</a><a class="btn btn--ghost" href="#prior">Join PRIOR</a></div>
+    <div class="meters">
+      <div class="meter up" style="--w:88%"><span class="mono">Brands</span><b data-count="35">0</b><div class="bar"><i></i></div></div>
+      <div class="meter up" style="--w:64%"><span class="mono">PRIOR creators</span><b data-count="20">0</b><div class="bar"><i></i></div></div>
+      <div class="meter up" style="--w:100%"><span class="mono">Service verticals</span><b data-count="4">0</b><div class="bar"><i></i></div></div>
+      <div class="meter up" style="--w:76%"><span class="mono">Production offerings</span><b data-count="6">0</b><div class="bar"><i></i></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <p class="mono up">01 / Services</p>
+    <h2 class="h2 up">Everything your brand needs to win online</h2>
+    <div class="tiles">
+      <article class="tile big up"><span class="mono">Digital Media Marketing</span><h3>Virality is a Science!</h3><p>Precision-targeted campaigns, trend-jacking moments, SEO and social — data-driven and results-obsessed.</p><div class="chips"><span>SMM</span><span>SEO / ASO</span><span>Content</span><span>Web &amp; App</span></div><img src="assets/brand/dmm-marketing.jpg" alt="" /></article>
+      <article class="tile up"><span class="mono">Integrated Brand Solutions</span><h3>The Brand Connects of Atlantic</h3><p>Campaigns that don’t just get seen, they get felt.</p><img src="assets/media/svc-ips.jpg" alt="" /></article>
+      <article class="tile up"><span class="mono">Talent Management</span><h3>PRIOR</h3><p>Matchmaker for brands and creators.</p><img src="assets/brand/prior-3.jpg" alt="" /></article>
+      <article class="tile up" style="grid-column: span 2"><span class="mono">Content &amp; Production</span><h3>Your launchpad on YouTube and beyond</h3><p>YouTube CMS, content management, pre and post production, THM Originals and The Hidden Mic podcast.</p></article>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="mono up">02 / How we work</p>
+    <h2 class="h2 up">Boosting reach via a network of Influencers</h2>
+    <div class="process">
+      <div class="up"><span class="mono">Step 01</span><h3>Strategize</h3><p>We dive deep into understanding your brand and audience to craft tailored strategies that drive measurable results.</p></div>
+      <div class="up"><span class="mono">Step 02</span><h3>Secure</h3><p>Our team ensures the right partnerships, resources, and opportunities are locked in, setting you up for success from the start.</p></div>
+      <div class="up"><span class="mono">Step 03</span><h3>Succeed</h3><p>With our execution and expertise, we deliver impactful campaigns that elevate your brand and leave a lasting impression.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="clients">
+  <div class="wrap">
+    <p class="mono up">03 / Clients</p>
+    <h2 class="h2 up">Brands that trust the signal</h2>
+    <div class="bt" id="brand-tiers" aria-label="Brand partnership highlights"></div>
+  </div>
+</section>
+
+<section id="prior">
+  <div class="wrap">
+    <p class="mono up">04 / PRIOR</p>
+    <h2 class="h2 up">A match made in heaven — Connect, Collaborate, Create</h2>
+    <div class="creators">
+      <div class="card up"><img src="assets/media/creator-1.jpg" alt="" /><div><b>Creator name</b><span class="mono">Vlogs · Delhi</span><div class="sig"><i></i><i></i><i></i><i class="off"></i></div></div></div>
+      <div class="card up"><img src="assets/media/creator-3.jpg" alt="" /><div><b>Creator name</b><span class="mono">Lifestyle · Pune</span><div class="sig"><i></i><i></i><i></i><i></i></div></div></div>
+      <div class="card up"><img src="assets/media/creator-8.jpg" alt="" /><div><b>Creator name</b><span class="mono">Podcasts · Kolkata</span><div class="sig"><i></i><i></i><i class="off"></i><i class="off"></i></div></div></div>
+      <div class="card up"><img src="assets/media/creator-11.jpg" alt="" /><div><b>Creator name</b><span class="mono">Beauty · Hyderabad</span><div class="sig"><i></i><i></i><i></i><i></i></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap contact">
+    <div class="up"><p class="mono">05 / Contact</p><h2 class="h2">Let’s make your brand the next big thing online</h2><div style="margin-top:28px;display:flex;gap:12px"><a class="btn btn--teal" href="mailto:connect@atlanticmedia.in">Email us</a><a class="btn btn--ghost" href="#">WhatsApp</a></div></div>
+    <div class="terminal up">
+      <div><b>email</b> → connect@atlanticmedia.in</div>
+      <div><b>call</b> → +91 72079 74343 / +91 93922 56699</div>
+      <div><b>visit</b> → Level 19 / Unit 3, One West – A Terminus Project, Financial District, Hyderabad 500008</div>
+      <div><b>follow</b> → linkedin.com/company/atlantic-media-india</div>
+      <div><b>creators</b> → @prior_atlanticmedia</div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap"><img src="assets/brand/logo-white.png" alt="Atlantic Media" /><span class="mono">Amplified. Elevated. Unstoppable.</span><span>© Atlantic Media · Privacy · Terms</span></div></footer>
+
+<script>
+  const io = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; e.target.classList.add('in'); const b = e.target.querySelector('[data-count]'); if (b) { const n = +b.dataset.count; let i = 0; const t = setInterval(() => { b.textContent = ++i + (i === n ? '+' : ''); if (i >= n) clearInterval(t); }, 1100 / n); } io.unobserve(e.target); }), { threshold: .12 });
+  document.querySelectorAll('.up').forEach(el => io.observe(el));
+</script>
+<script src="brands.js"></script>
+</body>
+</html>

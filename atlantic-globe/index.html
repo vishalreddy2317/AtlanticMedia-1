@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#130F0E" />
+    <meta name="description" content="The Atlantic Globe — PRIOR's creator constellation. Prototype." />
+    <title>The Atlantic Globe · PRIOR by Atlantic Media</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='22' fill='%23130F0E' stroke='%23FBF5EC' stroke-width='2'/%3E%3Cpath d='M8 30C14 24 20 36 26 30S38 24 42 30' fill='none' stroke='%23FF7A1A' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
+    <script>
+      // Apply the chosen palette before first paint (see src/lib/theme.ts).
+      (function () { try { var q = new URLSearchParams(location.search).get('theme'); var t = q || localStorage.getItem('atlantic-globe:theme'); if (t && t !== 'sunset' && t !== 'current' && /^[a-z]+$/.test(t)) document.documentElement.dataset.theme = t; } catch (e) {} })();
+      // Embedded (?embed=1): flag it before first paint so the page never flashes its dark backdrop inside the host page.
+      // Add &on=light when the host page behind the embed is light, so the labels around the globe turn dark.
+      if (/[?&]embed=1(&|$)/.test(location.search)) document.documentElement.classList.add('embed');
+      if (/[?&]on=light(&|$)/.test(location.search)) document.documentElement.classList.add('on-light');
+    </script>
+    <style>
+      /* Embedded: no backdrop of its own, so the globe sits directly on the host page's background. */
+      html.embed body, html.embed .pin-wrap.embed .stage { background: transparent; }
+      /* Embedded: the brand badges orbit out to the stage's edges, so inset the stage and let them spill into the margin instead of being cut off. */
+      html.embed { --embed-mx: clamp(16px, 7.6vw, 50px); --embed-my: clamp(0px, 4.6vw, 30px); }
+      html.embed .pin-wrap.embed .stage { width: auto; height: calc(100vh - 2 * var(--embed-my)); height: calc(100svh - 2 * var(--embed-my)); margin: var(--embed-my) var(--embed-mx); overflow: visible; }
+      html.embed.on-light .brand-badge span, html.embed.on-light .embed-link { color: rgba(14, 27, 44, .78); }
+      html.embed.on-light .embed-link:hover { color: #0e1b2c; background: rgba(14, 27, 44, .08); }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Manrope:wght@400;500;600;700&display=swap" />
+    <script type="module" crossorigin src="/atlantic-globe/assets/index-DoQt9udI.js"></script>
+    <link rel="modulepreload" crossorigin href="/atlantic-globe/assets/rolldown-runtime-BpQH8Ho1.js">
+    <link rel="modulepreload" crossorigin href="/atlantic-globe/assets/webgl-globe-DeptiKeQ.js">
+    <link rel="stylesheet" crossorigin href="/atlantic-globe/assets/index-3qCtLDio.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

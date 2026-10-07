@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96" role="img" aria-label="Lumen Apparel (placeholder logo)">
+  <circle cx="48" cy="48" r="46" fill="#FBF5EC"/>
+  <circle cx="48" cy="48" r="40" fill="none" stroke="#130F0E" stroke-opacity="0.35" stroke-width="1" stroke-dasharray="3 4"/>
+  <text x="48" y="58" text-anchor="middle" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="30" font-weight="600" fill="#130F0E">LA</text>
+</svg>

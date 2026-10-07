@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Contact — Concept B · Atlantic Media</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root { --paper: #f7f4ee; --ink: #141414; --soft: #6b645b; --rule: rgba(20,20,20,.14); --accent: #a65e3f;
+    --serif: 'Cormorant Garamond', Georgia, serif; --sans: 'Inter', system-ui, sans-serif; --pad: clamp(18px, 5vw, 64px); --max: 1280px; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; } a { color: inherit; text-decoration: none; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
+  .rule { border-top: 1px solid var(--ink); }
+  .label { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; color: var(--soft); }
+  .mask { overflow: hidden; } .mask > * { transform: translateY(105%); transition: transform 1s cubic-bezier(.2,.8,.2,1); } .mask.in > * { transform: none; }
+  .fade { opacity: 0; transition: opacity 1s; } .fade.in { opacity: 1; }
+
+  /* masthead */
+  .top { display: flex; justify-content: space-between; align-items: center; padding: 18px 0; font-size: .82rem; }
+  .top nav { display: flex; gap: 26px; }
+  .top nav a:hover { color: var(--accent); }
+  .masthead { text-align: center; padding: 24px 0 20px; border-top: 3px double var(--ink); border-bottom: 1px solid var(--ink); }
+  .masthead h1 { font-family: var(--serif); font-weight: 700; font-size: clamp(56px, 11vw, 168px); letter-spacing: .02em; line-height: .9; }
+  .masthead .meta { display: flex; justify-content: space-between; margin-top: 12px; font-size: .75rem; letter-spacing: .18em; text-transform: uppercase; }
+
+  /* cover */
+  .cover { display: grid; grid-template-columns: 1.3fr .7fr; gap: 40px; padding: 40px 0 70px; }
+  .cover__img { position: relative; }
+  .cover__img img { width: 100%; aspect-ratio: 4/3; object-fit: cover; filter: grayscale(.2) contrast(1.05); }
+  .cover__img span { position: absolute; left: 0; bottom: -14px; background: var(--accent); color: #fff; padding: 8px 16px; font-size: .75rem; letter-spacing: .18em; text-transform: uppercase; }
+  .cover h2 { font-family: var(--serif); font-weight: 600; font-size: clamp(40px, 4.6vw, 70px); line-height: 1; }
+  .cover h2 em { color: var(--accent); }
+  .cover p { margin-top: 20px; color: var(--soft); }
+  .cover .dropcap::first-letter { font-family: var(--serif); float: left; font-size: 4.2rem; line-height: .8; padding: 6px 10px 0 0; color: var(--accent); }
+  .cta { display: inline-block; margin-top: 26px; padding: 14px 24px; background: var(--ink); color: var(--paper); font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; }
+  .cta:hover { background: var(--accent); }
+
+  section { padding: clamp(70px, 9vw, 120px) 0; }
+  .sec-head { display: flex; justify-content: space-between; align-items: baseline; padding-top: 14px; border-top: 1px solid var(--ink); margin-bottom: 50px; }
+  .sec-head h2 { font-family: var(--serif); font-weight: 600; font-size: clamp(36px, 4vw, 58px); }
+
+  /* table of contents */
+  .toc li { list-style: none; display: grid; grid-template-columns: 90px 1fr 1.2fr 160px; gap: 30px; align-items: center; padding: 28px 0; border-bottom: 1px solid var(--rule); transition: background .3s, padding .3s; }
+  .toc li:hover { background: #efe9df; padding-left: 14px; }
+  .toc .no { font-family: var(--serif); font-size: 3rem; color: var(--accent); line-height: 1; }
+  .toc h3 { font-family: var(--serif); font-size: 2rem; font-weight: 600; line-height: 1.05; }
+  .toc p { color: var(--soft); font-size: .95rem; }
+  .toc img { width: 160px; aspect-ratio: 4/3; object-fit: cover; filter: grayscale(1); transition: filter .4s; }
+  .toc li:hover img { filter: none; }
+
+  /* quote */
+  .pull { text-align: center; padding: 90px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .pull q { font-family: var(--serif); font-style: italic; font-size: clamp(30px, 4vw, 58px); line-height: 1.15; display: block; max-width: 22ch; margin: 0 auto; }
+  .pull cite { display: block; margin-top: 22px; font-style: normal; }
+
+  /* hello — 3 columns like a feature article */
+  .article { columns: 3 260px; column-gap: 44px; column-rule: 1px solid var(--rule); color: #34302b; }
+  .article p + p { margin-top: 1em; }
+  .strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 50px; }
+  .strip figure img { aspect-ratio: 3/4; object-fit: cover; width: 100%; }
+  .strip figcaption { margin-top: 8px; font-size: .75rem; letter-spacing: .16em; text-transform: uppercase; }
+
+  /* prior editorial */
+  .prior { background: var(--ink); color: var(--paper); }
+  .prior .sec-head { border-color: var(--paper); }
+  .prior .label { color: #bdb4a8; }
+  .portraits { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 16px; align-items: end; }
+  .portraits figure:first-child img { aspect-ratio: 3/4; }
+  .portraits img { width: 100%; aspect-ratio: 4/5; object-fit: cover; filter: grayscale(1); transition: filter .5s; }
+  .portraits figure:hover img { filter: none; }
+  .portraits figcaption { margin-top: 10px; font-family: var(--serif); font-size: 1.3rem; }
+  .prior-copy { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-top: 50px; }
+  .prior-copy h3 { font-family: var(--serif); font-size: 2.6rem; line-height: 1; }
+  .prior-copy p { color: #cfc8bd; }
+
+  /* clients index */
+  .index { columns: 4 200px; column-gap: 30px; }
+  .index span { display: block; padding: 10px 0; border-bottom: 1px solid var(--rule); font-family: var(--serif); font-size: 1.35rem; break-inside: avoid; }
+  .index span:hover { color: var(--accent); }
+  .logos { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin-top: 40px; }
+  .logos div { background: var(--paper); height: 110px; display: grid; place-items: center; padding: 18px 22px; }
+  .logos img { max-height: 100%; max-width: 100%; object-fit: contain; }
+
+  /* contact */
+  .contact { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
+  .contact h2 { font-family: var(--serif); font-size: clamp(44px, 5vw, 80px); line-height: .95; }
+  .contact dl div { display: grid; grid-template-columns: 120px 1fr; padding: 14px 0; border-bottom: 1px solid var(--rule); }
+  .contact dt { font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--soft); padding-top: 4px; }
+  footer { border-top: 3px double var(--ink); padding: 34px 0 40px; }
+  footer .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; font-size: .85rem; }
+  footer img { height: 56px; }
+
+  @media (max-width: 860px) {
+    .top nav { display: none; }
+    .cover, .prior-copy, .contact { grid-template-columns: 1fr; }
+    .toc li { grid-template-columns: 60px 1fr; } .toc p, .toc img { display: none; }
+    .strip, .portraits { grid-template-columns: 1fr 1fr; }
+    .logos { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (prefers-reduced-motion: reduce) { .mask > *, .fade { transform: none !important; opacity: 1 !important; } }
+
+  .cf { display: grid; gap: 18px; } .cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .cf-field { display: grid; gap: 8px; border: 0; } .cf-field > span { font-size: .85rem; font-weight: 600; }
+  .cf-field small { font-weight: 400; opacity: .7; }
+  .cf input, .cf select, .cf textarea { width: 100%; font: inherit; font-size: 1rem; padding: 13px 14px; border-radius: 10px; border: 1px solid var(--cf-line); background: var(--cf-bg); color: var(--cf-fg); outline: none; transition: border-color .2s; }
+  .cf input:focus, .cf select:focus, .cf textarea:focus { border-color: var(--cf-acc); }
+  .cf [aria-invalid="true"] { border-color: #d9534f; }
+  .cf em { font-style: normal; color: #d9534f; font-size: .82rem; min-height: 0; }
+  .cf-checks { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .cf-checks label { display: flex; gap: 10px; align-items: center; padding: 11px 12px; border: 1px solid var(--cf-line); border-radius: 10px; cursor: pointer; font-size: .92rem; }
+  .cf-checks input { width: auto; accent-color: var(--cf-acc); }
+  .cf-hp { position: absolute; left: -9999px; }
+  .form-note { color: #d9534f; font-size: .9rem; } .form-note:empty { display: none; }
+  .cf-submit { justify-self: start; font: inherit; font-weight: 700; padding: 15px 28px; border: 0; border-radius: var(--cf-radius); background: var(--cf-acc); color: var(--cf-on-acc); cursor: pointer; transition: filter .2s; }
+  .cf-submit:hover { filter: brightness(1.1); }
+  .cf-done { display: none; padding: 16px; border-radius: 10px; border: 1px solid var(--cf-line); }
+  .cf.is-sent > :not(.cf-done) { display: none; } .cf.is-sent .cf-done { display: block; }
+  .cd { list-style: none; display: grid; }
+  .cd li { display: grid; gap: 4px; padding: 16px 0; border-bottom: 1px solid var(--cf-line); }
+  .cd span { font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; opacity: .65; font-weight: 600; }
+  .cd a { font-weight: 600; }
+  .c-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(32px, 5vw, 72px); align-items: start; }
+  .c-map { margin-top: 26px; border-radius: 16px; overflow: hidden; border: 1px solid var(--cf-line); height: 260px; }
+  .c-map iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .c-photo { margin-top: 18px; border-radius: 16px; overflow: hidden; aspect-ratio: 16/10; } .c-photo img { width: 100%; height: 100%; object-fit: cover; }
+  @media (max-width: 860px) { .c-grid, .cf-row, .cf-checks { grid-template-columns: 1fr; } }
+
+  :root { --cf-bg: #fffdf9; --cf-fg: var(--ink); --cf-line: rgba(20,20,20,.18); --cf-acc: var(--ink); --cf-on-acc: var(--paper); --cf-radius: 0; }
+  .cf input, .cf select, .cf textarea, .cf-checks label, .c-map, .c-photo, .cf-done { border-radius: 0; }
+  .cf-submit { letter-spacing: .12em; text-transform: uppercase; font-size: .85rem; } .cf-submit:hover { background: var(--accent); filter: none; }
+  .c-hero { padding: 50px 0 40px; border-bottom: 1px solid var(--rule); }
+  .c-hero h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(50px, 7vw, 104px); line-height: .95; }
+  .c-hero h1 em { color: var(--accent); } .c-hero p { margin-top: 14px; color: var(--soft); max-width: 52ch; }
+  .c-body { padding: 60px 0 100px; } .c-body h2 { font-family: var(--serif); font-size: 2.2rem; margin-bottom: 16px; }
+</style>
+</head>
+<body>
+<div class="wrap"><div class="top">
+    <span class="label">Hyderabad · Est. Atlantic Media</span>
+    <nav><a href='/concept-b-editorial#services'>Services</a><a href='/concept-b-editorial#prior'>PRIOR</a><a href='/concept-b-editorial#clients'>Clients</a><a href='/concept-b-editorial#hello'>About</a><a href="#enquiry">Contact</a></nav>
+    <a href="#enquiry" class="label" style="color:var(--accent)">Start a project →</a>
+  </div>
+  <header class="masthead" style="padding:14px 0 12px">
+    <div class="mask in"><h1 style="font-size:clamp(40px,6vw,84px)">ATLANTIC MEDIA</h1></div>
+    <div class="meta"><span>Digital Marketing</span><span>Brand Solutions</span><span>Talent</span><span>Content &amp; Production</span></div>
+  </header></div>
+<section class="c-hero"><div class="wrap"><p class="label fade">Letters to the editor</p><div class="mask"><h1>We are here <em>for you!</em></h1></div><p class="fade">Drop us an Email or Call — or write to us below. We reply within two working days.</p></div></section><section class="c-body"><div class="wrap c-grid"><div class="reveal fade up in"><h2>Drop us an Email or Call</h2><ul class="cd">
+  <li><span>Email</span><a href="mailto:connect@atlanticmedia.in">connect@atlanticmedia.in</a></li>
+  <li><span>Call</span><a href="tel:+917207974343">+91 72079 74343</a><a href="tel:+919392256699">+91 93922 56699</a></li>
+  <li><span>WhatsApp</span><a href="https://wa.me/917207974343" target="_blank" rel="noopener">Chat with us →</a></li>
+  <li><span>Visit</span>Level 19 / Unit 3, One West – A Terminus Project, Narsing Nanakramguda Service Rd, Financial District, Hyderabad, Telangana 500008</li>
+  <li><span>Follow</span><a href="https://in.linkedin.com/company/atlantic-media-india" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.instagram.com/prior_atlanticmedia/" target="_blank" rel="noopener">Instagram · @prior_atlanticmedia</a></li>
+</ul><div class="c-map"><iframe title="Atlantic Media office on Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=One%20West%20A%20Terminus%20Project%2C%20Financial%20District%2C%20Hyderabad%20500008&z=15&output=embed"></iframe></div><div class="c-photo"><img src="assets/brand/office-building.jpg" alt="One West, Financial District, Hyderabad" /></div></div><div class="reveal fade up in"><h2>Tell us about your brand</h2><form id="enquiry" class="cf" novalidate>
+  <div class="cf-row">
+    <label class="cf-field"><span>Name</span><input name="name" maxlength="80" autocomplete="name" placeholder="Your name" /><em data-err="name"></em></label>
+    <label class="cf-field"><span>Phone (+91)</span><input name="phone" type="tel" maxlength="15" inputmode="tel" autocomplete="tel-national" placeholder="98765 43210" /><em data-err="phone"></em></label>
+  </div>
+  <label class="cf-field"><span>Email</span><input name="email" type="email" maxlength="254" autocomplete="email" placeholder="you@company.com" /><em data-err="email"></em></label>
+  <label class="cf-field"><span>I am a</span><select name="type"><option value="">Select one</option><option>Brand</option><option>Creator</option><option>Agency</option><option>Job applicant</option><option>Other</option></select><em data-err="type"></em></label>
+  <fieldset class="cf-field" name="services"><span>What are you looking for?</span>
+    <div class="cf-checks">
+      <label><input type="checkbox" name="services" value="Digital Media Marketing" /> Digital Media Marketing</label>
+      <label><input type="checkbox" name="services" value="Integrated Brand Solutions" /> Integrated Brand Solutions</label>
+      <label><input type="checkbox" name="services" value="Talent Management (PRIOR)" /> Talent Management (PRIOR)</label>
+      <label><input type="checkbox" name="services" value="Content & Production" /> Content &amp; Production</label>
+    </div><em data-err="services"></em>
+  </fieldset>
+  <label class="cf-field"><span>Project details <small>(optional)</small></span><textarea name="message" rows="4" maxlength="2000" placeholder="Tell us about your brief, timeline or goals"></textarea><em data-err="message"></em></label>
+  <label class="cf-hp" aria-hidden="true">Website <input name="website" tabindex="-1" autocomplete="off" /></label>
+  <p class="form-note" role="alert"></p>
+  <button type="submit" class="cf-submit">Send enquiry →</button>
+  <div class="cf-done" role="status"><b>Thank you!</b> Your email app should open with your enquiry filled in — just hit send. If not, write to <a href="mailto:connect@atlanticmedia.in">connect@atlanticmedia.in</a>.</div>
+</form></div></div></section>
+<footer><div class="wrap"><img src="assets/brand/logo-black.png" alt="Atlantic Media" /><span class="label">Amplified. Elevated. Unstoppable.</span><span>© Atlantic Media · Privacy · Terms</span></div></footer>
+<script src="contact.js"></script>
+</body>
+</html>

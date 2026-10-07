@@ -1,0 +1,5 @@
+# deploy bundle, rebuilt from the files in this folder (zip -r atlantic-media.zip . -x package.json dev-server.mjs '*.zip')
+atlantic-media.zip
+node_modules/
+.DS_Store
+Thumbs.db
