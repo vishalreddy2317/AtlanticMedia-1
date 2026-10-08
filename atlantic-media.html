@@ -55,33 +55,20 @@
   .hero h1 em { font-style: italic; color: #e3b79f; }
   .hero p.lead { margin-top: 28px; max-width: 46ch; color: var(--muted); font-size: 1.08rem; }
   .hero .ctas { display: flex; gap: 14px; margin-top: 34px; flex-wrap: wrap; }
-  /* right column: the demo-2 "voyage plan" chart, as a printed chart of India (sand paper, ink grid, every state outlined and named, Telangana highlighted, terracotta routes from Hyderabad, chart bars, compass) */
+  /* right column: India's outline with Telangana inside it and animated routes from Hyderabad to every state; transparent, sits on the hero */
   .hero__slot { position: relative; width: 100%; aspect-ratio: 1 / 1; }
   .hero--pin .hero__slot { aspect-ratio: auto; }                       /* square side set by script so the column fits one screen */
-  .chart { --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace; position: absolute; inset: 0; overflow: hidden; border-radius: .25rem; background: var(--sand-2); color: var(--ocean); box-shadow: 0 30px 60px -30px rgba(0,0,0,.6), 0 0 0 1px rgba(243,237,227,.5); animation: frame-open 1.4s cubic-bezier(.16, 1, .3, 1) both .3s; }
-  .hero__sticky > .chart { inset: auto; left: 0; top: 0; will-change: transform, width, height; }
-  .chart__grid { position: absolute; inset: 0; background-image: linear-gradient(to right, rgba(14,27,44,.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(14,27,44,.05) 1px, transparent 1px), linear-gradient(to right, rgba(14,27,44,.11) 1px, transparent 1px), linear-gradient(to bottom, rgba(14,27,44,.11) 1px, transparent 1px); background-size: 1rem 1rem, 1rem 1rem, 5rem 5rem, 5rem 5rem; }
-  .chart__map { position: absolute; inset: 48px 10px 64px; }               /* the map is fitted between the two chart bars and scales with the chart */
-  .chart__outline { position: absolute; inset: 0; background: url(assets/brand/india-states.svg) 50% / contain no-repeat; }   /* land, state borders and the Telangana highlight, colours baked into the file */
-  .chart__routes { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-  .chart__routes .g { stroke: var(--terra); stroke-width: .55; stroke-dasharray: 1.6 3.2; opacity: .6; }
-  .chart__routes .r { stroke: var(--terra); stroke-width: .9; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1px; animation: route-draw 2.6s cubic-bezier(.16, 1, .3, 1) forwards; }
-  .chart__routes .m { fill: var(--ocean); transform-box: fill-box; transform-origin: 50% 50%; opacity: 0; animation: mark-in .5s cubic-bezier(.16, 1, .3, 1) forwards; }
-  .chart__routes text { font-family: var(--mono); font-size: 6px; letter-spacing: .5px; fill: #2a3646; stroke: var(--sand-2); stroke-width: 1.8px; stroke-linejoin: round; paint-order: stroke; transform-box: fill-box; transform-origin: 50% 50%; opacity: 0; animation: mark-in .5s cubic-bezier(.16, 1, .3, 1) forwards; }
-  .chart__routes .ring { fill: none; stroke: var(--terra); stroke-width: .5; transform-box: fill-box; transform-origin: 50% 50%; animation: ring-out 3s ease-out infinite; }
-  .chart__routes .hq { fill: var(--terra); } .chart__routes .hq-label { fill: var(--ocean); font-size: 6.6px; font-weight: 500; opacity: 1; animation: none; letter-spacing: .6px; }
-  .chart__routes .st { text-anchor: middle; font-size: 4.6px; letter-spacing: .55px; font-weight: 500; fill: rgba(14,27,44,.74); stroke-width: 1.2px; opacity: 1; animation: none; }   /* state names */
-  .chart__routes .st--hq { fill: #6f3418; font-weight: 700; }
-  .chart__routes .ld { stroke: rgba(14,27,44,.45); stroke-width: .35; }
-  .chart__routes .sea { text-anchor: middle; font-size: 5.4px; font-style: italic; letter-spacing: 1.6px; fill: rgba(14,27,44,.32); stroke: none; opacity: 1; animation: none; }
-  .chart__bar { position: absolute; left: 0; right: 0; display: flex; flex-wrap: wrap; gap: 4px 16px; justify-content: space-between; padding: 12px 16px; background: rgba(243,237,227,.78); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); font-family: var(--mono); font-size: .6875rem; line-height: 1.4; letter-spacing: .16em; text-transform: uppercase; color: rgba(14,27,44,.72); }
-  .chart__bar--top { top: 0; align-items: center; border-bottom: 1px solid rgba(14,27,44,.16); } .chart__bar--top .t { color: var(--terra); }
-  .chart__bar--bottom { bottom: 0; align-items: flex-end; border-top: 1px solid rgba(14,27,44,.16); }
-  .chart__legend { display: grid; gap: 4px; } .chart__legend span { display: flex; align-items: center; gap: 8px; } .chart__legend i { display: inline-block; } .chart__legend .line { width: 20px; height: 1px; background: var(--terra); } .chart__legend .sq { width: 6px; height: 6px; background: var(--ocean); }
-  .chart__coords { color: var(--ocean); }
-  .chart__compass { position: absolute; right: 16px; bottom: 64px; width: 80px; height: 80px; color: var(--ocean); } @media (min-width: 640px) { .chart__compass { width: 96px; height: 96px; } }
+  .chart { position: absolute; inset: 0; overflow: visible; animation: frame-open 1.4s cubic-bezier(.16, 1, .3, 1) both .3s; }
+  .chart__map { position: absolute; inset: 0; }
+  .chart__outline { position: absolute; inset: 0; background: url(assets/brand/india-outline.svg) 50% / contain no-repeat; }
+  .chart__routes { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 0 3px rgba(221,142,107,.55)); }
+  .chart__routes .g { stroke: #dd8e6b; stroke-width: .35; stroke-dasharray: 1.4 2.8; opacity: .35; }
+  .chart__routes .r { stroke: #dd8e6b; stroke-width: .7; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1px; animation: route-draw 2.6s cubic-bezier(.16, 1, .3, 1) forwards; }
+  .chart__routes .m { fill: #f4efe6; transform-box: fill-box; transform-origin: 50% 50%; opacity: 0; animation: mark-in .5s cubic-bezier(.16, 1, .3, 1) forwards; }
+  .chart__routes .ring { fill: none; stroke: #dd8e6b; stroke-width: .5; transform-box: fill-box; transform-origin: 50% 50%; animation: ring-out 3s ease-out infinite; }
+  .chart__routes .hq { fill: #dd8e6b; }
   @keyframes frame-open { 0% { clip-path: inset(0 100% 0 0); } 100% { clip-path: inset(0); } }
-  @media (prefers-reduced-motion: reduce) { .chart { animation: none; clip-path: none; } .chart__routes .r { stroke-dashoffset: 0; animation: none; } .chart__routes .m, .chart__routes text { opacity: 1; animation: none; } .chart__routes .ring { opacity: 0; animation: none; } }
+  @media (prefers-reduced-motion: reduce) { .chart { animation: none; clip-path: none; } .chart__routes .r { stroke-dashoffset: 0; animation: none; } .chart__routes .m { opacity: 1; animation: none; } .chart__routes .ring { opacity: 0; animation: none; } }
   @keyframes route-draw { 0% { stroke-dashoffset: 1px; } 100% { stroke-dashoffset: 0; } }
   @keyframes mark-in { 0% { opacity: 0; transform: scale(.4); } 100% { opacity: 1; transform: none; } }
   @keyframes ring-out { 0% { opacity: .8; transform: scale(.5); } 100% { opacity: 0; transform: scale(1.8); } }
@@ -159,15 +146,15 @@
   .team .lead-ink { margin-top: 20px; font-size: 1.12rem; color: #3d3630; }
   .crew-row { display: grid; grid-template-columns: 1fr 2.2fr; gap: 40px; padding: 30px 0; border-top: 1px solid rgba(14,27,44,.12); }
   .crew-row--first { margin-top: 50px; }
-  .crew-row h3 { font-size: .8rem; letter-spacing: .18em; text-transform: uppercase; font-weight: 800; color: var(--ocean); }
-  .crew-row .tag { font-family: var(--serif); font-size: 1.25rem; color: #4a423b; margin-top: 8px; line-height: 1.35; }
-  .founders { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .founder { background: #fff; border-radius: 20px; padding: 26px; display: grid; grid-template-columns: 64px 1fr; gap: 18px; align-items: start; border: 1px solid rgba(14,27,44,.08); }
+  .crew-row h3 { font-size: .8rem; letter-spacing: .18em; text-transform: uppercase; font-weight: 800; color: #A85A3D; }
+  .crew-row .tag { font-family: var(--serif); font-size: 1.25rem; color: #A85A3D; margin-top: 8px; line-height: 1.35; }
+  .founders { display: grid; grid-template-columns: 1fr; gap: 16px; max-width: 560px; }   /* Darnish above Mohitha */
+  .founder { background: #fff; border-radius: 20px; padding: 22px 26px; display: grid; grid-template-columns: 64px 1fr; gap: 18px; align-items: center; border: 1px solid rgba(14,27,44,.08); }
   .avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--ocean); color: var(--sand); display: grid; place-items: center; font-family: var(--serif); font-size: 1.5rem; font-weight: 600; flex: none; }
   .avatar--terra { background: var(--terra); color: #fff; }
   .founder h4 { font-family: var(--serif); font-size: 1.6rem; line-height: 1.1; font-weight: 600; }
   .founder .role { color: var(--terra); font-weight: 700; font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; margin-top: 4px; }
-  .founder .line { font-family: var(--serif); font-style: italic; font-size: 1.12rem; color: var(--ocean); margin-top: 12px; }
+  .founder .line { font-family: var(--serif); font-style: italic; font-size: 1.12rem; color: var(--ocean); margin-top: 8px; }
   .founder p { margin-top: 10px; color: #4a423b; font-size: .96rem; } .founder p b { color: var(--ocean); }
   .people { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; align-content: start; }
   .person { display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid rgba(14,27,44,.08); border-radius: 16px; padding: 14px 16px; }
@@ -240,25 +227,44 @@
     <div class="hero__stack">
       <div class="hero__slot">
         <div class="chart" aria-hidden="true">
-          <div class="chart__grid"></div>
           <div class="chart__map">
             <div class="chart__outline"></div>
-            <svg class="chart__routes" viewBox="-6 2 304 334" fill="none">
-              <g class="states"><text class="st" x="63.5" y="36.4"><tspan x="63.5" dy="0">JAMMU &</tspan><tspan x="63.5" dy="4.2">KASHMIR</tspan></text><text class="st" x="96.4" y="32.5">LADAKH</text><text class="st" x="91.3" y="58.4"><tspan x="91.3" dy="0">HIMACHAL</tspan><tspan x="91.3" dy="4.2">PRADESH</tspan></text><text class="st" x="72.8" y="70.5">PUNJAB</text><text class="st" x="109.9" y="79.0">UTTARAKHAND</text><text class="st" x="77.9" y="84.0">HARYANA</text><text class="st" x="47.3" y="124.0">RAJASTHAN</text><text class="st" x="121.5" y="107.4"><tspan x="121.5" dy="0">UTTAR</tspan><tspan x="121.5" dy="4.2">PRADESH</tspan></text><text class="st" x="167.8" y="121.5">BIHAR</text><line class="ld" x1="194.2" y1="94.7" x2="194.2" y2="104.0"/><text class="st" x="194.2" y="92.5">SIKKIM</text><text class="st" x="250.3" y="94.4"><tspan x="250.3" dy="0">ARUNACHAL</tspan><tspan x="250.3" dy="4.2">PRADESH</tspan></text><text class="st" x="242.5" y="111.5">ASSAM</text><line class="ld" x1="252.4" y1="118.4" x2="248.5" y2="119.0"/><text class="st" x="267.0" y="117.5">NAGALAND</text><line class="ld" x1="251.3" y1="132.0" x2="244.3" y2="132.5"/><text class="st" x="264.2" y="132.5">MANIPUR</text><line class="ld" x1="239.7" y1="146.9" x2="235.0" y2="147.0"/><text class="st" x="252.7" y="148.0">MIZORAM</text><line class="ld" x1="233.7" y1="162.1" x2="225.8" y2="147.0"/><text class="st" x="235.5" y="167.0">TRIPURA</text><text class="st" x="218.8" y="125.5">MEGHALAYA</text><text class="st" x="190.5" y="137.4"><tspan x="190.5" dy="0">WEST</tspan><tspan x="190.5" dy="4.2">BENGAL</tspan></text><text class="st" x="161.8" y="145.5">JHARKHAND</text><text class="st" x="161.3" y="179.0">ODISHA</text><text class="st" x="130.7" y="162.0">CHHATTISGARH</text><text class="st" x="115.0" y="140.9"><tspan x="115.0" dy="0">MADHYA</tspan><tspan x="115.0" dy="4.2">PRADESH</tspan></text><text class="st" x="38.0" y="152.5">GUJARAT</text><text class="st" x="72.3" y="180.0">MAHARASHTRA</text><text class="st st--hq" x="128.9" y="202.5">TELANGANA</text><text class="st" x="120.5" y="220.9"><tspan x="120.5" dy="0">ANDHRA</tspan><tspan x="120.5" dy="4.2">PRADESH</tspan></text><text class="st" x="74.2" y="234.0">KARNATAKA</text><line class="ld" x1="78.5" y1="277.2" x2="81.6" y2="277.5"/><text class="st" x="67.2" y="277.5">KERALA</text><text class="st" x="102.5" y="268.9"><tspan x="102.5" dy="0">TAMIL</tspan><tspan x="102.5" dy="4.2">NADU</tspan></text><line class="ld" x1="44.6" y1="276.5" x2="50.5" y2="276.0"/><text class="st" x="25.0" y="279.5">LAKSHADWEEP</text><line class="ld" x1="238.6" y1="233.3" x2="237.4" y2="246.0"/><text class="st" x="239.2" y="226.9"><tspan x="239.2" dy="0">ANDAMAN &</tspan><tspan x="239.2" dy="4.2">NICOBAR</tspan></text></g>
-              <g><text class="sea" x="16.7" y="218.0">ARABIAN</text><text class="sea" x="16.7" y="226.2">SEA</text><text class="sea" x="190.1" y="220.0">BAY OF</text><text class="sea" x="190.1" y="228.2">BENGAL</text><text class="sea" x="120.5" y="327.0">INDIAN OCEAN</text></g>
-              <g><path class="g" d="M100.5 205.8 Q108.7 148.6 90.0 93.9"/><path class="r" pathLength="1" d="M100.5 205.8 Q108.7 148.6 90.0 93.9" style="animation-delay:0.70s"/><rect class="m" x="88.6" y="92.5" width="2.8" height="2.8" style="animation-delay:2.40s"/><text class="city" x="93.2" y="95.5" text-anchor="start" style="animation-delay:2.60s">DELHI</text></g>
-              <g><path class="g" d="M100.5 205.8 Q100.1 155.5 76.8 110.9"/><path class="r" pathLength="1" d="M100.5 205.8 Q100.1 155.5 76.8 110.9" style="animation-delay:0.92s"/><rect class="m" x="75.4" y="109.5" width="2.8" height="2.8" style="animation-delay:2.62s"/><text class="city" x="73.6" y="112.5" text-anchor="end" style="animation-delay:2.82s">JAIPUR</text></g>
-              <g><path class="g" d="M100.5 205.8 Q139.8 167.0 193.4 154.3"/><path class="r" pathLength="1" d="M100.5 205.8 Q139.8 167.0 193.4 154.3" style="animation-delay:1.14s"/><rect class="m" x="192.0" y="152.9" width="2.8" height="2.8" style="animation-delay:2.84s"/><text class="city" x="196.6" y="155.9" text-anchor="start" style="animation-delay:3.04s">KOLKATA</text></g>
-              <g><path class="g" d="M100.5 205.8 Q77.2 191.4 49.9 189.2"/><path class="r" pathLength="1" d="M100.5 205.8 Q77.2 191.4 49.9 189.2" style="animation-delay:1.36s"/><rect class="m" x="48.5" y="187.8" width="2.8" height="2.8" style="animation-delay:3.06s"/><text class="city" x="46.7" y="190.8" text-anchor="end" style="animation-delay:3.26s">MUMBAI</text></g>
-              <g><path class="g" d="M100.5 205.8 Q104.3 229.6 118.4 249.2"/><path class="r" pathLength="1" d="M100.5 205.8 Q104.3 229.6 118.4 249.2" style="animation-delay:1.58s"/><rect class="m" x="117.0" y="247.8" width="2.8" height="2.8" style="animation-delay:3.28s"/><text class="city" x="121.6" y="250.8" text-anchor="start" style="animation-delay:3.48s">CHENNAI</text></g>
-              <g><path class="g" d="M100.5 205.8 Q92.6 227.4 93.6 250.3"/><path class="r" pathLength="1" d="M100.5 205.8 Q92.6 227.4 93.6 250.3" style="animation-delay:1.80s"/><rect class="m" x="92.2" y="248.9" width="2.8" height="2.8" style="animation-delay:3.50s"/><text class="city" x="90.4" y="251.9" text-anchor="end" style="animation-delay:3.70s">BENGALURU</text></g>
-              <g><path class="g" d="M100.5 205.8 Q81.9 220.5 58.7 225.1"/><path class="r" pathLength="1" d="M100.5 205.8 Q81.9 220.5 58.7 225.1" style="animation-delay:2.02s"/><rect class="m" x="57.3" y="223.7" width="2.8" height="2.8" style="animation-delay:3.72s"/><text class="city" x="55.5" y="226.7" text-anchor="end" style="animation-delay:3.92s">GOA</text></g>
-              <circle class="ring" cx="100.5" cy="205.8" r="5"/><rect class="hq" x="98.5" y="203.8" width="4" height="4"/><text class="hq-label city" x="105.1" y="212.0">HYDERABAD</text>
+            <svg class="chart__routes" viewBox="-6 2 304 334" fill="none" aria-hidden="true">
+              <g data-state="Andhra Pradesh"><path class="g" d="M100.6 205.8 Q103.5 216.9 110.3 226.0"/><path class="r" pathLength="1" d="M100.6 205.8 Q103.5 216.9 110.3 226.0" style="animation-delay:0.50s"/><rect class="m" x="109.2" y="224.9" width="2.2" height="2.2" style="animation-delay:2.00s"/></g>
+              <g data-state="Maharashtra"><path class="g" d="M100.6 205.8 Q87.1 197.2 77.9 184.0"/><path class="r" pathLength="1" d="M100.6 205.8 Q87.1 197.2 77.9 184.0" style="animation-delay:0.59s"/><rect class="m" x="76.8" y="182.9" width="2.2" height="2.2" style="animation-delay:2.09s"/></g>
+              <g data-state="Karnataka"><path class="g" d="M100.6 205.8 Q87.2 216.2 78.8 231.0"/><path class="r" pathLength="1" d="M100.6 205.8 Q87.2 216.2 78.8 231.0" style="animation-delay:0.68s"/><rect class="m" x="77.7" y="229.9" width="2.2" height="2.2" style="animation-delay:2.18s"/></g>
+              <g data-state="Goa"><path class="g" d="M100.6 205.8 Q82.5 220.2 60.3 226.5"/><path class="r" pathLength="1" d="M100.6 205.8 Q82.5 220.2 60.3 226.5" style="animation-delay:0.77s"/><rect class="m" x="59.2" y="225.4" width="2.2" height="2.2" style="animation-delay:2.27s"/></g>
+              <g data-state="Chhattisgarh"><path class="g" d="M100.6 205.8 Q121.4 189.8 134.4 167.0"/><path class="r" pathLength="1" d="M100.6 205.8 Q121.4 189.8 134.4 167.0" style="animation-delay:0.86s"/><rect class="m" x="133.3" y="165.9" width="2.2" height="2.2" style="animation-delay:2.36s"/></g>
+              <g data-state="Madhya Pradesh"><path class="g" d="M100.6 205.8 Q94.7 174.9 101.1 144.0"/><path class="r" pathLength="1" d="M100.6 205.8 Q94.7 174.9 101.1 144.0" style="animation-delay:0.95s"/><rect class="m" x="100.0" y="142.9" width="2.2" height="2.2" style="animation-delay:2.45s"/></g>
+              <g data-state="Odisha"><path class="g" d="M100.6 205.8 Q131.8 196.0 156.7 175.0"/><path class="r" pathLength="1" d="M100.6 205.8 Q131.8 196.0 156.7 175.0" style="animation-delay:1.04s"/><rect class="m" x="155.6" y="173.9" width="2.2" height="2.2" style="animation-delay:2.54s"/></g>
+              <g data-state="Tamil Nadu"><path class="g" d="M100.6 205.8 Q108.3 238.2 102.9 271.0"/><path class="r" pathLength="1" d="M100.6 205.8 Q108.3 238.2 102.9 271.0" style="animation-delay:1.13s"/><rect class="m" x="101.8" y="269.9" width="2.2" height="2.2" style="animation-delay:2.63s"/></g>
+              <g data-state="Kerala"><path class="g" d="M100.6 205.8 Q84.0 239.5 81.6 277.0"/><path class="r" pathLength="1" d="M100.6 205.8 Q84.0 239.5 81.6 277.0" style="animation-delay:1.22s"/><rect class="m" x="80.5" y="275.9" width="2.2" height="2.2" style="animation-delay:2.72s"/></g>
+              <g data-state="Gujarat"><path class="g" d="M100.6 205.8 Q64.6 186.1 38.9 154.0"/><path class="r" pathLength="1" d="M100.6 205.8 Q64.6 186.1 38.9 154.0" style="animation-delay:1.31s"/><rect class="m" x="37.8" y="152.9" width="2.2" height="2.2" style="animation-delay:2.81s"/></g>
+              <g data-state="Lakshadweep"><path class="g" d="M100.6 205.8 Q68.3 235.9 50.1 276.0"/><path class="r" pathLength="1" d="M100.6 205.8 Q68.3 235.9 50.1 276.0" style="animation-delay:1.40s"/><rect class="m" x="49.0" y="274.9" width="2.2" height="2.2" style="animation-delay:2.90s"/></g>
+              <g data-state="Jharkhand"><path class="g" d="M100.6 205.8 Q127.1 168.4 166.0 144.0"/><path class="r" pathLength="1" d="M100.6 205.8 Q127.1 168.4 166.0 144.0" style="animation-delay:1.49s"/><rect class="m" x="164.9" y="142.9" width="2.2" height="2.2" style="animation-delay:2.99s"/></g>
+              <g data-state="Uttar Pradesh"><path class="g" d="M100.6 205.8 Q120.6 160.0 121.5 110.0"/><path class="r" pathLength="1" d="M100.6 205.8 Q120.6 160.0 121.5 110.0" style="animation-delay:1.58s"/><rect class="m" x="120.4" y="108.9" width="2.2" height="2.2" style="animation-delay:3.08s"/></g>
+              <g data-state="Rajasthan"><path class="g" d="M100.6 205.8 Q69.4 164.3 56.6 114.0"/><path class="r" pathLength="1" d="M100.6 205.8 Q69.4 164.3 56.6 114.0" style="animation-delay:1.67s"/><rect class="m" x="55.5" y="112.9" width="2.2" height="2.2" style="animation-delay:3.17s"/></g>
+              <g data-state="Bihar"><path class="g" d="M100.6 205.8 Q142.6 170.6 167.8 122.0"/><path class="r" pathLength="1" d="M100.6 205.8 Q142.6 170.6 167.8 122.0" style="animation-delay:1.76s"/><rect class="m" x="166.7" y="120.9" width="2.2" height="2.2" style="animation-delay:3.26s"/></g>
+              <g data-state="West Bengal"><path class="g" d="M100.6 205.8 Q138.7 166.1 189.1 144.0"/><path class="r" pathLength="1" d="M100.6 205.8 Q138.7 166.1 189.1 144.0" style="animation-delay:1.85s"/><rect class="m" x="188.0" y="142.9" width="2.2" height="2.2" style="animation-delay:3.35s"/></g>
+              <g data-state="Delhi"><path class="g" d="M100.6 205.8 Q106.5 148.9 89.9 94.0"/><path class="r" pathLength="1" d="M100.6 205.8 Q106.5 148.9 89.9 94.0" style="animation-delay:1.94s"/><rect class="m" x="88.8" y="92.9" width="2.2" height="2.2" style="animation-delay:3.44s"/></g>
+              <g data-state="Haryana"><path class="g" d="M100.6 205.8 Q78.8 148.4 80.7 87.0"/><path class="r" pathLength="1" d="M100.6 205.8 Q78.8 148.4 80.7 87.0" style="animation-delay:2.03s"/><rect class="m" x="79.6" y="85.9" width="2.2" height="2.2" style="animation-delay:3.53s"/></g>
+              <g data-state="Uttarakhand"><path class="g" d="M100.6 205.8 Q117.7 143.3 109.4 79.0"/><path class="r" pathLength="1" d="M100.6 205.8 Q117.7 143.3 109.4 79.0" style="animation-delay:2.12s"/><rect class="m" x="108.3" y="77.9" width="2.2" height="2.2" style="animation-delay:3.62s"/></g>
+              <g data-state="Punjab"><path class="g" d="M100.6 205.8 Q73.2 141.0 72.8 70.5"/><path class="r" pathLength="1" d="M100.6 205.8 Q73.2 141.0 72.8 70.5" style="animation-delay:2.21s"/><rect class="m" x="71.7" y="69.4" width="2.2" height="2.2" style="animation-delay:3.71s"/></g>
+              <g data-state="Sikkim"><path class="g" d="M100.6 205.8 Q157.6 164.3 194.2 104.0"/><path class="r" pathLength="1" d="M100.6 205.8 Q157.6 164.3 194.2 104.0" style="animation-delay:2.30s"/><rect class="m" x="193.1" y="102.9" width="2.2" height="2.2" style="animation-delay:3.80s"/></g>
+              <g data-state="Tripura"><path class="g" d="M100.6 205.8 Q156.2 161.8 224.4 142.5"/><path class="r" pathLength="1" d="M100.6 205.8 Q156.2 161.8 224.4 142.5" style="animation-delay:2.39s"/><rect class="m" x="223.3" y="141.4" width="2.2" height="2.2" style="animation-delay:3.89s"/></g>
+              <g data-state="Meghalaya"><path class="g" d="M100.6 205.8 Q168.7 177.4 220.7 125.0"/><path class="r" pathLength="1" d="M100.6 205.8 Q168.7 177.4 220.7 125.0" style="animation-delay:2.48s"/><rect class="m" x="219.6" y="123.9" width="2.2" height="2.2" style="animation-delay:3.98s"/></g>
+              <g data-state="Himachal Pradesh"><path class="g" d="M100.6 205.8 Q81.5 134.4 91.3 61.0"/><path class="r" pathLength="1" d="M100.6 205.8 Q81.5 134.4 91.3 61.0" style="animation-delay:2.57s"/><rect class="m" x="90.2" y="59.9" width="2.2" height="2.2" style="animation-delay:4.07s"/></g>
+              <g data-state="Andaman & Nicobar"><path class="g" d="M100.6 205.8 Q161.8 248.3 234.6 264.0"/><path class="r" pathLength="1" d="M100.6 205.8 Q161.8 248.3 234.6 264.0" style="animation-delay:2.66s"/><rect class="m" x="233.5" y="262.9" width="2.2" height="2.2" style="animation-delay:4.16s"/></g>
+              <g data-state="Mizoram"><path class="g" d="M100.6 205.8 Q162.0 163.0 235.0 147.0"/><path class="r" pathLength="1" d="M100.6 205.8 Q162.0 163.0 235.0 147.0" style="animation-delay:2.75s"/><rect class="m" x="233.9" y="145.9" width="2.2" height="2.2" style="animation-delay:4.25s"/></g>
+              <g data-state="Manipur"><path class="g" d="M100.6 205.8 Q179.8 183.5 244.3 132.5"/><path class="r" pathLength="1" d="M100.6 205.8 Q179.8 183.5 244.3 132.5" style="animation-delay:2.84s"/><rect class="m" x="243.2" y="131.4" width="2.2" height="2.2" style="animation-delay:4.34s"/></g>
+              <g data-state="Assam"><path class="g" d="M100.6 205.8 Q159.6 147.3 236.4 116.0"/><path class="r" pathLength="1" d="M100.6 205.8 Q159.6 147.3 236.4 116.0" style="animation-delay:2.93s"/><rect class="m" x="235.3" y="114.9" width="2.2" height="2.2" style="animation-delay:4.43s"/></g>
+              <g data-state="Jammu & Kashmir"><path class="g" d="M100.6 205.8 Q99.7 119.9 65.8 41.0"/><path class="r" pathLength="1" d="M100.6 205.8 Q99.7 119.9 65.8 41.0" style="animation-delay:3.02s"/><rect class="m" x="64.7" y="39.9" width="2.2" height="2.2" style="animation-delay:4.52s"/></g>
+              <g data-state="Ladakh"><path class="g" d="M100.6 205.8 Q80.2 121.6 93.6 36.0"/><path class="r" pathLength="1" d="M100.6 205.8 Q80.2 121.6 93.6 36.0" style="animation-delay:3.11s"/><rect class="m" x="92.5" y="34.9" width="2.2" height="2.2" style="animation-delay:4.61s"/></g>
+              <g data-state="Nagaland"><path class="g" d="M100.6 205.8 Q183.3 177.2 248.5 119.0"/><path class="r" pathLength="1" d="M100.6 205.8 Q183.3 177.2 248.5 119.0" style="animation-delay:3.20s"/><rect class="m" x="247.4" y="117.9" width="2.2" height="2.2" style="animation-delay:4.70s"/></g>
+              <g data-state="Arunachal Pradesh"><path class="g" d="M100.6 205.8 Q164.6 136.5 250.3 97.0"/><path class="r" pathLength="1" d="M100.6 205.8 Q164.6 136.5 250.3 97.0" style="animation-delay:3.29s"/><rect class="m" x="249.2" y="95.9" width="2.2" height="2.2" style="animation-delay:4.79s"/></g>
+              <circle class="ring" cx="100.6" cy="205.8" r="5"/><rect class="hq" x="98.6" y="203.8" width="4" height="4"/>
             </svg>
           </div>
-          <div class="chart__bar chart__bar--top"><span>Chart 01 · India</span><span class="t">The Atlantic Way</span></div>
-          <div class="chart__bar chart__bar--bottom"><div class="chart__legend"><span><i class="line"></i> Route</span><span><i class="sq"></i> Port of call</span></div><span class="chart__coords">17.4153° N · 78.3550° E</span></div>
-          <svg class="chart__compass" viewBox="0 0 100 100" fill="none" stroke="currentColor"><circle cx="50" cy="50" r="40" stroke-width=".75" opacity=".6"/><circle cx="50" cy="50" r="30" stroke-width=".5" stroke-dasharray="1 3" opacity=".6"/><path d="M50 10 L55 50 L50 90 L45 50 Z" fill="#a65e3f" stroke="none"/><path d="M10 50 L50 45 L90 50 L50 55 Z" fill="currentColor" stroke="none" opacity=".85"/><text x="50" y="7" text-anchor="middle" font-size="8" font-family="IBM Plex Mono, ui-monospace, monospace" fill="currentColor" stroke="none">N</text></svg>
         </div>
       </div>
     </div>
@@ -276,7 +282,7 @@
 <section class="story" id="about">
   <div class="wrap">
     <p class="kicker reveal">01. What Atlantic does &amp; how</p>
-    <p class="intro reveal">India and especially the Telugu states went from occasionally scrolling to living online.</p>
+    <p class="intro reveal">India and especially South India went from occasionally scrolling to living online.</p>
     <div class="shifts">
       <div class="shift reveal"><b>01</b>Brands moved to Instagram.</div>
       <div class="shift reveal"><b>02</b>Creators became Media.</div>
@@ -318,7 +324,7 @@
       <article class="svc-row reveal"><span class="num">01</span><div><h3>Creator Partnerships</h3><p class="tag">PRIOR — Where Brands Meet Their Internet People.</p></div><div class="text"><p>Creators have communities. Brands have stories. PRIOR makes the introduction.</p><p>We scout, manage and connect brands with a curated roster of creators — from niche voices to rising internet personalities.</p><p>No random influencer dumping. Right creator. Right audience. Right collab.</p></div><img src="assets/brand/prior-3.jpg" alt="" loading="lazy" /></article>
       <article class="svc-row reveal"><span class="num">02</span><div><h3>Integrated Brand Solutions</h3><p class="tag">Ideas That Leave the Group Chat.</p></div><div class="text"><p>Campaigns shouldn’t just look good on a deck. They should travel.</p><p>From campaigns and digital activations to partnerships, launches and on-ground experiences — we connect brand, audience, internet and real life.</p><p>Think big. Then make it happen.</p></div><img src="assets/media/svc-ips.jpg" alt="" loading="lazy" /></article>
       <article class="svc-row reveal"><span class="num">03</span><div><h3>IPs, Businesses &amp; Portfolios</h3><p class="tag">You Bring the Idea. We Build the Thing.</p></div><div class="text"><p>A business needs a brand. A creator needs a portfolio. A community needs an IP. Sometimes, an idea just needs someone crazy enough to build it. That’s where Atlantic comes in.</p><p>We develop content IPs, creator properties, business portfolios, digital identities and media-led concepts from scratch.</p><p class="chain">Concept → Identity → Content → Audience → Growth.</p></div><img src="assets/brand/hello-creations.jpg" alt="" loading="lazy" /></article>
-      <article class="svc-row reveal"><span class="num">04</span><div><h3>Digital Media Marketing</h3><p class="tag">Make the Algorithm Know Your Name.</p></div><div class="text"><p>Social isn’t just posting pretty things and praying for reach.</p><p>We do strategy, social, SEO, performance campaigns, content planning and digital marketing designed to put your brand in the right feeds, searches and conversations.</p><p>Less “post &amp; pray.” More “plan &amp; perform.”</p></div><img src="assets/brand/dmm-marketing.jpg" alt="" loading="lazy" /></article>
+      <article class="svc-row reveal"><span class="num">04</span><div><h3>CaaS — Content As A Service</h3><p class="tag">Your Content Team. On Demand.</p></div><div class="text"><p>Our dedicated creative team takes it from brief → brainstorm → create → refine → deliver, giving your brand consistent support, from social creatives, ad designs, and video edits to landing pages, campaign assets, and more on-demand creative support.</p><p class="chain">Brief. Create. Deliver. Repeat.</p></div><img src="assets/brand/hello-content.jpg" alt="" loading="lazy" /></article>
       <article class="svc-row reveal"><span class="num">05</span><div><h3>Content &amp; Production</h3><p class="tag">Shoot. Edit. Drop. Repeat.</p></div><div class="text"><p>Good content doesn’t happen because someone owns a camera. It happens when there’s a thought behind the frame.</p><p>From pre-production, shoots and editing to post, YouTube CMS, thumbnails, podcasts and original formats — we make content built for the internet.</p><p>Premium when it needs to be. Raw when it needs to be. Never boring.</p></div><img src="assets/brand/camera.jpg" alt="" loading="lazy" /></article>
     </div>
   </div>
@@ -347,8 +353,8 @@
 
 <section class="process" id="process">
   <div class="wrap">
-    <p class="kicker reveal">04. How we work</p>
-    <h2 class="h2 reveal">How We Get Shit Done</h2>
+    <p class="kicker reveal">04. How we get the job done</p>
+    <h2 class="h2 reveal">How We Get the Job Done</h2>
     <div class="steps">
       <div class="step reveal"><div class="dot">01</div><h3>Strategize</h3><p class="sub">First, We Get Nosy.</p><p>We get into your brand, audience, competitors, culture and what the internet is talking about.</p><p>Before making noise, we figure out what noise is worth making.</p></div>
       <div class="step reveal"><div class="dot">02</div><h3>Secure</h3><p class="sub">Then We Lock It In.</p><p>Creators. Partners. Production. People. Platforms. Budgets.</p><p>Whatever moves the idea from Google Doc → real world, we get it together.</p></div>
@@ -367,8 +373,8 @@
     <div class="crew-row crew-row--first reveal">
       <div><h3>The Founders’ Desk</h3><p class="tag">Where the big calls, bigger ideas &amp; occasional chaos begin.</p></div>
       <div class="founders">
-        <article class="founder"><div class="avatar">D</div><div><h4>Darnish</h4><p class="role">Founder</p><p class="line">The final boss of Atlantic.</p><p>Builds the playground, backs the crazy ideas and gives the team enough creative freedom to actually make them happen.</p><p><b>Basically:</b> vision, decisions &amp; “let’s do it.”</p></div></article>
-        <article class="founder"><div class="avatar avatar--terra">M</div><div><h4>Mohitha</h4><p class="role">Founder’s Office</p><p class="line">The tab that keeps all the tabs open.</p><p>Works across the Founder’s Office, coordination, operations and everything that needs to move from “we should” to “it’s done.”</p><p><b>Basically:</b> keeping the madness organised.</p></div></article>
+        <article class="founder"><div class="avatar">D</div><div><h4>Darnish</h4><p class="role">Founder</p><p class="line">The final boss of Atlantic.</p></div></article>
+        <article class="founder"><div class="avatar avatar--terra">M</div><div><h4>Mohitha</h4><p class="role">Founder’s Office</p><p class="line">The tab that keeps all the tabs open.</p></div></article>
       </div>
     </div>
     <div class="crew-row reveal"><div><h3>PRIOR</h3><p class="tag">The people matching brands with their internet people.</p></div><div class="people">
