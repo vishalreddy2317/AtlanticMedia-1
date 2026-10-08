@@ -69,7 +69,7 @@
   .chart__routes .hq { fill: #dd8e6b; }
   .chart__routes .st { font-family: var(--mono); text-anchor: middle; font-size: 4.4px; letter-spacing: .5px; font-weight: 500; fill: rgba(243,237,227,.8); stroke: #0e1b2c; stroke-width: 1.4px; stroke-linejoin: round; paint-order: stroke; }   /* state names, with a navy halo so routes stay behind them */
   .chart__routes .st--hq { fill: #dd8e6b; font-weight: 700; }
-  .chart__routes .hq-name { font-size: 5.2px; letter-spacing: .8px; }
+  .chart__routes .hq-name { font-size: 5.2px; letter-spacing: .8px; text-anchor: end; }   /* the stylesheet's text-anchor would otherwise override the attribute */
   .chart__routes .ld { stroke: rgba(243,237,227,.45); stroke-width: .35; }
   @keyframes frame-open { 0% { clip-path: inset(0 100% 0 0); } 100% { clip-path: inset(0); } }
   @media (prefers-reduced-motion: reduce) { .chart { animation: none; clip-path: none; } .chart__routes .r { stroke-dashoffset: 0; animation: none; } .chart__routes .m { opacity: 1; animation: none; } .chart__routes .ring { opacity: 0; animation: none; } }
