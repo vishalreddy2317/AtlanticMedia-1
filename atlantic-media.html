@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="robots" content="noindex, nofollow" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Atlantic Media — Your Brand Amplified. Elevated. Unstoppable</title>
+<title>Atlantic Media — We Saw the Internet Changing. So We Logged In.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -86,49 +86,47 @@
   @keyframes mark-in { 0% { opacity: 0; transform: scale(.4); } 100% { opacity: 1; transform: none; } }
   @keyframes ring-out { 0% { opacity: .8; transform: scale(.5); } 100% { opacity: 0; transform: scale(1.8); } }
 
-  /* proof strip */
-  .proof { background: var(--sand-2); border-bottom: 1px solid rgba(0,0,0,.06); }
-  .proof .wrap { display: grid; grid-template-columns: repeat(4, 1fr); }
-  .proof div { padding: 34px 0; border-right: 1px solid rgba(0,0,0,.08); padding-left: 28px; }
-  .proof div:last-child { border: 0; }
-  .proof b { font-family: var(--serif); font-size: 2.6rem; font-weight: 600; color: var(--ocean); display: block; line-height: 1; }
-  .proof small { color: #5b5147; font-weight: 600; }
-
   section { padding: clamp(80px, 10vw, 130px) 0; }
   .h2 { font-family: var(--serif); font-weight: 600; font-size: clamp(36px, 4.6vw, 64px); line-height: 1.05; letter-spacing: -.015em; margin-top: 16px; }
 
-  /* hello */
-  .hello .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; }
-  .collage { display: grid; grid-template-columns: 1.2fr 1fr; grid-template-rows: 190px 190px 120px; gap: 12px; }
-  .collage figure { position: relative; border-radius: 16px; overflow: hidden; }
-  .collage img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s; }
-  .collage figure:hover img { transform: scale(1.06); }
-  .collage figcaption { position: absolute; left: 12px; bottom: 12px; background: var(--sand); padding: 6px 12px; border-radius: 999px; font-size: .8rem; font-weight: 700; }
-  .collage .a { grid-row: 1 / 3; } .collage .d { grid-column: 1 / 3; }
-  .hello p { margin-top: 22px; color: #3d3630; font-size: 1.05rem; }
+  /* 01 story */
+  .story .intro { font-family: var(--serif); font-size: clamp(26px, 2.8vw, 40px); line-height: 1.22; color: var(--ocean); max-width: 26ch; margin-top: 18px; letter-spacing: -.01em; }
+  .shifts { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 50px; }
+  .shift { background: #fff; border: 1px solid rgba(14,27,44,.08); border-radius: 18px; padding: 22px 22px 24px; font-family: var(--serif); font-size: 1.25rem; line-height: 1.25; color: var(--ocean); }
+  .shift b { display: block; font-family: var(--sans); font-size: .72rem; letter-spacing: .18em; color: var(--terra); margin-bottom: 14px; }
+  .story .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 56px; }
+  .story .cols p { margin-top: 16px; color: #3d3630; font-size: 1.05rem; } .story .cols p:first-child { margin-top: 0; } .story .cols p b { color: var(--ocean); }
+  .story .cols .list { font-family: var(--serif); font-size: 1.5rem; line-height: 1.3; color: var(--ocean); }
+  .asks { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 56px; }
+  .ask { display: block; background: var(--ocean); color: var(--sand); border-radius: 18px; padding: 26px 22px 30px; font-family: var(--serif); font-size: 1.35rem; line-height: 1.2; transition: transform .3s, background .3s; }
+  .ask:hover { transform: translateY(-4px); background: var(--ocean-2); }
+  .quote { background: var(--sand-2); padding: clamp(60px, 7vw, 90px) 0; }
+  .quote p { font-family: var(--serif); font-weight: 600; font-size: clamp(34px, 4.4vw, 60px); line-height: 1.05; letter-spacing: -.015em; color: var(--ocean); text-align: center; }
+  .quote em { font-style: italic; color: var(--terra); }
 
-  /* journey */
-  .journey { background: var(--ocean); color: var(--sand); position: relative; overflow: hidden; }
-  .journey .h2 { max-width: 16ch; }
-  .route { position: relative; margin-top: 70px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-  .route::before { content: ''; position: absolute; top: 22px; left: 22px; right: 22px; border-top: 2px dashed rgba(166,94,63,.7); }
-  .stop { position: relative; }
-  .stop .dot { width: 46px; height: 46px; border-radius: 50%; border: 2px solid var(--terra); background: var(--ocean); display: grid; place-items: center; font-family: var(--serif); font-weight: 700; color: #e3b79f; position: relative; }
-  .stop h3 { font-family: var(--serif); font-size: 1.5rem; font-weight: 600; margin-top: 26px; }
-  .stop p { color: var(--muted); margin-top: 10px; font-size: .95rem; }
-  .stop img { margin-top: 20px; border-radius: 14px; aspect-ratio: 4/3; object-fit: cover; width: 100%; filter: saturate(.9); }
-  .stop a { display: inline-block; margin-top: 14px; font-weight: 700; color: #e3b79f; border-bottom: 1px solid; }
+  /* 02 services */
+  .journey { background: var(--ocean); color: var(--sand); }
+  .svc { border-top: 1px solid rgba(243,237,227,.15); margin-top: 60px; }
+  .svc-row { display: grid; grid-template-columns: 70px 1.05fr 1.35fr 240px; gap: 36px; align-items: center; padding: 36px 0; border-bottom: 1px solid rgba(243,237,227,.15); }
+  .svc-row .num { font-family: var(--serif); font-size: 2rem; color: #e3b79f; line-height: 1; }
+  .svc-row h3 { font-family: var(--serif); font-size: clamp(26px, 2.3vw, 34px); line-height: 1.05; font-weight: 600; }
+  .svc-row .tag { font-family: var(--serif); font-style: italic; color: #e3b79f; margin-top: 10px; font-size: 1.12rem; line-height: 1.3; }
+  .svc-row .text p { color: var(--muted); font-size: .98rem; margin-top: 10px; } .svc-row .text p:first-child { margin-top: 0; }
+  .svc-row .text .chain { color: var(--sand); font-weight: 600; }
+  .svc-row img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 16px; filter: saturate(.9); }
 
-  /* how we work */
-  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 56px; border-top: 1px solid rgba(0,0,0,.12); }
-  .step { padding: 34px 30px 10px 0; border-right: 1px solid rgba(0,0,0,.12); }
-  .step + .step { padding-left: 30px; } .step:last-child { border: 0; }
-  .step i { font-style: normal; font-family: var(--serif); color: var(--terra); font-size: 3rem; line-height: 1; }
-  .step h3 { font-family: var(--serif); font-size: 1.8rem; margin-top: 16px; }
+  /* 04 process */
+  .process { background: var(--sand-2); }
+  .steps { position: relative; margin-top: 60px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+  .steps::before { content: ''; position: absolute; top: 22px; left: 22px; right: 22px; border-top: 2px dashed rgba(166,94,63,.6); }
+  .step { position: relative; }
+  .step .dot { width: 46px; height: 46px; border-radius: 50%; border: 2px solid var(--terra); background: var(--sand-2); display: grid; place-items: center; font-family: var(--serif); font-weight: 700; color: var(--terra); position: relative; }
+  .step h3 { font-family: var(--serif); font-size: 1.8rem; margin-top: 24px; }
+  .step .sub { font-family: var(--serif); font-style: italic; color: var(--terra); font-size: 1.15rem; margin-top: 6px; }
   .step p { color: #4a423b; margin-top: 10px; }
 
   /* clients */
-  .clients { background: var(--sand); overflow: hidden; } /* overflow: the brand ring is wider than the page */
+  .clients { background: var(--sand-2); overflow: hidden; } /* overflow: the brand ring is wider than the page */
   .logos { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-top: 50px; }
   .logos div { background: #fff; border-radius: 14px; height: 96px; display: grid; place-items: center; padding: 14px 18px; transition: transform .3s, box-shadow .3s; }
   .logos div:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(14,27,44,.12); }
@@ -149,17 +147,40 @@
   .passport small { color: var(--terra); font-weight: 700; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; }
   .match { display: flex; gap: 26px; margin-top: 30px; flex-wrap: wrap; }
   .match span { font-weight: 800; letter-spacing: .16em; font-size: .82rem; }
+  .prior .big { font-family: var(--serif); font-weight: 600; font-size: clamp(28px, 3vw, 40px); line-height: 1.1; color: var(--ocean); margin-top: 8px; }
+  .prior .verbs { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 22px; font-family: var(--serif); font-size: 1.2rem; color: var(--ocean); }
+  .prior .rizz { margin-top: 14px; font-style: italic; font-size: .95rem; }
+  .btn--ink { background: rgba(14,27,44,.92); color: var(--sand); } .btn--ink:hover { background: var(--ocean); }
+  .btn--paper { background: #fff; color: var(--ocean); } .btn--paper:hover { background: var(--sand-2); }
+  .btn--outline-ink { border: 1px solid rgba(14,27,44,.45); color: var(--ocean); } .btn--outline-ink:hover { background: rgba(14,27,44,.06); }
+
+  /* 05 team */
+  .team .lead-ink { margin-top: 20px; font-size: 1.12rem; color: #3d3630; }
+  .crew-row { display: grid; grid-template-columns: 1fr 2.2fr; gap: 40px; padding: 30px 0; border-top: 1px solid rgba(14,27,44,.12); }
+  .crew-row--first { margin-top: 50px; }
+  .crew-row h3 { font-size: .8rem; letter-spacing: .18em; text-transform: uppercase; font-weight: 800; color: var(--ocean); }
+  .crew-row .tag { font-family: var(--serif); font-size: 1.25rem; color: #4a423b; margin-top: 8px; line-height: 1.35; }
+  .founders { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .founder { background: #fff; border-radius: 20px; padding: 26px; display: grid; grid-template-columns: 64px 1fr; gap: 18px; align-items: start; border: 1px solid rgba(14,27,44,.08); }
+  .avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--ocean); color: var(--sand); display: grid; place-items: center; font-family: var(--serif); font-size: 1.5rem; font-weight: 600; flex: none; }
+  .avatar--terra { background: var(--terra); color: #fff; }
+  .founder h4 { font-family: var(--serif); font-size: 1.6rem; line-height: 1.1; font-weight: 600; }
+  .founder .role { color: var(--terra); font-weight: 700; font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; margin-top: 4px; }
+  .founder .line { font-family: var(--serif); font-style: italic; font-size: 1.12rem; color: var(--ocean); margin-top: 12px; }
+  .founder p { margin-top: 10px; color: #4a423b; font-size: .96rem; } .founder p b { color: var(--ocean); }
+  .people { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; align-content: start; }
+  .person { display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid rgba(14,27,44,.08); border-radius: 16px; padding: 14px 16px; }
+  .person .avatar { width: 44px; height: 44px; font-size: .95rem; }
+  .person b { display: block; color: var(--ocean); line-height: 1.2; } .person small { color: #5b5147; }
 
   /* live */
   .live .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
   .live img { border-radius: 22px; aspect-ratio: 4/5; object-fit: cover; width: 100%; }
   .live address { font-style: normal; margin-top: 22px; color: #3d3630; }
   .live .contacts { margin-top: 24px; display: grid; gap: 6px; font-weight: 700; color: var(--ocean); }
+  .live .coords { margin-top: 18px; font-family: "IBM Plex Mono", ui-monospace, monospace; letter-spacing: .14em; font-size: .9rem; color: var(--terra); }
 
-  /* cta + footer */
-  .cta { background: var(--ocean); color: var(--sand); text-align: center; }
-  .cta .h2 { margin: 16px auto 0; max-width: 18ch; }
-  .cta .ctas { display: flex; gap: 14px; justify-content: center; margin-top: 34px; }
+  /* footer */
   footer { background: #0a1522; color: var(--muted); padding: 60px 0 30px; font-size: .92rem; }
   footer .wrap { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; }
   footer img { height: 70px; width: auto; }
@@ -167,15 +188,17 @@
   footer ul { list-style: none; display: grid; gap: 6px; }
   .legal { max-width: var(--max); margin: 40px auto 0; padding: 20px var(--pad) 0; border-top: 1px solid rgba(243,237,227,.1); display: flex; justify-content: space-between; }
 
+  @media (max-width: 1100px) { .shifts { grid-template-columns: repeat(3, 1fr); } .svc-row { grid-template-columns: 60px 1fr 1.3fr; } .svc-row img { display: none; } .people { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 900px) {
     .nav ul { display: none; }
-    .hero__inner, .hello .wrap, .prior .wrap, .live .wrap, footer .wrap { grid-template-columns: 1fr; }
+    .shifts, .asks, .steps, .people, .story .cols, .founders, .crew-row { grid-template-columns: 1fr; }
+    .hero__inner, .prior .wrap, .live .wrap, footer .wrap { grid-template-columns: 1fr; }
     .hero__inner { padding-top: 90px; padding-bottom: 60px; gap: 44px; }
     .hero__stack { gap: 44px; }
-    .proof .wrap { grid-template-columns: 1fr 1fr; }
-    .route, .steps { grid-template-columns: 1fr 1fr; } .route::before { display: none; }
+    .shifts, .asks, .steps, .people, .story .cols, .founders, .crew-row { grid-template-columns: 1fr 1fr; }
+    .steps::before { display: none; }
+    .svc-row { grid-template-columns: 1fr; gap: 16px; } .svc-row img { aspect-ratio: 16 / 9; order: -1; } .svc-row .num { display: none; }
     .logos { grid-template-columns: repeat(3, 1fr); }
-    .step { border: 0; padding-left: 0 !important; }
   }
   @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
 </style>
@@ -192,8 +215,8 @@
 <header class="nav" id="nav">
   <div class="wrap">
     <a href="/"><img src="assets/brand/logo-white.png" alt="Atlantic Media" /></a>
-    <ul><li><a href="#journey">Services</a></li><li><a href="#clients">Work</a></li><li><a href="#prior">PRIOR</a></li><li><a href="#hello">About</a></li><li><a href="/contact">Contact</a></li></ul>
-    <a class='btn btn--terra' href="/contact">Start a project →</a>
+    <ul><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#prior">PRIOR</a></li><li><a href="#team">Team</a></li><li><a href="/contact">Contact</a></li></ul>
+    <a class='btn btn--terra' href="/contact">Slide into our DMs →</a>
   </div>
 </header>
 
@@ -208,10 +231,10 @@
 
   <div class="wrap hero__inner">
     <div>
-      <p class="kicker reveal">The Atlantic Way</p>
-      <h1 class="reveal">Your Brand<br/><em>Amplified.</em> Elevated. Unstoppable</h1>
-      <p class="lead reveal">At Atlantic Media, we’re more than just a digital Media agency-we’re a powerhouse of creativity, strategy, and execution.</p>
-      <div class="ctas reveal"><a class='btn btn--terra' href="/contact">Start a project →</a><a class="btn btn--line" href="#prior">Join PRIOR</a></div>
+      <p class="kicker reveal">Atlantic Media</p>
+      <h1 class="reveal">We Saw the Internet Changing.<br/><em>So We Logged In.</em></h1>
+      <p class="lead reveal">Atlantic didn’t enter digital to “revolutionise” it. We entered because the revolution was already happening and we wanted a seat at the table.</p>
+      <div class="ctas reveal"><a class='btn btn--terra' href="/contact">Slide into our DMs →</a><a class="btn btn--line" href="/atlantic-globe/roster">Meet our internet people →</a></div>
     </div>
     <div class="hero__stack">
       <div class="hero__slot">
@@ -233,7 +256,7 @@
             </svg>
           </div>
           <div class="chart__bar chart__bar--top"><span>Chart 01 · India</span><span class="t">The Atlantic Way</span></div>
-          <div class="chart__bar chart__bar--bottom"><div class="chart__legend"><span><i class="line"></i> Route</span><span><i class="sq"></i> Port of call</span></div><span class="chart__coords">17.42° N · 78.34° E</span></div>
+          <div class="chart__bar chart__bar--bottom"><div class="chart__legend"><span><i class="line"></i> Route</span><span><i class="sq"></i> Port of call</span></div><span class="chart__coords">17.4153° N · 78.3550° E</span></div>
           <svg class="chart__compass" viewBox="0 0 100 100" fill="none" stroke="currentColor"><circle cx="50" cy="50" r="40" stroke-width=".75" opacity=".6"/><circle cx="50" cy="50" r="30" stroke-width=".5" stroke-dasharray="1 3" opacity=".6"/><path d="M50 10 L55 50 L50 90 L45 50 Z" fill="#a65e3f" stroke="none"/><path d="M10 50 L50 45 L90 50 L50 55 Z" fill="currentColor" stroke="none" opacity=".85"/><text x="50" y="7" text-anchor="middle" font-size="8" font-family="IBM Plex Mono, ui-monospace, monospace" fill="currentColor" stroke="none">N</text></svg>
         </div>
       </div>
@@ -243,61 +266,53 @@
   </div>
 </section>
 
-<section class="clients" id="clients">
+<section class="story" id="about">
   <div class="wrap">
-    <p class="kicker reveal">Brand partnership highlights</p>
-    <h2 class="h2 reveal">Trusted across fashion, beauty, jewellery &amp; lifestyle</h2>
-    <div class="bt" id="brand-tiers" data-layout="ring" aria-label="Brand partnership highlights"></div>
+    <p class="kicker reveal">01. What Atlantic does &amp; how</p>
+    <p class="intro reveal">India and especially the Telugu states went from occasionally scrolling to living online.</p>
+    <div class="shifts">
+      <div class="shift reveal"><b>01</b>Brands moved to Instagram.</div>
+      <div class="shift reveal"><b>02</b>Creators became Media.</div>
+      <div class="shift reveal"><b>03</b>Memes became Marketing.</div>
+      <div class="shift reveal"><b>04</b>Reels became Reach.</div>
+      <div class="shift reveal"><b>05</b>Communities became Audiences.</div>
+    </div>
+    <div class="cols">
+      <div class="reveal">
+        <p>We wanted in. So we started where most small media teams do: <b>Digital Marketing. Content. Production. Social.</b></p>
+        <p>Then came PRIOR: our creator partnership and influencer marketing wing, built around the right creators, not just the biggest numbers.</p>
+        <p>Today, we work with brands, businesses, creators and people building something of their own — helping them figure out what to say, where to say it and how to make people care.</p>
+      </div>
+      <div class="reveal">
+        <p>And we’re not stopping at social.</p>
+        <p class="list">Events. Brand Solutions. Production. Creator Partnerships. IPs.</p>
+        <p>We’re a compact mix of millennials, Gen Zs, creatives, strategists, producers and people who spend an unhealthy amount of time online.</p>
+      </div>
+    </div>
+    <div class="asks">
+      <a class="ask reveal" href="/contact">Creators for your campaign?</a>
+      <a class="ask reveal" href="/contact">Launching a brand?</a>
+      <a class="ask reveal" href="/contact">Building an IP?</a>
+      <a class="ask reveal" href="/contact">Growing a business or portfolio?</a>
+    </div>
+    <div class="ctas reveal" style="margin-top:22px;display:flex;gap:14px;align-items:center;flex-wrap:wrap"><a class="btn btn--terra" href="/contact">Cool. Slide into our DMs. →</a></div>
   </div>
 </section>
 
-<div class="proof">
-  <div class="wrap">
-    <div><b data-count="35">0</b><small>Brands partnered</small></div>
-    <div><b data-count="20">0</b><small>PRIOR creators</small></div>
-    <div><b data-count="4">0</b><small>Service verticals</small></div>
-    <div><b data-count="6">0</b><small>Production offerings</small></div>
-  </div>
-</div>
-
-<section class="hello" id="hello">
-  <div class="wrap">
-    <div class="collage reveal">
-      <figure class="a"><img src="assets/brand/hello-branding.jpg" alt="" /><figcaption>Branding</figcaption></figure>
-      <figure><img src="assets/brand/hello-content.jpg" alt="" /><figcaption>Content</figcaption></figure>
-      <figure><img src="assets/brand/hello-creations.jpg" alt="" /><figcaption>Creations</figcaption></figure>
-      <figure class="d"><img src="assets/brand/analytics.jpg" alt="" /><figcaption>SEO / SMM</figcaption></figure>
-    </div>
-    <div class="reveal">
-      <p class="kicker">Who we are</p>
-      <h2 class="h2">Hello There!</h2>
-      <p>Atlantic Media is your one-stop digital media wizardry hub, where creativity meets strategy. From crafting unique brand identities to capturing eye-popping photos and videos, We’ve got all the tools to make your business stand out online.</p>
-      <p>Our team is built on relentless talent, from our brand and talent managers securing impactful deals to our production crew and marketers bringing ideas to life. Together, we don’t just keep up with the industry- we set the pace.</p>
-    </div>
-  </div>
+<section class="quote">
+  <div class="wrap"><p class="reveal">You bring the idea.<br/><em>We bring the internet brain.</em></p></div>
 </section>
 
-<section class="journey" id="journey">
+<section class="journey" id="services">
   <div class="wrap">
-    <p class="kicker reveal">Our services</p>
-    <h2 class="h2 reveal">One journey, four ways to grow your brand</h2>
-    <div class="route">
-      <article class="stop reveal"><div class="dot">01</div><h3>Digital Media Marketing</h3><p>Virality is a science — precision-targeted campaigns, SEO, social and ads.</p><img src="assets/brand/dmm-social.jpg" alt="" /><a href="#">Read more</a></article>
-      <article class="stop reveal"><div class="dot">02</div><h3>Integrated Brand Solutions</h3><p>The Brand Connects of Atlantic — campaigns that don’t just get seen, they get felt.</p><img src="assets/media/svc-ips.jpg" alt="" /><a href="#">Read more</a></article>
-      <article class="stop reveal"><div class="dot">03</div><h3>Talent Management</h3><p>PRIOR — the matchmaker for brands and creators, with 20+ creators on the roster.</p><img src="assets/brand/prior-3.jpg" alt="" /><a href="#prior">Read more</a></article>
-      <article class="stop reveal"><div class="dot">04</div><h3>Content &amp; Production</h3><p>YouTube CMS, pre and post production, THM Originals and The Hidden Mic podcast.</p><img src="assets/brand/camera.jpg" alt="" /><a href="#">Read more</a></article>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <p class="kicker reveal">How we work</p>
-    <h2 class="h2 reveal">Boosting reach via a network of Influencers</h2>
-    <div class="steps">
-      <div class="step reveal"><i>i.</i><h3>Strategize</h3><p>We dive deep into understanding your brand and audience to craft tailored strategies that drive measurable results.</p></div>
-      <div class="step reveal"><i>ii.</i><h3>Secure</h3><p>Our team ensures the right partnerships, resources, and opportunities are locked in, setting you up for success from the start.</p></div>
-      <div class="step reveal"><i>iii.</i><h3>Succeed</h3><p>With our execution and expertise, we deliver impactful campaigns that elevate your brand and leave a lasting impression.</p></div>
+    <p class="kicker reveal">02. Services</p>
+    <h2 class="h2 reveal">One Brand. Five Ways to Make It Louder.</h2>
+    <div class="svc">
+      <article class="svc-row reveal"><span class="num">01</span><div><h3>Creator Partnerships</h3><p class="tag">PRIOR — Where Brands Meet Their Internet People.</p></div><div class="text"><p>Creators have communities. Brands have stories. PRIOR makes the introduction.</p><p>We scout, manage and connect brands with a curated roster of creators — from niche voices to rising internet personalities.</p><p>No random influencer dumping. Right creator. Right audience. Right collab.</p></div><img src="assets/brand/prior-3.jpg" alt="" loading="lazy" /></article>
+      <article class="svc-row reveal"><span class="num">02</span><div><h3>Integrated Brand Solutions</h3><p class="tag">Ideas That Leave the Group Chat.</p></div><div class="text"><p>Campaigns shouldn’t just look good on a deck. They should travel.</p><p>From campaigns and digital activations to partnerships, launches and on-ground experiences — we connect brand, audience, internet and real life.</p><p>Think big. Then make it happen.</p></div><img src="assets/media/svc-ips.jpg" alt="" loading="lazy" /></article>
+      <article class="svc-row reveal"><span class="num">03</span><div><h3>IPs, Businesses &amp; Portfolios</h3><p class="tag">You Bring the Idea. We Build the Thing.</p></div><div class="text"><p>A business needs a brand. A creator needs a portfolio. A community needs an IP. Sometimes, an idea just needs someone crazy enough to build it. That’s where Atlantic comes in.</p><p>We develop content IPs, creator properties, business portfolios, digital identities and media-led concepts from scratch.</p><p class="chain">Concept → Identity → Content → Audience → Growth.</p></div><img src="assets/brand/hello-creations.jpg" alt="" loading="lazy" /></article>
+      <article class="svc-row reveal"><span class="num">04</span><div><h3>Digital Media Marketing</h3><p class="tag">Make the Algorithm Know Your Name.</p></div><div class="text"><p>Social isn’t just posting pretty things and praying for reach.</p><p>We do strategy, social, SEO, performance campaigns, content planning and digital marketing designed to put your brand in the right feeds, searches and conversations.</p><p>Less “post &amp; pray.” More “plan &amp; perform.”</p></div><img src="assets/brand/dmm-marketing.jpg" alt="" loading="lazy" /></article>
+      <article class="svc-row reveal"><span class="num">05</span><div><h3>Content &amp; Production</h3><p class="tag">Shoot. Edit. Drop. Repeat.</p></div><div class="text"><p>Good content doesn’t happen because someone owns a camera. It happens when there’s a thought behind the frame.</p><p>From pre-production, shoots and editing to post, YouTube CMS, thumbnails, podcasts and original formats — we make content built for the internet.</p><p>Premium when it needs to be. Raw when it needs to be. Never boring.</p></div><img src="assets/brand/camera.jpg" alt="" loading="lazy" /></article>
     </div>
   </div>
 </section>
@@ -306,11 +321,16 @@
   <div class="wrap">
     <div class="reveal">
       <img src="assets/brand/prior.jpg" alt="PRIOR" style="width:92px;border-radius:14px" />
-      <p class="kicker" style="margin-top:26px">PRIOR by Atlantic Media</p>
-      <h2 class="h2">A match made in heaven</h2>
-      <p>PRIOR is the talent management agency that turns collaborations into pure magic. We handpick the perfect creators for brands — no guesswork and no drama.</p>
-      <div class="match"><span>CONNECT</span><span>·</span><span>COLLABORATE</span><span>·</span><span>CREATE</span></div>
-      <div class="ctas" style="margin-top:30px;display:flex;gap:12px"><a class="btn" style="background:rgba(14,27,44,.92);color:var(--sand)" href="/atlantic-globe/roster">Meet the roster →</a><a class="btn" style="background:#fff;color:var(--ocean)" href="#">Apply as a creator</a></div>
+      <p class="kicker" style="margin-top:26px">03. PRIOR by Atlantic Media</p>
+      <h2 class="h2">The Internet’s Talent Desk.</h2>
+      <p>Brands are looking for influence. Creators are looking for opportunities. We sit in the middle and make the chemistry happen.</p>
+      <p>PRIOR is Atlantic’s creator partnership &amp; talent management wing, connecting brands with creators who have something more valuable than followers:</p>
+      <p class="big">A real audience.</p>
+      <ul class="verbs"><li>We scout.</li><li>We curate.</li><li>We negotiate.</li><li>We collaborate.</li><li>We execute.</li></ul>
+      <p>No fake hype. No random creator lists. No “sir, 2M followers.” Just the right people for the right brief.</p>
+      <div class="match"><span>CONNECT</span><span>·</span><span>COLLAB</span><span>·</span><span>CREATE</span></div>
+      <div class="ctas" style="margin-top:30px;display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn--ink" href="/atlantic-globe/roster">Meet our internet people →</a><a class="btn btn--paper" href="mailto:connect@atlanticmedia.in?subject=Joining%20the%20PRIOR%20roster">Wanna join the roster?</a></div>
+      <p class="rizz">Bring the rizz. We’ll bring the briefs.</p>
     </div>
     <div class="globe-embed reveal">
       <iframe src="/atlantic-globe/?embed=1&amp;on=light&amp;force3d=1" title="The Atlantic Globe — PRIOR creators (interactive)" loading="lazy" allow="fullscreen"></iframe>
@@ -318,31 +338,77 @@
   </div>
 </section>
 
-<section class="live" id="live">
+<section class="process" id="process">
   <div class="wrap">
-    <img class="reveal" src="assets/brand/office-building.jpg" alt="One West, Financial District, Hyderabad" />
-    <div class="reveal">
-      <p class="kicker">Visit us</p>
-      <h2 class="h2">This is where we Live!</h2>
-      <address>Level 19 / Unit 3, One West – A Terminus Project,<br/>Narsing Nanakramguda Service Rd, Financial District,<br/>Hyderabad, Telangana 500008</address>
-      <div class="contacts"><a href="mailto:connect@atlanticmedia.in">connect@atlanticmedia.in</a><a href="tel:+917207974343">+91 72079 74343</a><a href="tel:+919392256699">+91 93922 56699</a></div>
+    <p class="kicker reveal">04. How we work</p>
+    <h2 class="h2 reveal">How We Get Shit Done</h2>
+    <div class="steps">
+      <div class="step reveal"><div class="dot">01</div><h3>Strategize</h3><p class="sub">First, We Get Nosy.</p><p>We get into your brand, audience, competitors, culture and what the internet is talking about.</p><p>Before making noise, we figure out what noise is worth making.</p></div>
+      <div class="step reveal"><div class="dot">02</div><h3>Secure</h3><p class="sub">Then We Lock It In.</p><p>Creators. Partners. Production. People. Platforms. Budgets.</p><p>Whatever moves the idea from Google Doc → real world, we get it together.</p></div>
+      <div class="step reveal"><div class="dot">03</div><h3>Execute</h3><p class="sub">Then We Cook.</p><p>Strategy is cute. Execution is where the lore is made.</p><p>Our creative, production, brand and talent teams take ideas from planning → publishing → activation → amplification.</p></div>
+      <div class="step reveal"><div class="dot">04</div><h3>Scale</h3><p class="sub">If It Works, We Don’t Stop There.</p><p>One good campaign is nice. Building something people remember is better.</p><p>We double down on what’s working and build the next play. That’s how brands become properties.</p></div>
     </div>
   </div>
 </section>
 
-<section class="cta">
+<section class="team" id="team">
   <div class="wrap">
-    <p class="kicker">Let’s set sail</p>
-    <h2 class="h2">It’s your turn to join the digital revolution</h2>
-    <div class="ctas"><a class='btn btn--terra' href="/contact">Start a project →</a><a class="btn btn--line" href="https://wa.me/917207974343">WhatsApp us</a></div>
+    <p class="kicker reveal">05. Who’s actually cooking?</p>
+    <h2 class="h2 reveal">Not AI. It’s Humans and AI.</h2>
+    <p class="lead-ink reveal">Meet the humans behind the Atlantic.</p>
+
+    <div class="crew-row crew-row--first reveal">
+      <div><h3>The Founders’ Desk</h3><p class="tag">Where the big calls, bigger ideas &amp; occasional chaos begin.</p></div>
+      <div class="founders">
+        <article class="founder"><div class="avatar">D</div><div><h4>Darnish</h4><p class="role">Founder</p><p class="line">The final boss of Atlantic.</p><p>Builds the playground, backs the crazy ideas and gives the team enough creative freedom to actually make them happen.</p><p><b>Basically:</b> vision, decisions &amp; “let’s do it.”</p></div></article>
+        <article class="founder"><div class="avatar avatar--terra">M</div><div><h4>Mohitha</h4><p class="role">Founder’s Office</p><p class="line">The tab that keeps all the tabs open.</p><p>Works across the Founder’s Office, coordination, operations and everything that needs to move from “we should” to “it’s done.”</p><p><b>Basically:</b> keeping the madness organised.</p></div></article>
+      </div>
+    </div>
+    <div class="crew-row reveal"><div><h3>PRIOR</h3><p class="tag">The people matching brands with their internet people.</p></div><div class="people">
+      <div class="person"><span class="avatar avatar--terra">RM</span><span><b>Rinkitha Mohanty</b><small>Head of Creator Partnerships</small></span></div>
+      <div class="person"><span class="avatar">CS</span><span><b>Chinmayi Suri</b><small>Talent Manager</small></span></div>
+      <div class="person"><span class="avatar">K</span><span><b>Karthik</b><small>Talent Manager</small></span></div></div></div>
+    <div class="crew-row reveal"><div><h3>Brand Solutions</h3><p class="tag">Where briefs walk in and campaigns walk out.</p></div><div class="people">
+      <div class="person"><span class="avatar avatar--terra">RK</span><span><b>Rajeswari Karri</b><small>Senior Brands Manager</small></span></div>
+      <div class="person"><span class="avatar">D</span><span><b>Divya</b><small>Brands Associate</small></span></div></div></div>
+    <div class="crew-row reveal"><div><h3>Production</h3><p class="tag">Camera Crew: “One more take”</p></div><div class="people">
+      <div class="person"><span class="avatar avatar--terra">HB</span><span><b>Harish Bejjanki</b><small>DOP</small></span></div>
+      <div class="person"><span class="avatar">BB</span><span><b>Bharath Bachi</b><small>DOP</small></span></div>
+      <div class="person"><span class="avatar">S</span><span><b>Sanju</b><small>DOP</small></span></div></div></div>
+    <div class="crew-row reveal"><div><h3>Creative</h3><p class="tag">The guy making pixels behave.</p></div><div class="people">
+      <div class="person"><span class="avatar avatar--terra">R</span><span><b>Rajesh</b><small>Graphic Designer</small></span></div></div></div>
+    <div class="crew-row reveal"><div><h3>The IP Brain</h3><p class="tag">Turning “bro, what if we…” into actual properties.</p></div><div class="people">
+      <div class="person"><span class="avatar avatar--terra">KB</span><span><b>Kalyan Bharath</b><small>Creative Head &amp; IP Lead</small></span></div></div></div>
+    <div class="crew-row reveal"><div><h3>The One-Man Army</h3><p class="tag">Keeping the whole ship moving.</p></div><div class="people">
+      <div class="person"><span class="avatar avatar--terra">M</span><span><b>Mahesh</b><small>Office &amp; Operations</small></span></div></div></div>
+  </div>
+</section>
+
+<section class="clients" id="brands">
+  <div class="wrap">
+    <div class="bt" id="brand-tiers" data-layout="ring" aria-label="Brands we have worked with"></div>
+  </div>
+</section>
+
+<section class="live" id="contact">
+  <div class="wrap">
+    <img class="reveal" src="assets/brand/office-building.jpg" alt="One West, Financial District, Hyderabad" />
+    <div class="reveal">
+      <p class="kicker">07. Come find us IRL.</p>
+      <h2 class="h2">We’re one DM, mail or call away.</h2>
+      <p class="coords">17.4153° N · 78.3550° E</p>
+      <address>Level 19 / Unit 3<br/>One West – A Terminus Project<br/>Narsing Nanakramguda Service Road<br/>Financial District, Hyderabad<br/>Telangana – 500008</address>
+      <div class="contacts"><a href="mailto:connect@atlanticmedia.in">connect@atlanticmedia.in</a></div>
+      <div class="ctas" style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn--terra" href="/contact">Slide into our DMs →</a><a class="btn btn--outline-ink" href="https://www.instagram.com/prior_atlanticmedia/">Instagram</a></div>
+    </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <div><img src="assets/brand/logo-white.png" alt="Atlantic Media" /><p style="margin-top:14px">Amplified. Elevated. Unstoppable.</p></div>
-    <div><h4>Explore</h4><ul><li>Services</li><li>Work</li><li>PRIOR</li><li>Insights</li><li>About</li></ul></div>
-    <div><h4>Connect</h4><ul><li>connect@atlanticmedia.in</li><li>+91 72079 74343</li><li><a href="https://in.linkedin.com/company/atlantic-media-india">LinkedIn</a></li><li>Instagram · @prior_atlanticmedia</li></ul></div>
+    <div><img src="assets/brand/logo-white.png" alt="Atlantic Media" /><p style="margin-top:14px">We’re one DM, mail or call away.</p></div>
+    <div><h4>Explore</h4><ul><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#prior">PRIOR</a></li><li><a href="#team">Team</a></li><li><a href="/contact">Contact</a></li></ul></div>
+    <div><h4>Connect</h4><ul><li><a href="mailto:connect@atlanticmedia.in">connect@atlanticmedia.in</a></li><li><a href="https://www.instagram.com/prior_atlanticmedia/">Instagram · @prior_atlanticmedia</a></li><li><a href="https://in.linkedin.com/company/atlantic-media-india">LinkedIn</a></li></ul></div>
   </div>
   <div class="legal"><span>© Atlantic Media</span><span>Privacy · Terms</span></div>
 </footer>
