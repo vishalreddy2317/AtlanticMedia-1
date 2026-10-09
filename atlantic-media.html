@@ -7,7 +7,7 @@
 <title>Atlantic Media — We Saw the Internet Changing. So We Logged In.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
   :root {
     --ocean: #0e1b2c; --ocean-2: #16283f; --sand: #f3ede3; --sand-2: #e8dfd1;
@@ -39,44 +39,17 @@
   .btn--line { border: 1px solid rgba(243,237,227,.4); color: var(--sand); } .btn--line:hover { background: rgba(243,237,227,.08); }
 
   /* hero */
-  .hero { position: relative; background: var(--ocean); color: var(--sand); }
+  .hero { position: relative; background: var(--ocean); color: var(--sand); padding: 0; }   /* one screen tall: the sticky inner is 100vh */
   .hero__sticky { position: relative; min-height: 100vh; overflow: hidden; display: flex; align-items: center; }
-  /* pinned mode (desktop, motion allowed, content fits the viewport): the voyage chart rises out of its column and fills the screen on scroll */
-  .hero--pin { height: 200vh; padding: 0; }
-  .hero--pin .hero__sticky { position: sticky; top: 0; height: 100vh; }
-  .hero--pin .hero__inner { padding-top: 96px; padding-bottom: 40px; will-change: opacity, transform; }
   .hero__grid { position: absolute; inset: 0; opacity: .5; }
   .hero__grid line { stroke: rgba(243,237,227,.08); }
   .pin { position: absolute; width: 14px; height: 14px; border-radius: 50%; background: var(--terra); box-shadow: 0 0 0 6px rgba(166,94,63,.25); }
   .pin span { position: absolute; left: 22px; top: -4px; white-space: nowrap; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
-  .hero__inner { position: relative; display: grid; grid-template-columns: 1.2fr .8fr; gap: 60px; align-items: end; padding-top: 110px; padding-bottom: 80px; }
-  .hero__stack { display: grid; gap: 58px; justify-items: end; }
+  .hero__inner { position: relative; padding-top: 110px; padding-bottom: 80px; max-width: 980px; }
   .hero h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(48px, 7vw, 104px); line-height: .98; letter-spacing: -.02em; }
   .hero h1 em { font-style: italic; color: #e3b79f; }
   .hero p.lead { margin-top: 28px; max-width: 46ch; color: var(--muted); font-size: 1.08rem; }
   .hero .ctas { display: flex; gap: 14px; margin-top: 34px; flex-wrap: wrap; }
-  /* right column: India's outline with Telangana inside it and animated routes from Hyderabad to every state; transparent, sits on the hero */
-  .hero__slot { position: relative; width: 100%; aspect-ratio: 1 / 1; }
-  .hero--pin .hero__slot { aspect-ratio: auto; }                       /* square side set by script so the column fits one screen */
-  .chart { position: absolute; inset: 0; overflow: visible; animation: frame-open 1.4s cubic-bezier(.16, 1, .3, 1) both .3s; }
-  .chart__map { position: absolute; inset: 0; }
-  .chart__outline { position: absolute; inset: 0; background: url(assets/brand/india-outline.svg) 50% / contain no-repeat; }
-  .chart__routes { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 0 3px rgba(221,142,107,.55)); }
-  .chart__routes .g { stroke: #dd8e6b; stroke-width: .35; stroke-dasharray: 1.4 2.8; opacity: .35; }
-  .chart__routes .r { stroke: #dd8e6b; stroke-width: .7; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1px; animation: route-draw 2.6s cubic-bezier(.16, 1, .3, 1) forwards; }
-  .chart__routes .m { fill: #f4efe6; transform-box: fill-box; transform-origin: 50% 50%; opacity: 0; animation: mark-in .5s cubic-bezier(.16, 1, .3, 1) forwards; }
-  .chart__routes .ring { fill: none; stroke: #dd8e6b; stroke-width: .5; transform-box: fill-box; transform-origin: 50% 50%; animation: ring-out 3s ease-out infinite; }
-  .chart__routes .hq { fill: #dd8e6b; }
-  .chart__routes .st { font-family: var(--mono); text-anchor: middle; font-size: 4.4px; letter-spacing: .5px; font-weight: 500; fill: rgba(243,237,227,.8); stroke: #0e1b2c; stroke-width: 1.4px; stroke-linejoin: round; paint-order: stroke; }   /* state names, with a navy halo so routes stay behind them */
-  .chart__routes .st--hq { fill: #dd8e6b; font-weight: 700; }
-  .chart__routes .hq-name { font-size: 5.2px; letter-spacing: .8px; text-anchor: end; }
-  .chart__routes .city { font-family: var(--mono); font-size: 5.2px; letter-spacing: .7px; font-weight: 600; fill: #f4efe6; stroke: #0e1b2c; stroke-width: 1.4px; stroke-linejoin: round; paint-order: stroke; transform-box: fill-box; transform-origin: 50% 50%; opacity: 0; animation: mark-in .5s cubic-bezier(.16, 1, .3, 1) forwards; }   /* ports of call */   /* the stylesheet's text-anchor would otherwise override the attribute */
-  .chart__routes .ld { stroke: rgba(243,237,227,.45); stroke-width: .35; }
-  @keyframes frame-open { 0% { clip-path: inset(0 100% 0 0); } 100% { clip-path: inset(0); } }
-  @media (prefers-reduced-motion: reduce) { .chart { animation: none; clip-path: none; } .chart__routes .r { stroke-dashoffset: 0; animation: none; } .chart__routes .m, .chart__routes .city { opacity: 1; animation: none; } .chart__routes .ring { opacity: 0; animation: none; } }
-  @keyframes route-draw { 0% { stroke-dashoffset: 1px; } 100% { stroke-dashoffset: 0; } }
-  @keyframes mark-in { 0% { opacity: 0; transform: scale(.4); } 100% { opacity: 1; transform: none; } }
-  @keyframes ring-out { 0% { opacity: .8; transform: scale(.5); } 100% { opacity: 0; transform: scale(1.8); } }
 
   section { padding: clamp(80px, 10vw, 130px) 0; }
   .h2 { font-family: var(--serif); font-weight: 600; font-size: clamp(36px, 4.6vw, 64px); line-height: 1.05; letter-spacing: -.015em; margin-top: 16px; }
@@ -147,24 +120,6 @@
   .btn--paper { background: #fff; color: var(--ocean); } .btn--paper:hover { background: var(--sand-2); }
   .btn--outline-ink { border: 1px solid rgba(14,27,44,.45); color: var(--ocean); } .btn--outline-ink:hover { background: rgba(14,27,44,.06); }
 
-  /* 05 team */
-  .team .lead-ink { margin-top: 20px; font-size: 1.12rem; color: #3d3630; }
-  .crew-row { display: grid; grid-template-columns: 1fr 2.2fr; gap: 40px; padding: 30px 0; border-top: 1px solid rgba(14,27,44,.12); }
-  .crew-row--first { margin-top: 50px; }
-  .crew-row h3 { font-size: .8rem; letter-spacing: .18em; text-transform: uppercase; font-weight: 800; color: #A85A3D; }
-  .crew-row .tag { font-family: var(--serif); font-size: 1.25rem; color: #A85A3D; margin-top: 8px; line-height: 1.35; }
-  .founders { display: grid; grid-template-columns: 1fr; gap: 16px; max-width: 560px; }   /* Darnish above Mohitha */
-  .founder { background: #fff; border-radius: 20px; padding: 22px 26px; display: grid; grid-template-columns: 64px 1fr; gap: 18px; align-items: center; border: 1px solid rgba(14,27,44,.08); }
-  .avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--ocean); color: var(--sand); display: grid; place-items: center; font-family: var(--serif); font-size: 1.5rem; font-weight: 600; flex: none; }
-  .avatar--terra { background: var(--terra); color: #fff; }
-  .founder h4 { font-family: var(--serif); font-size: 1.6rem; line-height: 1.1; font-weight: 600; }
-  .founder .role { color: var(--terra); font-weight: 700; font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; margin-top: 4px; }
-  .founder .line { font-family: var(--serif); font-style: italic; font-size: 1.12rem; color: var(--ocean); margin-top: 8px; }
-  .founder p { margin-top: 10px; color: #4a423b; font-size: .96rem; } .founder p b { color: var(--ocean); }
-  .people { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; align-content: start; }
-  .person { display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid rgba(14,27,44,.08); border-radius: 16px; padding: 14px 16px; }
-  .person .avatar { width: 44px; height: 44px; font-size: .95rem; }
-  .person b { display: block; color: var(--ocean); line-height: 1.2; } .person small { color: #5b5147; }
 
   /* live */
   .live .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
@@ -181,14 +136,13 @@
   footer ul { list-style: none; display: grid; gap: 6px; }
   .legal { max-width: var(--max); margin: 40px auto 0; padding: 20px var(--pad) 0; border-top: 1px solid rgba(243,237,227,.1); display: flex; justify-content: space-between; }
 
-  @media (max-width: 1100px) { .shifts { grid-template-columns: repeat(3, 1fr); } .svc-row { grid-template-columns: 60px 1fr 1.3fr; } .svc-row img { display: none; } .people { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 1100px) { .shifts { grid-template-columns: repeat(3, 1fr); } .svc-row { grid-template-columns: 60px 1fr 1.3fr; } .svc-row img { display: none; } }
   @media (max-width: 900px) {
     .nav ul { display: none; }
-    .shifts, .asks, .steps, .people, .story .cols, .founders, .crew-row { grid-template-columns: 1fr; }
-    .hero__inner, .prior .wrap, .live .wrap, footer .wrap { grid-template-columns: 1fr; }
-    .hero__inner { padding-top: 90px; padding-bottom: 60px; gap: 44px; }
-    .hero__stack { gap: 44px; }
-    .shifts, .asks, .steps, .people, .story .cols, .founders, .crew-row { grid-template-columns: 1fr 1fr; }
+    .shifts, .asks, .steps, .story .cols { grid-template-columns: 1fr; }
+    .prior .wrap, .live .wrap, footer .wrap { grid-template-columns: 1fr; }
+    .hero__inner { padding-top: 90px; padding-bottom: 60px; }
+    .shifts, .asks, .steps, .story .cols { grid-template-columns: 1fr 1fr; }
     .steps::before { display: none; }
     .svc-row { grid-template-columns: 1fr; gap: 16px; } .svc-row img { aspect-ratio: 16 / 9; order: -1; } .svc-row .num { display: none; }
     .logos { grid-template-columns: repeat(3, 1fr); }
@@ -208,7 +162,7 @@
 <header class="nav" id="nav">
   <div class="wrap">
     <a href="/"><img src="assets/brand/logo-white.png" alt="Atlantic Media" /></a>
-    <ul><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#prior">PRIOR</a></li><li><a href="#team">Team</a></li><li><a href="/contact">Contact</a></li></ul>
+    <ul><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#prior">PRIOR</a></li><li><a href="/contact">Contact</a></li></ul>
     <a class='btn btn--terra' href="/contact">Slide into our DMs →</a>
   </div>
 </header>
@@ -228,26 +182,6 @@
       <h1 class="reveal">We Saw the Internet Changing.<br/><em>So We Logged In.</em></h1>
       <p class="lead reveal">Atlantic didn’t enter digital to “revolutionise” it. We entered because the revolution was already happening and we wanted a seat at the table.</p>
       <div class="ctas reveal"><a class='btn btn--terra' href="/contact">Slide into our DMs →</a><a class="btn btn--line" href="/atlantic-globe/roster">Meet our internet people →</a></div>
-    </div>
-    <div class="hero__stack">
-      <div class="hero__slot">
-        <div class="chart" aria-hidden="true">
-          <div class="chart__map">
-            <div class="chart__outline"></div>
-            <svg class="chart__routes" viewBox="-6 2 304 334" fill="none" aria-hidden="true">
-              <g data-city="DELHI"><path class="g" d="M100.6 205.8 Q108.8 148.6 90.0 93.9"/><path class="r" pathLength="1" d="M100.6 205.8 Q108.8 148.6 90.0 93.9" style="animation-delay:0.70s"/><rect class="m" x="88.6" y="92.5" width="2.8" height="2.8" style="animation-delay:2.40s"/><text class="city" x="93.2" y="95.5" style="text-anchor:start;animation-delay:2.60s">DELHI</text></g>
-              <g data-city="JAIPUR"><path class="g" d="M100.6 205.8 Q100.1 155.5 76.8 110.9"/><path class="r" pathLength="1" d="M100.6 205.8 Q100.1 155.5 76.8 110.9" style="animation-delay:0.92s"/><rect class="m" x="75.4" y="109.5" width="2.8" height="2.8" style="animation-delay:2.62s"/><text class="city" x="73.6" y="112.5" style="text-anchor:end;animation-delay:2.82s">JAIPUR</text></g>
-              <g data-city="KOLKATA"><path class="g" d="M100.6 205.8 Q139.8 167.1 193.4 154.3"/><path class="r" pathLength="1" d="M100.6 205.8 Q139.8 167.1 193.4 154.3" style="animation-delay:1.14s"/><rect class="m" x="192.0" y="152.9" width="2.8" height="2.8" style="animation-delay:2.84s"/><text class="city" x="196.6" y="155.9" style="text-anchor:start;animation-delay:3.04s">KOLKATA</text></g>
-              <g data-city="MUMBAI"><path class="g" d="M100.6 205.8 Q77.2 191.4 49.9 189.2"/><path class="r" pathLength="1" d="M100.6 205.8 Q77.2 191.4 49.9 189.2" style="animation-delay:1.36s"/><rect class="m" x="48.5" y="187.8" width="2.8" height="2.8" style="animation-delay:3.06s"/><text class="city" x="46.7" y="190.8" style="text-anchor:end;animation-delay:3.26s">MUMBAI</text></g>
-              <g data-city="CHENNAI"><path class="g" d="M100.6 205.8 Q104.3 229.6 118.4 249.2"/><path class="r" pathLength="1" d="M100.6 205.8 Q104.3 229.6 118.4 249.2" style="animation-delay:1.58s"/><rect class="m" x="117.0" y="247.8" width="2.8" height="2.8" style="animation-delay:3.28s"/><text class="city" x="121.6" y="250.8" style="text-anchor:start;animation-delay:3.48s">CHENNAI</text></g>
-              <g data-city="BENGALURU"><path class="g" d="M100.6 205.8 Q92.7 227.4 93.6 250.3"/><path class="r" pathLength="1" d="M100.6 205.8 Q92.7 227.4 93.6 250.3" style="animation-delay:1.80s"/><rect class="m" x="92.2" y="248.9" width="2.8" height="2.8" style="animation-delay:3.50s"/><text class="city" x="90.4" y="251.9" style="text-anchor:end;animation-delay:3.70s">BENGALURU</text></g>
-              <g data-city="GOA"><path class="g" d="M100.6 205.8 Q82.0 220.5 58.7 225.1"/><path class="r" pathLength="1" d="M100.6 205.8 Q82.0 220.5 58.7 225.1" style="animation-delay:2.02s"/><rect class="m" x="57.3" y="223.7" width="2.8" height="2.8" style="animation-delay:3.72s"/><text class="city" x="55.5" y="226.7" style="text-anchor:end;animation-delay:3.92s">GOA</text></g>
-              <circle class="ring" cx="100.6" cy="205.8" r="5"/><rect class="hq" x="98.6" y="203.8" width="4" height="4"/>
-              <g class="names"><text class="st" x="63.5" y="36.4"><tspan x="63.5" dy="0">JAMMU &</tspan><tspan x="63.5" dy="4.2">KASHMIR</tspan></text><text class="st" x="96.4" y="32.5">LADAKH</text><text class="st" x="91.3" y="58.4"><tspan x="91.3" dy="0">HIMACHAL</tspan><tspan x="91.3" dy="4.2">PRADESH</tspan></text><text class="st" x="72.8" y="70.5">PUNJAB</text><text class="st" x="109.9" y="79.0">UTTARAKHAND</text><text class="st" x="77.9" y="84.0">HARYANA</text><text class="st" x="47.3" y="124.0">RAJASTHAN</text><text class="st" x="121.5" y="107.4"><tspan x="121.5" dy="0">UTTAR</tspan><tspan x="121.5" dy="4.2">PRADESH</tspan></text><text class="st" x="167.8" y="121.5">BIHAR</text><line class="ld" x1="194.2" y1="94.7" x2="194.2" y2="104.0"/><text class="st" x="194.2" y="92.5">SIKKIM</text><text class="st" x="250.3" y="94.4"><tspan x="250.3" dy="0">ARUNACHAL</tspan><tspan x="250.3" dy="4.2">PRADESH</tspan></text><text class="st" x="242.5" y="111.5">ASSAM</text><line class="ld" x1="252.4" y1="118.4" x2="248.5" y2="119.0"/><text class="st" x="267.0" y="117.5">NAGALAND</text><line class="ld" x1="251.3" y1="132.0" x2="244.3" y2="132.5"/><text class="st" x="264.2" y="132.5">MANIPUR</text><line class="ld" x1="239.7" y1="146.9" x2="235.0" y2="147.0"/><text class="st" x="252.7" y="148.0">MIZORAM</text><line class="ld" x1="233.7" y1="162.1" x2="225.8" y2="147.0"/><text class="st" x="235.5" y="167.0">TRIPURA</text><text class="st" x="218.8" y="125.5">MEGHALAYA</text><text class="st" x="190.5" y="137.4"><tspan x="190.5" dy="0">WEST</tspan><tspan x="190.5" dy="4.2">BENGAL</tspan></text><text class="st" x="161.8" y="145.5">JHARKHAND</text><text class="st" x="161.3" y="179.0">ODISHA</text><text class="st" x="130.7" y="162.0">CHHATTISGARH</text><text class="st" x="115.0" y="140.9"><tspan x="115.0" dy="0">MADHYA</tspan><tspan x="115.0" dy="4.2">PRADESH</tspan></text><text class="st" x="38.0" y="152.5">GUJARAT</text><text class="st" x="72.3" y="180.0">MAHARASHTRA</text><text class="st st--hq" x="128.9" y="202.5">TELANGANA</text><text class="st" x="120.5" y="220.9"><tspan x="120.5" dy="0">ANDHRA</tspan><tspan x="120.5" dy="4.2">PRADESH</tspan></text><text class="st" x="78.8" y="234.5">KARNATAKA</text><line class="ld" x1="78.5" y1="277.2" x2="81.6" y2="277.5"/><text class="st" x="67.2" y="277.5">KERALA</text><text class="st" x="102.5" y="268.9"><tspan x="102.5" dy="0">TAMIL</tspan><tspan x="102.5" dy="4.2">NADU</tspan></text><line class="ld" x1="44.6" y1="276.5" x2="50.5" y2="276.0"/><text class="st" x="25.0" y="279.5">LAKSHADWEEP</text><line class="ld" x1="238.6" y1="233.3" x2="237.4" y2="246.0"/><text class="st" x="239.2" y="226.9"><tspan x="239.2" dy="0">ANDAMAN &</tspan><tspan x="239.2" dy="4.2">NICOBAR</tspan></text><text class="st st--hq hq-name" x="97.1" y="214.0">HYDERABAD</text></g>
-            </svg>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -300,13 +234,14 @@
 <section class="journey" id="services">
   <div class="wrap">
     <p class="kicker reveal">02. Services</p>
-    <h2 class="h2 reveal">One Brand. Five Ways to Make It Louder.</h2>
+    <h2 class="h2 reveal">One Brand. Six Ways to Make It Louder.</h2>
     <div class="svc">
-      <article class="svc-row reveal"><span class="num">01</span><div><h3>Creator Partnerships</h3><p class="tag">PRIOR — Where Brands Meet Their Internet People.</p></div><div class="text"><p>Creators have communities. Brands have stories. PRIOR makes the introduction.</p><p>We scout, manage and connect brands with a curated roster of creators — from niche voices to rising internet personalities.</p><p>No random influencer dumping. Right creator. Right audience. Right collab.</p></div><img src="assets/brand/prior-3.jpg" alt="" loading="lazy" /></article>
-      <article class="svc-row reveal"><span class="num">02</span><div><h3>Integrated Brand Solutions</h3><p class="tag">Ideas That Leave the Group Chat.</p></div><div class="text"><p>Campaigns shouldn’t just look good on a deck. They should travel.</p><p>From campaigns and digital activations to partnerships, launches and on-ground experiences — we connect brand, audience, internet and real life.</p><p>Think big. Then make it happen.</p></div><img src="assets/media/svc-ips.jpg" alt="" loading="lazy" /></article>
-      <article class="svc-row reveal"><span class="num">03</span><div><h3>IPs, Businesses &amp; Portfolios</h3><p class="tag">You Bring the Idea. We Build the Thing.</p></div><div class="text"><p>A business needs a brand. A creator needs a portfolio. A community needs an IP. Sometimes, an idea just needs someone crazy enough to build it. That’s where Atlantic comes in.</p><p>We develop content IPs, creator properties, business portfolios, digital identities and media-led concepts from scratch.</p><p class="chain">Concept → Identity → Content → Audience → Growth.</p></div><img src="assets/brand/hello-creations.jpg" alt="" loading="lazy" /></article>
-      <article class="svc-row reveal"><span class="num">04</span><div><h3>CaaS — Content As A Service</h3><p class="tag">Your Content Team. On Demand.</p></div><div class="text"><p>Our dedicated creative team takes it from brief → brainstorm → create → refine → deliver, giving your brand consistent support, from social creatives, ad designs, and video edits to landing pages, campaign assets, and more on-demand creative support.</p><p class="chain">Brief. Create. Deliver. Repeat.</p></div><img src="assets/brand/hello-content.jpg" alt="" loading="lazy" /></article>
-      <article class="svc-row reveal"><span class="num">05</span><div><h3>Content &amp; Production</h3><p class="tag">Shoot. Edit. Drop. Repeat.</p></div><div class="text"><p>Good content doesn’t happen because someone owns a camera. It happens when there’s a thought behind the frame.</p><p>From pre-production, shoots and editing to post, YouTube CMS, thumbnails, podcasts and original formats — we make content built for the internet.</p><p>Premium when it needs to be. Raw when it needs to be. Never boring.</p></div><img src="assets/brand/camera.jpg" alt="" loading="lazy" /></article>
+      <article class="svc-row reveal"><span class="num">01</span><div><h3>Integrated Brand Solutions</h3><p class="tag">Ideas That Leave the Group Chat.</p></div><div class="text"><p>Campaigns shouldn’t just look good on a deck. They should travel.</p><p>From campaigns and digital activations to partnerships, launches and on-ground experiences — we connect brand, audience, internet and real life.</p><p>Think big. Then make it happen.</p></div><img src="assets/media/svc-ips.jpg" alt="" loading="lazy" /></article>
+      <article class="svc-row reveal"><span class="num">02</span><div><h3>Influencer Marketing</h3><p class="tag">Creators Who Make Your Brand the Main Character.</p></div><div class="text"><p>Creators have communities. Brands have stories. PRIOR makes the introduction.</p><p>We scout, manage and connect brands with a curated roster of creators — from niche voices to rising internet personalities.</p><p>No random influencer dumping. Right creator. Right audience. Right collab.</p></div><img src="assets/brand/prior-3.jpg" alt="" loading="lazy" /></article>
+      <article class="svc-row reveal"><span class="num">03</span><div><h3>Talent Management</h3><p class="tag">Your Name in Lights. Our Plan Behind the Scenes.</p></div><div class="text"><p>Brands are looking for influence. Creators are looking for opportunities. We sit in the middle and make the chemistry happen.</p><p>We scout. We curate. We negotiate. We collaborate. We execute.</p><p>Just the right people for the right brief.</p></div><img src="assets/brand/team.jpg" alt="" loading="lazy" /></article>
+      <article class="svc-row reveal"><span class="num">04</span><div><h3>IPs, Businesses &amp; Portfolios</h3><p class="tag">You Bring the Idea. We Build the Thing.</p></div><div class="text"><p>A business needs a brand. A creator needs a portfolio. A community needs an IP. Sometimes, an idea just needs someone crazy enough to build it. That’s where Atlantic comes in.</p><p>We develop content IPs, creator properties, business portfolios, digital identities and media-led concepts from scratch.</p><p class="chain">Concept → Identity → Content → Audience → Growth.</p></div><img src="assets/brand/hello-creations.jpg" alt="" loading="lazy" /></article>
+      <article class="svc-row reveal"><span class="num">05</span><div><h3>CaaS — Content As A Service</h3><p class="tag">Your Content Team. On Demand.</p></div><div class="text"><p>Our dedicated creative team takes it from brief → brainstorm → create → refine → deliver, giving your brand consistent support, from social creatives, ad designs, and video edits to landing pages, campaign assets, and more on-demand creative support.</p><p class="chain">Brief. Create. Deliver. Repeat.</p></div><img src="assets/brand/hello-content.jpg" alt="" loading="lazy" /></article>
+      <article class="svc-row reveal"><span class="num">06</span><div><h3>Production</h3><p class="tag">Shoot. Edit. Drop. Repeat.</p></div><div class="text"><p>Good content doesn’t happen because someone owns a camera. It happens when there’s a thought behind the frame.</p><p>From pre-production, shoots and editing to post, YouTube CMS, thumbnails, podcasts and original formats — we make content built for the internet.</p><p>Premium when it needs to be. Raw when it needs to be. Never boring.</p></div><img src="assets/brand/camera.jpg" alt="" loading="lazy" /></article>
     </div>
   </div>
 </section>
@@ -345,44 +280,13 @@
   </div>
 </section>
 
-<section class="team" id="team">
-  <div class="wrap">
-    <p class="kicker reveal">05. Who’s actually cooking?</p>
-    <h2 class="h2 reveal">Not AI. It’s Humans and AI.</h2>
-    <p class="lead-ink reveal">Meet the humans behind the Atlantic.</p>
-
-    <div class="crew-row crew-row--first reveal">
-      <div><h3>The Founders’ Desk</h3><p class="tag">Where the big calls, bigger ideas &amp; occasional chaos begin.</p></div>
-      <div class="founders">
-        <article class="founder"><div class="avatar">D</div><div><h4>Darnish</h4><p class="role">Founder</p><p class="line">The final boss of Atlantic.</p></div></article>
-        <article class="founder"><div class="avatar avatar--terra">M</div><div><h4>Mohitha</h4><p class="role">Founder’s Office</p><p class="line">The tab that keeps all the tabs open.</p></div></article>
-      </div>
-    </div>
-    <div class="crew-row reveal"><div><h3>PRIOR</h3><p class="tag">The people matching brands with their internet people.</p></div><div class="people">
-      <div class="person"><span class="avatar avatar--terra">RM</span><span><b>Rinkitha Mohanty</b><small>Head of Creator Partnerships</small></span></div>
-      <div class="person"><span class="avatar">CS</span><span><b>Chinmayi Suri</b><small>Talent Manager</small></span></div>
-      <div class="person"><span class="avatar">K</span><span><b>Karthik</b><small>Talent Manager</small></span></div></div></div>
-    <div class="crew-row reveal"><div><h3>Brand Solutions</h3><p class="tag">Where briefs walk in and campaigns walk out.</p></div><div class="people">
-      <div class="person"><span class="avatar avatar--terra">RK</span><span><b>Rajeswari Karri</b><small>Senior Brands Manager</small></span></div>
-      <div class="person"><span class="avatar">D</span><span><b>Divya</b><small>Brands Associate</small></span></div></div></div>
-    <div class="crew-row reveal"><div><h3>Production</h3><p class="tag">Camera Crew: “One more take”</p></div><div class="people">
-      <div class="person"><span class="avatar avatar--terra">HB</span><span><b>Harish Bejjanki</b><small>DOP</small></span></div>
-      <div class="person"><span class="avatar">BB</span><span><b>Bharath Bachi</b><small>DOP</small></span></div>
-      <div class="person"><span class="avatar">S</span><span><b>Sanju</b><small>DOP</small></span></div></div></div>
-    <div class="crew-row reveal"><div><h3>Creative</h3><p class="tag">The guy making pixels behave.</p></div><div class="people">
-      <div class="person"><span class="avatar avatar--terra">R</span><span><b>Rajesh</b><small>Graphic Designer</small></span></div></div></div>
-    <div class="crew-row reveal"><div><h3>The IP Brain</h3><p class="tag">Turning “bro, what if we…” into actual properties.</p></div><div class="people">
-      <div class="person"><span class="avatar avatar--terra">KB</span><span><b>Kalyan Bharath</b><small>Creative Head &amp; IP Lead</small></span></div></div></div>
-    <div class="crew-row reveal"><div><h3>The One-Man Army</h3><p class="tag">Keeping the whole ship moving.</p></div><div class="people">
-      <div class="person"><span class="avatar avatar--terra">M</span><span><b>Mahesh</b><small>Office &amp; Operations</small></span></div></div></div>
-  </div>
 </section>
 
 <section class="live" id="contact">
   <div class="wrap">
     <img class="reveal" src="assets/brand/office-building.jpg" alt="One West, Financial District, Hyderabad" />
     <div class="reveal">
-      <p class="kicker">07. Come find us IRL.</p>
+      <p class="kicker">05. Come find us IRL.</p>
       <h2 class="h2">We’re one DM, mail or call away.</h2>
       <p class="coords">17.4153° N · 78.3550° E</p>
       <address>Level 19 / Unit 3<br/>One West – A Terminus Project<br/>Narsing Nanakramguda Service Road<br/>Financial District, Hyderabad<br/>Telangana – 500008</address>
@@ -395,7 +299,7 @@
 <footer>
   <div class="wrap">
     <div><img src="assets/brand/logo-white.png" alt="Atlantic Media" /><p style="margin-top:14px">We’re one DM, mail or call away.</p></div>
-    <div><h4>Explore</h4><ul><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#prior">PRIOR</a></li><li><a href="#team">Team</a></li><li><a href="/contact">Contact</a></li></ul></div>
+    <div><h4>Explore</h4><ul><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#prior">PRIOR</a></li><li><a href="/contact">Contact</a></li></ul></div>
     <div><h4>Connect</h4><ul><li><a href="mailto:connect@atlanticmedia.in">connect@atlanticmedia.in</a></li><li><a href="https://www.instagram.com/prior_atlanticmedia/">Instagram · @prior_atlanticmedia</a></li><li><a href="https://in.linkedin.com/company/atlantic-media-india">LinkedIn</a></li></ul></div>
   </div>
   <div class="legal"><span>© Atlantic Media</span><span>Privacy · Terms</span></div>
@@ -408,50 +312,6 @@
   addEventListener('scroll', () => nav.classList.toggle('solid', scrollY > 40), { passive: true });
   const co = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; const el = e.target, n = +el.dataset.count; let i = 0; const t = setInterval(() => { el.textContent = ++i + (i === n ? '+' : ''); if (i >= n) clearInterval(t); }, 1200 / n); co.unobserve(el); }));
   document.querySelectorAll('[data-count]').forEach(el => co.observe(el));
-</script>
-<script>
-(function () {
-  var hero = document.querySelector('.hero'), stage = hero.querySelector('.hero__sticky'), inner = hero.querySelector('.hero__inner');
-  var slot = hero.querySelector('.hero__slot'), chart = hero.querySelector('.chart'), nav = document.getElementById('nav');
-  if (!chart || !slot) return;
-  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var clamp = function (v, a, b) { return Math.max(a, Math.min(b, v)); }, lerp = function (a, b, t) { return a + (b - a) * t; };
-  var raf = 0, pinned = false;
-  function sizeSlot() { // pinned: the chart at rest is a square that keeps the whole column inside one screen
-    var cs = getComputedStyle(inner), padT = parseFloat(cs.paddingTop) || 0, padB = parseFloat(cs.paddingBottom) || 0;
-    var avail = innerHeight - padT - padB - 24;   // 24px breathing room below the column
-    slot.style.width = ''; var side = Math.max(220, Math.min(slot.clientWidth, avail));
-    slot.style.width = slot.style.height = side + 'px';
-  }
-  function fits() {
-    if (reduced || innerWidth < 900 || innerHeight < 700) return false;
-    hero.classList.add('hero--pin'); sizeSlot(); var ok = inner.scrollHeight <= innerHeight; hero.classList.remove('hero--pin'); slot.style.width = slot.style.height = ''; return ok;
-  }
-  function setPinned(on) {
-    pinned = on; hero.classList.toggle('hero--pin', on);
-    if (on) { sizeSlot(); if (chart.parentNode !== stage) stage.appendChild(chart); }
-    else { slot.style.width = slot.style.height = ''; chart.style.cssText = ''; if (chart.parentNode !== slot) slot.appendChild(chart); inner.style.opacity = ''; inner.style.transform = ''; inner.style.visibility = ''; }
-  }
-  function layout() {
-    raf = 0; if (!pinned) return;
-    var vh = innerHeight, r = hero.getBoundingClientRect(), sr = stage.getBoundingClientRect();
-    var p = clamp(-r.top / (r.height - vh), 0, 1);                    // 0 = hero at rest, 1 = chart at full size
-    var s = slot.getBoundingClientRect();
-    var x0 = s.left - sr.left, y0 = s.top - sr.top + 40 * p, w0 = s.width, h0 = s.height; // (+40p undoes the lift applied below)
-    var box = inner.getBoundingClientRect(), pad = parseFloat(getComputedStyle(inner).paddingLeft) || 0, cw = box.width - pad * 2;
-    var navH = nav ? nav.getBoundingClientRect().height : 0;
-    var w1 = Math.min(vh - navH - 56, cw), h1 = w1, x1 = box.left - sr.left + pad + (cw - w1) / 2, y1 = navH + (vh - navH - h1) / 2;   // grows into the largest centred square
-    var w = lerp(w0, w1, p), h = lerp(h0, h1, p), x = lerp(x0, x1, p), y = lerp(y0, y1, p);
-    chart.style.width = w + 'px'; chart.style.height = h + 'px'; chart.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)';
-    inner.style.opacity = clamp(1 - p * 1.6, 0, 1);                    // hero text fades and lifts as the chart grows
-    inner.style.transform = 'translateY(' + (-40 * p) + 'px)';
-    inner.style.visibility = p > 0.7 ? 'hidden' : '';
-  }
-  function onScroll() { if (!raf) raf = requestAnimationFrame(layout); }
-  function onResize() { setPinned(fits()); onScroll(); }
-  addEventListener('scroll', onScroll, { passive: true }); addEventListener('resize', onResize);
-  addEventListener('load', onResize); onResize();
-})();
 </script>
 <script src="brands.js"></script>
 </body>
