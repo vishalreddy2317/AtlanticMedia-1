@@ -1,4 +1,4 @@
-// Brand partnership wall, grouped by priority.
+// Brand wall: the 42 brands from Atlantic Media's 'Brands that trusted us' creative, in that order.
 // To change priority, move a brand between the three lists (order within a list = display order).
 // The `file` is the logo name in assets/clients/ (without .webp).
 // An optional third value is the logo file's own background colour. The ring layout
@@ -9,25 +9,28 @@
     {
       id: 'high', label: 'Headline partners',
       brands: [
-        ['Samsung', 'samsung'], ['Tata CLiQ', 'tata-cliq'], ['Rado', 'rado'], ['Tira Beauty', 'tira-beauty', '#f5d0c6'],
-        ['Air Arabia', 'airarabia-com', '#ee1b24'], ['Pond’s', 'ponds'], ['Telangana Tourism', 'telangana-tourism'], ['Royal Challenge', 'royal-challenge', '#000000'],
+        ['Adobe', 'adobe'], ['Apple', 'apple'], ['PhonePe', 'phonepe'], ['Airtel', 'airtel'],
+        ['Yashoda Hospitals', 'yashoda-hospitals'], ['ITC', 'itc'], ['Hyundai', 'hyundai'], ['Maruti Suzuki', 'maruti-suzuki'],
+        ['Dyson', 'dyson'], ['Godrej Properties', 'godrej-properties'], ['Kurl-on', 'kurl-on'], ['Whisper', 'whisper'],
+        ['KFC', 'kfc'], ['Thums Up', 'thums-up'],
       ],
     },
     {
       id: 'mid', label: 'Key brands',
       brands: [
-        ['McDowell’s No.1', 'mc-dowell-s', '#f6f6f6'], ['Snitch', 'snitch'], ['Kesh King', 'kesh-king', '#004c1c'], ['Jaypore', 'jaypore'],
-        ['Style Union', 'style-union'], ['Emma', 'emma-mattress'], ['Agaro', 'agaro'], ['ASBL', 'asbl'],
-        ['Wondr Diamonds', 'wondr-diamonds'], ['PMJ Jewels', 'pmj', '#1d3258'], ['Siddhartha Jewellers', 'siddhartha-jewellers'], ['Azorte', 'azorte'],
+        ['Kurkure', 'kurkure'], ['Horlicks', 'horlicks'], ['Duroflex', 'duroflex'], ['Head & Shoulders', 'head-shoulders'],
+        ['Titan', 'titan'], ['Malabar Gold & Diamonds', 'malabar-gold-diamonds'], ['Mamaearth', 'mamaearth'], ['Crocs', 'crocs'],
+        ['Be Bodywise', 'be-bodywise'], ['LIC', 'lic'], ['Paytm', 'paytm'], ['Lenskart', 'lenskart'],
+        ['Netflix', 'netflix'], ['Zomato', 'zomato'],
       ],
     },
     {
       id: 'small', label: 'Growing brands',
       brands: [
-        ['Taruni', 'taruni'], ['Neeru’s', 'neerus'], ['Highlander', 'highlander'], ['Mayuka', 'mayuka', '#660116'],
-        ['Hetafu Diamonds', 'hetafu', '#0c1f3f'], ['Swadesh', 'swadesh', '#a6845d', 'soft'], ['Cream Stone', 'cream-stone', '#462215'], ['Century Mattresses', 'century-mattress', '#f4b21b'],
-        ['Truthin', 'truthin'], ['Mebaz', 'mebaz', '#fef5e4'], ['MSU', 'msu'], ['Ladia', 'ladia', '#252b50'],
-        ['Sri Venkatramana Jewellers', 'sri-venkatramana'], ['Brand Mandir', 'brand-mandir', '#ed0779'], ['One Nation One Election', 'one-nation-one-elections'], ['The Hidden Music Originals', 'the-hidden-music-originals'],
+        ['Plix', 'plix', '#5cd07b'], ['Bath & Body Works', 'bath-body-works'], ['Philips', 'philips'], ['LEGO', 'lego'],
+        ['Lifestyle', 'lifestyle'], ['Jack & Jones', 'jack-jones'], ['Eucerin', 'eucerin'], ['Wrogn', 'wrogn'],
+        ['Schweppes', 'schweppes'], ['Snitch', 'snitch'], ['Dr. Sheth’s', 'dr-sheths'], ['Kushal’s', 'kushals'],
+        ['Bioderma', 'bioderma'], ['Nathu & Sons', 'nathu-sons', '#512a00'],
       ],
     },
   ];

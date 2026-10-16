@@ -6,16 +6,66 @@
     <meta name="theme-color" content="#130F0E" />
     <meta name="description" content="The Atlantic Globe — PRIOR's creator constellation. Prototype." />
     <title>The Atlantic Globe · PRIOR by Atlantic Media</title>
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='22' fill='%23130F0E' stroke='%23FBF5EC' stroke-width='2'/%3E%3Cpath d='M8 30C14 24 20 36 26 30S38 24 42 30' fill='none' stroke='%23FF7A1A' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
+    <link rel="icon" type="image/png" href="/assets/brand/prior-logo.png" />
     <script>
-      // Apply the chosen palette before first paint (see src/lib/theme.ts).
-      (function () { try { var q = new URLSearchParams(location.search).get('theme'); var t = q || localStorage.getItem('atlantic-globe:theme'); if (t && t !== 'sunset' && t !== 'current' && /^[a-z]+$/.test(t)) document.documentElement.dataset.theme = t; } catch (e) {} })();
+      // The full-page site uses the PRIOR palette from the Atlantic Media home page (defined below); the palette picker is hidden.
+      // The embed (?embed=1) keeps the default look, so the globe on the home page is unchanged.
+      (function () {
+        var embed = /[?&]embed=1(&|$)/.test(location.search);
+        try { localStorage.removeItem('atlantic-globe:theme'); } catch (e) {}   // a palette chosen earlier must not override either look
+        if (!embed) document.documentElement.dataset.theme = 'prior';
+        // the Metrics page is retired: send old links to the globe
+        if (/^\/atlantic-globe\/(metrics|results)\/?$/.test(location.pathname)) location.replace('/atlantic-globe/');
+      })();
       // Embedded (?embed=1): flag it before first paint so the page never flashes its dark backdrop inside the host page.
       // Add &on=light when the host page behind the embed is light, so the labels around the globe turn dark.
       if (/[?&]embed=1(&|$)/.test(location.search)) document.documentElement.classList.add('embed');
       if (/[?&]on=light(&|$)/.test(location.search)) document.documentElement.classList.add('on-light');
     </script>
     <style>
+      /* PRIOR palette: the page is the burnt orange of the home page's PRIOR section with navy text; the globe itself keeps
+         its dark sphere, sand coastlines and orange routes (the WebGL scene reads --bg, --bg-2, --fg, --accent, --glow). */
+      :root[data-theme=prior] { --bg: #130f0e; --bg-rgb: 19 15 14; --bg-2: #1f1816; --bg-3: #2c211e; --fg: #f3ede3; --fg-rgb: 14 27 44; --fg-2: #e6dccb;
+        --accent: #ff7a1a; --accent-rgb: 255 122 26; --accent-hi: #ffa45c; --accent-deep: #a33e00; --accent-btn: #0e1b2c; --accent-btn-fg: #f3ede3;
+        --accent-2: #ff3d8a; --accent-2-rgb: 255 61 138; --accent-2-hi: #ff8ab8; --glow: #ffb03b; --glow-rgb: 255 176 59; }
+      html[data-theme=prior] body { background: #d98c5b; color: #0e1b2c; }
+      html[data-theme=prior] .site-header { background: linear-gradient(to bottom, rgba(217,140,91,.96), rgba(217,140,91,0)); }
+      html[data-theme=prior] .brand-lockup svg, html[data-theme=prior] .brand-lockup .prior { display: none; }
+      html[data-theme=prior] .brand-lockup::before { content: ''; display: block; width: 48px; height: 48px; border-radius: 12px; background: #fff url(/assets/brand/prior-logo.png) center / 165% no-repeat; box-shadow: 0 6px 18px rgba(0,0,0,.18); }
+      html[data-theme=prior] .site-nav a { color: rgba(14,27,44,.75); }
+      html[data-theme=prior] .site-nav a:hover, html[data-theme=prior] .site-nav a[aria-current=page] { color: #0e1b2c; background: rgba(14,27,44,.08); }
+      html[data-theme=prior] .site-nav a[href$="/metrics"], html[data-theme=prior] .theme-picker { display: none; }
+      html[data-theme=prior] .eyebrow { color: #4a2010; }
+      html[data-theme=prior] em, html[data-theme=prior] h1 em, html[data-theme=prior] h2 em { color: #fff5ef !important; }
+      html[data-theme=prior] .stage { background: radial-gradient(60% 55% at 50% 48%, rgba(255,176,59,.22), transparent 70%), #d98c5b; }
+      html[data-theme=prior] .chips button { background: rgba(255,245,239,.78); color: #0e1b2c; border-color: rgba(14,27,44,.25); }
+      html[data-theme=prior] .chips button[aria-pressed=true], html[data-theme=prior] .roster .chips-row button[aria-pressed=true] { background: #0e1b2c; border-color: #0e1b2c; color: #f3ede3; }
+      html[data-theme=prior] .roster .chips-row button { color: #0e1b2c; border-color: rgba(14,27,44,.35); }
+      html[data-theme=prior] .brand-badge span { color: rgba(14,27,44,.8); }
+      html[data-theme=prior] .stage-hint { color: rgba(14,27,44,.6); }
+      html[data-theme=prior] .scroll-hint { color: rgba(14,27,44,.75); }
+      html[data-theme=prior] .scroll-hint .line { background: #0e1b2c; }
+      html[data-theme=prior] .btn.ghost { color: #0e1b2c; border-color: rgba(14,27,44,.45); }
+      html[data-theme=prior] .btn.ghost:hover { background: rgba(14,27,44,.08); }
+      html[data-theme=prior] .roster-card, html[data-theme=prior] .creator-card { background: #fff; color: #0e1b2c; }
+      html[data-theme=prior] .roster-card .body span { color: rgba(14,27,44,.7); }
+      html[data-theme=prior] .roster-group h3 small, html[data-theme=prior] .count { color: rgba(14,27,44,.55); }
+      html[data-theme=prior] .site-footer { color: rgba(14,27,44,.75); border-top-color: rgba(14,27,44,.18); }
+      html[data-theme=prior] .group-label { color: #0e1b2c; }
+      html[data-theme=prior] .city-label small { color: #4a2010; }
+      html[data-theme=prior] .act-nav div.on { color: #0e1b2c; }
+      /* roster page: the brand band and the sticky filter bar in PRIOR navy */
+      html[data-theme=prior] .rs-marquee { background: rgba(14,27,44,.94); border-color: rgba(14,27,44,.94); }
+      html[data-theme=prior] .rs-marquee:before { background: linear-gradient(to right, #0e1b2c, transparent); }
+      html[data-theme=prior] .rs-marquee:after { background: linear-gradient(to left, #0e1b2c, transparent); }
+      html[data-theme=prior] .rs-marquee-item { color: rgba(243,237,227,.85); }
+      html[data-theme=prior] .rs-toolbar { background: linear-gradient(to bottom, rgba(14,27,44,.97), rgba(14,27,44,.92)); border-bottom-color: rgba(243,237,227,.12); }
+      html[data-theme=prior] .rs-toolbar button { color: #f3ede3; border-color: rgba(243,237,227,.4); }
+      html[data-theme=prior] .rs-toolbar button[aria-pressed=true] { background: #fff5ef; border-color: #fff5ef; color: #0e1b2c; }
+      html[data-theme=prior] .rs-toolbar .count, html[data-theme=prior] .rs-toolbar span { color: rgba(243,237,227,.7); }
+      html[data-theme=prior] .rs-name, html[data-theme=prior] .rs-nums b, html[data-theme=prior] .rs-stats b, html[data-theme=prior] .rs-head .num { color: #0e1b2c !important; }
+      html[data-theme=prior] .rs-open, html[data-theme=prior] .rs-head .next:hover { color: #4a2010 !important; }
+
       /* Embedded: no backdrop of its own, so the globe sits directly on the host page's background. */
       html.embed body, html.embed .pin-wrap.embed .stage { background: transparent; }
       /* Embedded: the brand badges orbit out to the stage's edges, so inset the stage and let them spill into the margin instead of being cut off. */
