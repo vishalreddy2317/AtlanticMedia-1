@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#130F0E" />
     <meta name="description" content="The Atlantic Globe — PRIOR's creator constellation. Prototype." />
     <title>The Atlantic Globe · PRIOR by Atlantic Media</title>
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='22' fill='%23130F0E' stroke='%23FBF5EC' stroke-width='2'/%3E%3Cpath d='M8 30C14 24 20 36 26 30S38 24 42 30' fill='none' stroke='%23FF7A1A' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
+    <link rel="icon" type="image/png" href="/assets/brand/prior-logo.png" />
     <script>
       // The full-page site uses the PRIOR palette from the Atlantic Media home page (defined below); the palette picker is hidden.
       // The embed (?embed=1) keeps the default look, so the globe on the home page is unchanged.
@@ -30,8 +30,8 @@
         --accent-2: #ff3d8a; --accent-2-rgb: 255 61 138; --accent-2-hi: #ff8ab8; --glow: #ffb03b; --glow-rgb: 255 176 59; }
       html[data-theme=prior] body { background: #d98c5b; color: #0e1b2c; }
       html[data-theme=prior] .site-header { background: linear-gradient(to bottom, rgba(217,140,91,.96), rgba(217,140,91,0)); }
-      html[data-theme=prior] .brand-lockup .prior { color: #0e1b2c; }
-      html[data-theme=prior] .brand-lockup svg { color: #0e1b2c !important; }
+      html[data-theme=prior] .brand-lockup svg, html[data-theme=prior] .brand-lockup .prior { display: none; }
+      html[data-theme=prior] .brand-lockup::before { content: ''; display: block; width: 48px; height: 48px; border-radius: 12px; background: #fff url(/assets/brand/prior-logo.png) center / 165% no-repeat; box-shadow: 0 6px 18px rgba(0,0,0,.18); }
       html[data-theme=prior] .site-nav a { color: rgba(14,27,44,.75); }
       html[data-theme=prior] .site-nav a:hover, html[data-theme=prior] .site-nav a[aria-current=page] { color: #0e1b2c; background: rgba(14,27,44,.08); }
       html[data-theme=prior] .site-nav a[href$="/metrics"], html[data-theme=prior] .theme-picker { display: none; }

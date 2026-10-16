@@ -82,6 +82,19 @@
   .svc-row .text .chain { color: var(--sand); font-weight: 600; }
   .svc-row img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 16px; filter: saturate(.9); }
 
+  /* videos: three bordered cards (left, centre, right); each holds a <video> once the files arrive */
+  .reels { background: var(--sand); }
+  .reel-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 56px; }
+  .reel { position: relative; margin: 0; aspect-ratio: 9 / 16; max-height: 640px; border: 2px solid rgba(14,27,44,.35); border-radius: 22px; overflow: hidden; background: var(--sand-2); display: grid; place-items: center; }
+  .reel video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .reel video:not([src]) { display: none; }
+  .reel figcaption { position: relative; display: grid; justify-items: center; gap: 6px; text-align: center; color: var(--ocean); }
+  .reel .play { width: 64px; height: 64px; border-radius: 50%; border: 2px solid var(--terra); display: grid; place-items: center; margin-bottom: 10px; }
+  .reel .play::before { content: ''; border-style: solid; border-width: 10px 0 10px 17px; border-color: transparent transparent transparent var(--terra); margin-left: 4px; }
+  .reel b { font-family: var(--serif); font-size: 1.3rem; font-weight: 600; }
+  .reel small { font-size: .76rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 700; color: var(--terra); }
+  .reel.has-video figcaption { display: none; }
+
   /* 04 process */
   .process { background: var(--sand-2); }
   .steps { position: relative; margin-top: 60px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
@@ -144,6 +157,7 @@
     .prior .wrap, .live .wrap, footer .wrap { grid-template-columns: 1fr; }
     .hero__inner { padding-top: 90px; padding-bottom: 60px; }
     .shifts, .asks, .steps, .story .cols { grid-template-columns: 1fr 1fr; }
+    .reel-grid { grid-template-columns: 1fr; gap: 18px; } .reel { aspect-ratio: 4 / 5; max-height: 520px; }
     .steps::before { display: none; }
     .svc-row { grid-template-columns: 1fr; gap: 16px; } .svc-row img { aspect-ratio: 16 / 9; order: -1; } .svc-row .num { display: none; }
     .logos { grid-template-columns: repeat(3, 1fr); }
@@ -244,6 +258,18 @@
       <article class="svc-row reveal"><span class="num">04</span><div><h3>IPs, Businesses &amp; Portfolios</h3><p class="tag">You Bring the Idea. We Build the Thing.</p></div><div class="text"><p>A business needs a brand. A creator needs a portfolio. A community needs an IP. Sometimes, an idea just needs someone crazy enough to build it. That’s where Atlantic comes in.</p><p>We develop content IPs, creator properties, business portfolios, digital identities and media-led concepts from scratch.</p><p class="chain">Concept → Identity → Content → Audience → Growth.</p></div><img src="assets/brand/hello-creations.jpg" alt="" loading="lazy" /></article>
       <article class="svc-row reveal"><span class="num">05</span><div><h3>CaaS — Content As A Service</h3><p class="tag">Your Content Team. On Demand.</p></div><div class="text"><p>Our dedicated creative team takes it from brief → brainstorm → create → refine → deliver, giving your brand consistent support, from social creatives, ad designs, and video edits to landing pages, campaign assets, and more on-demand creative support.</p><p class="chain">Brief. Create. Deliver. Repeat.</p></div><img src="assets/brand/hello-content.jpg" alt="" loading="lazy" /></article>
       <article class="svc-row reveal"><span class="num">06</span><div><h3>Production</h3><p class="tag">Shoot. Edit. Drop. Repeat.</p></div><div class="text"><p>Good content doesn’t happen because someone owns a camera. It happens when there’s a thought behind the frame.</p><p>From pre-production, shoots and editing to post, YouTube CMS, thumbnails, podcasts and original formats — we make content built for the internet.</p><p>Premium when it needs to be. Raw when it needs to be. Never boring.</p></div><img src="assets/brand/camera.jpg" alt="" loading="lazy" /></article>
+    </div>
+  </div>
+</section>
+
+<section class="reels" id="watch">
+  <div class="wrap">
+    <p class="kicker reveal">In motion</p>
+    <h2 class="h2 reveal">Watch the work.</h2>
+    <div class="reel-grid">
+      <figure class="reel reveal"><video playsinline muted loop preload="none" poster=""></video><figcaption><span class="play" aria-hidden="true"></span><b>Video 01</b><small>Coming soon</small></figcaption></figure>
+      <figure class="reel reveal"><video playsinline muted loop preload="none" poster=""></video><figcaption><span class="play" aria-hidden="true"></span><b>Video 02</b><small>Coming soon</small></figcaption></figure>
+      <figure class="reel reveal"><video playsinline muted loop preload="none" poster=""></video><figcaption><span class="play" aria-hidden="true"></span><b>Video 03</b><small>Coming soon</small></figcaption></figure>
     </div>
   </div>
 </section>
