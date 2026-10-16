@@ -87,13 +87,16 @@
   .reel-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 56px; }
   .reel { position: relative; margin: 0; aspect-ratio: 9 / 16; max-height: 640px; border: 2px solid rgba(14,27,44,.35); border-radius: 22px; overflow: hidden; background: var(--sand-2); display: grid; place-items: center; }
   .reel video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
-  .reel video:not([src]) { display: none; }
+  .reel:not(.has-video) video { display: none; }
   .reel figcaption { position: relative; display: grid; justify-items: center; gap: 6px; text-align: center; color: var(--ocean); }
   .reel .play { width: 64px; height: 64px; border-radius: 50%; border: 2px solid var(--terra); display: grid; place-items: center; margin-bottom: 10px; }
   .reel .play::before { content: ''; border-style: solid; border-width: 10px 0 10px 17px; border-color: transparent transparent transparent var(--terra); margin-left: 4px; }
   .reel b { font-family: var(--serif); font-size: 1.3rem; font-weight: 600; }
   .reel small { font-size: .76rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 700; color: var(--terra); }
   .reel.has-video figcaption { display: none; }
+  .reel .sound { position: absolute; left: 14px; bottom: 14px; z-index: 2; border: 0; cursor: pointer; padding: 8px 12px 8px 30px; border-radius: 999px; background: rgba(14,27,44,.72); color: var(--sand); font: 700 .7rem/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; backdrop-filter: blur(6px); }
+  .reel .sound::before { content: ''; position: absolute; left: 12px; top: 50%; width: 10px; height: 10px; margin-top: -5px; border-radius: 50%; background: var(--terra); }
+  .reel.is-unmuted .sound::before { background: #6fcf97; }
 
   /* 04 process */
   .process { background: var(--sand-2); }
@@ -267,9 +270,9 @@
     <p class="kicker reveal">In motion</p>
     <h2 class="h2 reveal">Watch the work.</h2>
     <div class="reel-grid">
-      <figure class="reel reveal"><video playsinline muted loop preload="none" poster=""></video><figcaption><span class="play" aria-hidden="true"></span><b>Video 01</b><small>Coming soon</small></figcaption></figure>
-      <figure class="reel reveal"><video playsinline muted loop preload="none" poster=""></video><figcaption><span class="play" aria-hidden="true"></span><b>Video 02</b><small>Coming soon</small></figcaption></figure>
-      <figure class="reel reveal"><video playsinline muted loop preload="none" poster=""></video><figcaption><span class="play" aria-hidden="true"></span><b>Video 03</b><small>Coming soon</small></figcaption></figure>
+      <figure class="reel has-video reveal"><video playsinline muted loop preload="metadata" poster="assets/video/reel-01.webp"><source src="assets/video/reel-01.mp4" type="video/mp4" /></video><button class="sound" type="button" aria-label="Turn sound on">Tap for sound</button></figure>
+      <figure class="reel has-video reveal"><video playsinline muted loop preload="metadata" poster="assets/video/reel-02.webp"><source src="assets/video/reel-02.mp4" type="video/mp4" /></video><button class="sound" type="button" aria-label="Turn sound on">Tap for sound</button></figure>
+      <figure class="reel has-video reveal"><video playsinline muted loop preload="metadata" poster="assets/video/reel-03.webp"><source src="assets/video/reel-03.mp4" type="video/mp4" /></video><button class="sound" type="button" aria-label="Turn sound on">Tap for sound</button></figure>
     </div>
   </div>
 </section>
@@ -340,6 +343,24 @@
   addEventListener('scroll', () => nav.classList.toggle('solid', scrollY > 40), { passive: true });
   const co = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; const el = e.target, n = +el.dataset.count; let i = 0; const t = setInterval(() => { el.textContent = ++i + (i === n ? '+' : ''); if (i >= n) clearInterval(t); }, 1200 / n); co.unobserve(el); }));
   document.querySelectorAll('[data-count]').forEach(el => co.observe(el));
+</script>
+<script>
+(function () {
+  var reels = document.querySelectorAll('.reel.has-video');
+  if (!reels.length) return;
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { var v = e.target.querySelector('video'); if (!v) return; if (e.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); } else v.pause(); });
+  }, { threshold: .5 });
+  reels.forEach(function (r) {
+    io.observe(r);
+    var v = r.querySelector('video'), b = r.querySelector('.sound');
+    b.addEventListener('click', function () {
+      var on = v.muted;                       // turning this one on mutes the others
+      reels.forEach(function (o) { var ov = o.querySelector('video'); ov.muted = true; o.classList.remove('is-unmuted'); o.querySelector('.sound').textContent = 'Tap for sound'; o.querySelector('.sound').setAttribute('aria-label', 'Turn sound on'); });
+      if (on) { v.muted = false; r.classList.add('is-unmuted'); b.textContent = 'Sound on'; b.setAttribute('aria-label', 'Turn sound off'); var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+    });
+  });
+})();
 </script>
 <script src="brands.js"></script>
 </body>
