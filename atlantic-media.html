@@ -86,7 +86,7 @@
 
   /* videos: three reels, each inside an iPhone-style frame (navy bezel, dynamic island, home bar) */
   .reels { background: var(--sand); }
-  .reel-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; margin-top: 56px; justify-items: center; }
+  .reel-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; justify-items: center; }
   .reel { position: relative; margin: 0; width: 100%; max-width: 330px; aspect-ratio: 9 / 19; padding: 12px; border-radius: 48px; background: #0e1b2c; box-shadow: 0 30px 60px -24px rgba(14,27,44,.55), inset 0 0 0 2px rgba(255,255,255,.12), inset 0 0 0 5px #1c2a3d; display: grid; place-items: center; }
   .reel::before { content: ''; position: absolute; top: 24px; left: 50%; width: 92px; height: 26px; margin-left: -46px; border-radius: 999px; background: #0b1522; z-index: 3; }   /* dynamic island */
   .reel::after { content: ''; position: absolute; bottom: 22px; left: 50%; width: 110px; height: 5px; margin-left: -55px; border-radius: 999px; background: rgba(255,255,255,.75); z-index: 3; }   /* home indicator */
@@ -271,8 +271,6 @@
 
 <section class="reels" id="watch">
   <div class="wrap">
-    <p class="kicker reveal">In motion</p>
-    <h2 class="h2 reveal">Watch the work.</h2>
     <div class="reel-grid">
       <figure class="reel has-video reveal"><video playsinline muted loop preload="metadata" poster="assets/video/reel-01.webp"><source src="assets/video/reel-01.mp4" type="video/mp4" /></video><button class="sound" type="button" aria-label="Turn sound on">Tap for sound</button></figure>
       <figure class="reel has-video reveal"><video playsinline muted loop preload="metadata" poster="assets/video/reel-02.webp"><source src="assets/video/reel-02.mp4" type="video/mp4" /></video><button class="sound" type="button" aria-label="Turn sound on">Tap for sound</button></figure>
