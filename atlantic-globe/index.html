@@ -73,8 +73,10 @@
       /* Embedded: the brand badges orbit out to the stage's edges, so inset the stage and let them spill into the margin instead of being cut off. */
       html.embed { --embed-mx: clamp(16px, 7.6vw, 50px); --embed-my: clamp(0px, 4.6vw, 30px); }
       html.embed .pin-wrap.embed .stage { width: auto; height: calc(100vh - 2 * var(--embed-my)); height: calc(100svh - 2 * var(--embed-my)); margin: var(--embed-my) var(--embed-mx); overflow: visible; }
-      html.embed.on-light .brand-badge span, html.embed.on-light .embed-link { color: rgba(14, 27, 44, .78); }
-      html.embed.on-light .embed-link:hover { color: #0e1b2c; background: rgba(14, 27, 44, .08); }
+      html.embed.on-light .brand-badge span { color: rgba(14, 27, 44, .78); }
+      /* 'Open the full globe' as a navy pill, matching the 'Meet our internet people' button beside it */
+      html.embed.on-light .embed-link { color: #f3ede3; background: rgba(14, 27, 44, .92); padding: 10px 16px; font-weight: 700; letter-spacing: .12em; box-shadow: 0 8px 20px -10px rgba(14, 27, 44, .6); }
+      html.embed.on-light .embed-link:hover { color: #fff; background: #0e1b2c; }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
