@@ -1,6 +1,9 @@
 /atlantic-globe/assets/*
   Cache-Control: public, max-age=31536000, immutable
+# Photos and the atlas keep their names when their content changes: always revalidate (Netlify answers 304 when unchanged).
 /atlantic-globe/*.webp
-  Cache-Control: public, max-age=86400
+  Cache-Control: public, max-age=0, must-revalidate
+/atlantic-globe/photos/*
+  Cache-Control: public, max-age=0, must-revalidate
 /assets/video/*
   Cache-Control: public, max-age=86400
