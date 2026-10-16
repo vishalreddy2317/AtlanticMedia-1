@@ -15,7 +15,7 @@
         try { localStorage.removeItem('atlantic-globe:theme'); } catch (e) {}   // a palette chosen earlier must not override either look
         if (!embed) document.documentElement.dataset.theme = 'prior';
         // the Metrics page is retired: send old links to the globe
-        if (/^\/atlantic-globe\/(metrics|results)\/?$/.test(location.pathname)) location.replace('/atlantic-globe/');
+        if (/^\/atlantic-globe\/(metrics|results|roster)\/?$/.test(location.pathname)) location.replace('/atlantic-globe/');
       })();
       // Embedded (?embed=1): flag it before first paint so the page never flashes its dark backdrop inside the host page.
       // Add &on=light when the host page behind the embed is light, so the labels around the globe turn dark.
@@ -28,26 +28,53 @@
       :root[data-theme=prior] { --bg: #130f0e; --bg-rgb: 19 15 14; --bg-2: #1f1816; --bg-3: #2c211e; --fg: #f3ede3; --fg-rgb: 14 27 44; --fg-2: #e6dccb;
         --accent: #ff7a1a; --accent-rgb: 255 122 26; --accent-hi: #ffa45c; --accent-deep: #a33e00; --accent-btn: #0e1b2c; --accent-btn-fg: #f3ede3;
         --accent-2: #ff3d8a; --accent-2-rgb: 255 61 138; --accent-2-hi: #ff8ab8; --glow: #ffb03b; --glow-rgb: 255 176 59; }
-      html[data-theme=prior] body { background: #d98c5b; color: #0e1b2c; }
-      html[data-theme=prior] .site-header { background: linear-gradient(to bottom, rgba(217,140,91,.96), rgba(217,140,91,0)); }
+      html[data-theme=prior] body { color: #0e1b2c; background: #d98c5b; }
+      html[data-theme=prior] body::before { content: ''; position: fixed; inset: -20%; z-index: -1; pointer-events: none;
+        background: radial-gradient(42% 38% at 18% 22%, rgba(255,214,170,.55), transparent 70%), radial-gradient(38% 40% at 82% 30%, rgba(255,122,26,.42), transparent 70%),
+                    radial-gradient(46% 42% at 50% 86%, rgba(126,46,20,.42), transparent 70%), radial-gradient(30% 30% at 88% 88%, rgba(255,245,239,.3), transparent 70%), #d98c5b;
+        animation: prior-drift 26s ease-in-out infinite alternate; }
+      html[data-theme=prior] body::after { content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: .18; mix-blend-mode: multiply;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E"); }
+      @keyframes prior-drift { to { transform: translate3d(3%, -2%, 0) scale(1.06); } }
+      @media (prefers-reduced-motion: reduce) { html[data-theme=prior] body::before { animation: none; } }
+      /* the shared glass recipe: translucent sand, frosted, hairline highlight */
+      html[data-theme=prior] .glass, html[data-theme=prior] .rs-card .rs-body, html[data-theme=prior] .rs-head, html[data-theme=prior] .outro, html[data-theme=prior] .hero > *:not(h1),
+      html[data-theme=prior] .rs-hero > *:not(h1), html[data-theme=prior] .site-footer, html[data-theme=prior] .roster-group h3 {
+        background: rgba(255,245,239,.22); border: 1px solid rgba(255,255,255,.35); border-radius: 18px; -webkit-backdrop-filter: blur(18px) saturate(1.25); backdrop-filter: blur(18px) saturate(1.25);
+        box-shadow: 0 18px 40px -24px rgba(14,27,44,.45), inset 0 1px 0 rgba(255,255,255,.45); }
+      html[data-theme=prior] .hero > p, html[data-theme=prior] .rs-hero > p { padding: 14px 18px; max-width: min(620px, 100%); box-sizing: border-box; }
+      html[data-theme=prior] .hero .scroll-hint, html[data-theme=prior] .rs-hero .rs-stats { padding: 14px 18px; width: fit-content; max-width: 100%; box-sizing: border-box; }
+      html[data-theme=prior] .hero > .eyebrow, html[data-theme=prior] .rs-hero > .eyebrow { padding: 8px 14px; width: max-content; border-radius: 999px; }
+      html[data-theme=prior] .hero > h1, html[data-theme=prior] .rs-hero > h1 { background: none; border: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+      html[data-theme=prior] .rs-head { padding: 22px 24px; }
+      html[data-theme=prior] .rs-card .rs-body { padding: 18px 20px 20px; margin-top: 14px; }
+      html[data-theme=prior] .outro { border-radius: 28px; margin: 0 var(--gutter) 48px; padding: 72px clamp(24px, 5vw, 64px); }
+      html[data-theme=prior] .site-footer { border-radius: 24px 24px 0 0; margin: 0 var(--gutter); border-top-color: rgba(255,255,255,.35); }
+      html[data-theme=prior] .roster-group h3 { padding: 10px 16px; width: max-content; }
+      html[data-theme=prior] .rs-media { box-shadow: 0 30px 60px -28px rgba(14,27,44,.6), 0 0 0 1px rgba(255,255,255,.3); }
+      html[data-theme=prior] .site-header { background: rgba(255,245,239,.1); -webkit-backdrop-filter: blur(16px) saturate(1.2); backdrop-filter: blur(16px) saturate(1.2); border-bottom: 1px solid rgba(255,255,255,.22); box-shadow: 0 10px 30px -18px rgba(14,27,44,.35); }
       html[data-theme=prior] .brand-lockup svg, html[data-theme=prior] .brand-lockup .prior { display: none; }
-      html[data-theme=prior] .brand-lockup::before { content: ''; display: block; width: 48px; height: 48px; border-radius: 12px; background: #fff url(/assets/brand/prior-logo.png) center / 165% no-repeat; box-shadow: 0 6px 18px rgba(0,0,0,.18); }
-      html[data-theme=prior] .site-nav a { color: rgba(14,27,44,.75); }
-      html[data-theme=prior] .site-nav a:hover, html[data-theme=prior] .site-nav a[aria-current=page] { color: #0e1b2c; background: rgba(14,27,44,.08); }
+      html[data-theme=prior] .brand-lockup::before { content: ''; display: block; width: 48px; height: 48px; border-radius: 12px; background: rgba(255,255,255,.78) url(/assets/brand/prior-logo.png) center / 165% no-repeat; border: 1px solid rgba(255,255,255,.6); box-shadow: 0 6px 18px rgba(0,0,0,.14); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+      html[data-theme=prior] .site-nav { gap: 6px; padding: 4px; border-radius: 999px; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.28); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+      html[data-theme=prior] .site-nav a { color: rgba(14,27,44,.8); min-height: 36px; }
+      html[data-theme=prior] .site-nav a:hover { color: #0e1b2c; background: rgba(255,255,255,.22); }
+      html[data-theme=prior] .site-nav a[aria-current=page] { color: #0e1b2c; background: rgba(255,255,255,.45); box-shadow: inset 0 0 0 1px rgba(255,255,255,.5); }
       html[data-theme=prior] .site-nav a[href$="/metrics"], html[data-theme=prior] .theme-picker { display: none; }
       html[data-theme=prior] .eyebrow { color: #4a2010; }
       html[data-theme=prior] em, html[data-theme=prior] h1 em, html[data-theme=prior] h2 em { color: #fff5ef !important; }
-      html[data-theme=prior] .stage { background: radial-gradient(60% 55% at 50% 48%, rgba(255,176,59,.22), transparent 70%), #d98c5b; }
-      html[data-theme=prior] .chips button { background: rgba(255,245,239,.78); color: #0e1b2c; border-color: rgba(14,27,44,.25); }
+      html[data-theme=prior] .stage { background: radial-gradient(60% 55% at 50% 48%, rgba(255,176,59,.22), transparent 70%); }
+      html[data-theme=prior] .chips button { background: rgba(255,245,239,.35); color: #0e1b2c; border-color: rgba(255,255,255,.45); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
       html[data-theme=prior] .chips button[aria-pressed=true], html[data-theme=prior] .roster .chips-row button[aria-pressed=true] { background: #0e1b2c; border-color: #0e1b2c; color: #f3ede3; }
       html[data-theme=prior] .roster .chips-row button { color: #0e1b2c; border-color: rgba(14,27,44,.35); }
-      html[data-theme=prior] .brand-badge span { color: rgba(14,27,44,.8); }
+      html[data-theme=prior] .brand-badge span { color: #0e1b2c; background: rgba(255,245,239,.45); padding: 2px 8px; border-radius: 999px; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
       html[data-theme=prior] .stage-hint { color: rgba(14,27,44,.6); }
       html[data-theme=prior] .scroll-hint { color: rgba(14,27,44,.75); }
       html[data-theme=prior] .scroll-hint .line { background: #0e1b2c; }
       html[data-theme=prior] .btn.ghost { color: #0e1b2c; border-color: rgba(14,27,44,.45); }
       html[data-theme=prior] .btn.ghost:hover { background: rgba(14,27,44,.08); }
-      html[data-theme=prior] .roster-card, html[data-theme=prior] .creator-card { background: #fff; color: #0e1b2c; }
+      html[data-theme=prior] .roster-card, html[data-theme=prior] .creator-card { background: rgba(255,245,239,.72); color: #0e1b2c; border: 1px solid rgba(255,255,255,.5); -webkit-backdrop-filter: blur(16px) saturate(1.2); backdrop-filter: blur(16px) saturate(1.2); }
+      html[data-theme=prior] .rs-dialog { background: rgba(255,245,239,.78); -webkit-backdrop-filter: blur(24px) saturate(1.2); backdrop-filter: blur(24px) saturate(1.2); border: 1px solid rgba(255,255,255,.5); }
+      html[data-theme=prior] .rs-backdrop { background: rgba(120,60,30,.35); }
       html[data-theme=prior] .roster-card .body span { color: rgba(14,27,44,.7); }
       html[data-theme=prior] .roster-group h3 small, html[data-theme=prior] .count { color: rgba(14,27,44,.55); }
       html[data-theme=prior] .site-footer { color: rgba(14,27,44,.75); border-top-color: rgba(14,27,44,.18); }
@@ -55,11 +82,11 @@
       html[data-theme=prior] .city-label small { color: #4a2010; }
       html[data-theme=prior] .act-nav div.on { color: #0e1b2c; }
       /* roster page: the brand band and the sticky filter bar in PRIOR navy */
-      html[data-theme=prior] .rs-marquee { background: rgba(14,27,44,.94); border-color: rgba(14,27,44,.94); }
-      html[data-theme=prior] .rs-marquee:before { background: linear-gradient(to right, #0e1b2c, transparent); }
-      html[data-theme=prior] .rs-marquee:after { background: linear-gradient(to left, #0e1b2c, transparent); }
+      html[data-theme=prior] .rs-marquee { background: rgba(14,27,44,.55); border-color: rgba(255,255,255,.18); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+      html[data-theme=prior] .rs-marquee:before { background: linear-gradient(to right, rgba(14,27,44,.6), transparent); }
+      html[data-theme=prior] .rs-marquee:after { background: linear-gradient(to left, rgba(14,27,44,.6), transparent); }
       html[data-theme=prior] .rs-marquee-item { color: rgba(243,237,227,.85); }
-      html[data-theme=prior] .rs-toolbar { background: linear-gradient(to bottom, rgba(14,27,44,.97), rgba(14,27,44,.92)); border-bottom-color: rgba(243,237,227,.12); }
+      html[data-theme=prior] .rs-toolbar { background: rgba(14,27,44,.6); border-bottom-color: rgba(255,255,255,.16); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
       html[data-theme=prior] .rs-toolbar button { color: #f3ede3; border-color: rgba(243,237,227,.4); }
       html[data-theme=prior] .rs-toolbar button[aria-pressed=true] { background: #fff5ef; border-color: #fff5ef; color: #0e1b2c; }
       html[data-theme=prior] .rs-toolbar .count, html[data-theme=prior] .rs-toolbar span { color: rgba(243,237,227,.7); }
@@ -68,19 +95,22 @@
 
       /* Embedded: no backdrop of its own, so the globe sits directly on the host page's background. */
       html.embed body, html.embed .pin-wrap.embed .stage { background: transparent; }
+      html.embed .embed-brand { display: none !important; }   /* the host page shows the PRIOR logo already */
       /* Embedded: the brand badges orbit out to the stage's edges, so inset the stage and let them spill into the margin instead of being cut off. */
       html.embed { --embed-mx: clamp(16px, 7.6vw, 50px); --embed-my: clamp(0px, 4.6vw, 30px); }
       html.embed .pin-wrap.embed .stage { width: auto; height: calc(100vh - 2 * var(--embed-my)); height: calc(100svh - 2 * var(--embed-my)); margin: var(--embed-my) var(--embed-mx); overflow: visible; }
-      html.embed.on-light .brand-badge span, html.embed.on-light .embed-link { color: rgba(14, 27, 44, .78); }
-      html.embed.on-light .embed-link:hover { color: #0e1b2c; background: rgba(14, 27, 44, .08); }
+      html.embed.on-light .brand-badge span { color: rgba(14, 27, 44, .78); }
+      /* 'Open the full globe' as a navy pill, matching the 'Meet our internet people' button beside it */
+      html.embed.on-light .embed-link { color: #f3ede3; background: rgba(14, 27, 44, .92); padding: 10px 16px; font-weight: 700; letter-spacing: .12em; box-shadow: 0 8px 20px -10px rgba(14, 27, 44, .6); }
+      html.embed.on-light .embed-link:hover { color: #fff; background: #0e1b2c; }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Manrope:wght@400;500;600;700&display=swap" />
-    <script type="module" crossorigin src="/atlantic-globe/assets/index-DoQt9udI.js"></script>
+    <script type="module" crossorigin src="/atlantic-globe/assets/index-BRZ48R6L.js"></script>
     <link rel="modulepreload" crossorigin href="/atlantic-globe/assets/rolldown-runtime-BpQH8Ho1.js">
-    <link rel="modulepreload" crossorigin href="/atlantic-globe/assets/webgl-globe-DeptiKeQ.js">
-    <link rel="stylesheet" crossorigin href="/atlantic-globe/assets/index-3qCtLDio.css">
+    <link rel="modulepreload" crossorigin href="/atlantic-globe/assets/webgl-globe-D9y95zpb.js">
+    <link rel="stylesheet" crossorigin href="/atlantic-globe/assets/index-CZbVp9qO.css">
   </head>
   <body>
     <div id="root"></div>
