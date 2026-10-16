@@ -15,7 +15,7 @@
         try { localStorage.removeItem('atlantic-globe:theme'); } catch (e) {}   // a palette chosen earlier must not override either look
         if (!embed) document.documentElement.dataset.theme = 'prior';
         // the Metrics page is retired: send old links to the globe
-        if (/^\/atlantic-globe\/(metrics|results)\/?$/.test(location.pathname)) location.replace('/atlantic-globe/');
+        if (/^\/atlantic-globe\/(metrics|results|roster)\/?$/.test(location.pathname)) location.replace('/atlantic-globe/');
       })();
       // Embedded (?embed=1): flag it before first paint so the page never flashes its dark backdrop inside the host page.
       // Add &on=light when the host page behind the embed is light, so the labels around the globe turn dark.
@@ -107,7 +107,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Manrope:wght@400;500;600;700&display=swap" />
-    <script type="module" crossorigin src="/atlantic-globe/assets/index-B0UO4S3i.js"></script>
+    <script type="module" crossorigin src="/atlantic-globe/assets/index-CmGh0uMP.js"></script>
     <link rel="modulepreload" crossorigin href="/atlantic-globe/assets/rolldown-runtime-BpQH8Ho1.js">
     <link rel="modulepreload" crossorigin href="/atlantic-globe/assets/webgl-globe-DP1yAdry.js">
     <link rel="stylesheet" crossorigin href="/atlantic-globe/assets/index-CZbVp9qO.css">
