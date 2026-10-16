@@ -43,6 +43,9 @@
   .hero__sticky { position: relative; min-height: 100vh; overflow: hidden; display: flex; align-items: center; }
   .hero__grid { position: absolute; inset: 0; opacity: .5; }
   .hero__grid line { stroke: rgba(243,237,227,.08); }
+  .hero__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .62; filter: saturate(.85); background: var(--ocean); }
+  .hero__veil { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(14,27,44,.9) 0%, rgba(14,27,44,.72) 42%, rgba(14,27,44,.38) 100%), linear-gradient(180deg, rgba(14,27,44,.45) 0%, rgba(14,27,44,0) 28%, rgba(14,27,44,0) 68%, var(--ocean) 100%); }
+  @media (prefers-reduced-motion: reduce) { .hero__video { display: none; } }
   .pin { position: absolute; width: 14px; height: 14px; border-radius: 50%; background: var(--terra); box-shadow: 0 0 0 6px rgba(166,94,63,.25); }
   .pin span { position: absolute; left: 22px; top: -4px; white-space: nowrap; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
   .hero__inner { position: relative; padding-top: 110px; padding-bottom: 80px; max-width: 980px; }
@@ -166,6 +169,7 @@
     .shifts, .asks, .steps, .story .cols { grid-template-columns: 1fr; }
     .prior .wrap, .live .wrap, footer .wrap { grid-template-columns: 1fr; }
     .hero__inner { padding-top: 90px; padding-bottom: 60px; }
+    .hero__veil { background: linear-gradient(180deg, rgba(14,27,44,.7) 0%, rgba(14,27,44,.58) 70%, var(--ocean) 100%); }
     .shifts, .asks, .steps, .story .cols { grid-template-columns: 1fr 1fr; }
     .reel-grid { grid-template-columns: 1fr; gap: 28px; } .reel { max-width: 300px; }
     .steps::before { display: none; }
@@ -209,6 +213,8 @@
 
 <section class="hero">
   <div class="hero__sticky">
+  <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="assets/video/hero-loop.webp" aria-hidden="true" tabindex="-1"><source src="assets/video/hero-loop.mp4" type="video/mp4" /></video>
+  <div class="hero__veil" aria-hidden="true"></div>
   <svg class="hero__grid" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
     <g>
       <line x1="0" y1="150" x2="1440" y2="150"/><line x1="0" y1="300" x2="1440" y2="300"/><line x1="0" y1="450" x2="1440" y2="450"/><line x1="0" y1="600" x2="1440" y2="600"/><line x1="0" y1="750" x2="1440" y2="750"/>
