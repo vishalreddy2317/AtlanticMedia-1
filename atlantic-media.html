@@ -77,10 +77,10 @@
   .quote em { font-style: italic; color: var(--terra); }
 
   /* 02 services */
-  .journey { background: var(--ocean); color: var(--sand); }
-  .svc { margin-top: 60px; display: grid; }
-  .svc-row { position: sticky; top: calc(102px + var(--i, 0) * 12px); display: grid; grid-template-columns: 70px 1.05fr 1.35fr 240px; gap: 36px; align-items: center; padding: 36px 40px; margin-bottom: 22vh; min-height: 330px; background: var(--ocean-2); border: 1px solid rgba(243,237,227,.14); border-radius: 24px; box-shadow: 0 -18px 50px -30px rgba(0,0,0,.7); }
-  .svc-row:last-child { margin-bottom: 0; }
+  .journey { background: var(--ocean); color: var(--sand); padding-bottom: 0; }   /* the reels section follows the last stacked card after one row gap, like the cards follow each other */
+  .svc::after { content: ''; display: block; height: 0; }   /* empty last grid row: adds one row gap after card 06 so it holds on the stack while the next section climbs through the gap */
+  .svc { margin-top: 60px; display: grid; row-gap: 22vh; }   /* gap, not card margins: a sticky card's own margin would eat its scroll room */
+  .svc-row { position: sticky; top: calc(102px + var(--i, 0) * 12px); display: grid; grid-template-columns: 70px 1.05fr 1.35fr 240px; gap: 36px; align-items: center; padding: 36px 40px; min-height: 330px; background: var(--ocean-2); border: 1px solid rgba(243,237,227,.14); border-radius: 24px; box-shadow: 0 -18px 50px -30px rgba(0,0,0,.7); }
   .svc-row:nth-child(1) { --i: 0 } .svc-row:nth-child(2) { --i: 1 } .svc-row:nth-child(3) { --i: 2 } .svc-row:nth-child(4) { --i: 3 } .svc-row:nth-child(5) { --i: 4 } .svc-row:nth-child(6) { --i: 5 }
   .svc-row .num { font-family: var(--serif); font-size: 2rem; color: #e3b79f; line-height: 1; }
   .svc-row h3 { font-family: var(--serif); font-size: clamp(26px, 2.3vw, 34px); line-height: 1.05; font-weight: 600; }
@@ -163,7 +163,7 @@
   .legal { max-width: var(--max); margin: 40px auto 0; padding: 20px var(--pad) 0; border-top: 1px solid rgba(243,237,227,.1); display: flex; justify-content: space-between; }
 
   @media (max-width: 1100px) { .shifts { grid-template-columns: repeat(3, 1fr); } .svc-row { grid-template-columns: 60px 1fr 1.3fr; } .svc-row img { display: none; } }
-  @media (max-width: 900px) { .svc-row { position: static; margin-bottom: 18px; padding: 26px 22px; min-height: 0; } }   /* phones: a plain list; the stack needs a tall screen */
+  @media (max-width: 900px) { .journey { padding-bottom: clamp(80px, 10vw, 130px); } .svc { row-gap: 18px; } .svc-row { position: static; padding: 26px 22px; min-height: 0; } .svc::after { display: none; } }   /* phones: a plain list; the stack needs a tall screen */
   @media (max-width: 900px) {
     .nav ul { display: none; }
     .shifts, .asks, .steps, .story .cols { grid-template-columns: 1fr; }
