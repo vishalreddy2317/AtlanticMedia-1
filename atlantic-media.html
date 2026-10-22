@@ -23,7 +23,6 @@
   .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
   .serif { font-family: var(--serif); }
   .kicker { font-size: .78rem; letter-spacing: .22em; text-transform: uppercase; font-weight: 700; color: var(--terra); display: inline-flex; align-items: center; gap: 10px; }
-  .kicker::before { content: ''; width: 26px; height: 1px; background: currentColor; }
   .reveal { opacity: 0; transform: translateY(18px); transition: opacity .8s ease, transform .8s ease; }
   .reveal.in { opacity: 1; transform: none; }
 
@@ -43,7 +42,8 @@
   .hero__sticky { position: relative; min-height: 100vh; overflow: hidden; display: flex; align-items: center; }
   .hero__grid { position: absolute; inset: 0; opacity: .5; }
   .hero__grid line { stroke: rgba(243,237,227,.08); }
-  .hero__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .62; filter: saturate(.85); background: var(--ocean); }
+  .hero__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; filter: saturate(.85); background: var(--ocean); transition: opacity .6s ease; }
+  .hero__video.is-on { opacity: .62; }
   .hero__veil { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(14,27,44,.9) 0%, rgba(14,27,44,.72) 42%, rgba(14,27,44,.38) 100%), linear-gradient(180deg, rgba(14,27,44,.45) 0%, rgba(14,27,44,0) 28%, rgba(14,27,44,0) 68%, var(--ocean) 100%); }
   @media (prefers-reduced-motion: reduce) { .hero__video { display: none; } }
   .pin { position: absolute; width: 14px; height: 14px; border-radius: 50%; background: var(--terra); box-shadow: 0 0 0 6px rgba(166,94,63,.25); }
@@ -213,7 +213,9 @@
 
 <section class="hero">
   <div class="hero__sticky">
-  <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="assets/video/hero-loop.webp" aria-hidden="true" tabindex="-1"><source src="assets/video/hero-loop.mp4" type="video/mp4" /></video>
+  <!-- Hero video wall: three clips of Atlantic's people play one after another; a return to the hero starts the next clip. -->
+  <video class="hero__video is-on" autoplay muted playsinline preload="auto" poster="assets/video/hero-01.webp" data-clips="assets/video/hero-01.mp4,assets/video/hero-02.mp4,assets/video/hero-03.mp4" aria-hidden="true" tabindex="-1"><source src="assets/video/hero-01.mp4" type="video/mp4" /></video>
+  <video class="hero__video" muted playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
   <div class="hero__veil" aria-hidden="true"></div>
   <svg class="hero__grid" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
     <g>
@@ -386,6 +388,37 @@
       if (on) { v.muted = false; r.classList.add('is-unmuted'); b.textContent = 'Sound on'; b.setAttribute('aria-label', 'Turn sound off'); var p = v.play(); if (p && p.catch) p.catch(function () {}); }
     });
   });
+})();
+</script>
+<script>
+(function () {
+  // Hero video wall: plays the clips in data-clips one after another (crossfade between two <video> elements).
+  // Leaving and returning to the hero starts the next clip; off-screen the wall pauses.
+  var hero = document.querySelector('.hero__sticky'), vids = hero ? hero.querySelectorAll('.hero__video') : [];
+  if (vids.length < 2) return;
+  var clips = (vids[0].getAttribute('data-clips') || '').split(',').map(function (s) { return s.trim(); }).filter(Boolean);
+  if (clips.length < 2) return;
+  var cur = 0, active = 0, inView = true, switching = false;
+  function play(v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+  function prepare() { var n = vids[1 - active], i = (cur + 1) % clips.length; n.removeAttribute('autoplay'); if (n.getAttribute('data-src') !== clips[i]) { n.setAttribute('data-src', clips[i]); n.src = clips[i]; n.load(); } n.pause(); }
+  function next() {
+    if (switching) return; switching = true;
+    var from = vids[active], to = vids[1 - active]; cur = (cur + 1) % clips.length;
+    to.removeAttribute('autoplay');
+    if (to.getAttribute('data-src') !== clips[cur]) { to.setAttribute('data-src', clips[cur]); to.src = clips[cur]; to.load(); }
+    var go = function () { to.currentTime = 0; play(to); to.classList.add('is-on'); from.classList.remove('is-on'); from.pause(); active = 1 - active; switching = false; prepare(); };
+    if (to.readyState >= 3) go(); else to.addEventListener('canplay', function h() { to.removeEventListener('canplay', h); go(); });
+  }
+  vids.forEach(function (v) { v.addEventListener('ended', function () { if (v === vids[active] && inView) next(); }); });
+  vids[0].addEventListener('playing', prepare, { once: true });
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) { if (!inView) next(); else play(vids[active]); inView = true; }
+        else { inView = false; vids[active].pause(); }
+      });
+    }, { threshold: .15 }).observe(hero);
+  }
 })();
 </script>
 <script src="brands.js"></script>
