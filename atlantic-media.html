@@ -131,6 +131,14 @@
   .prior p { margin-top: 20px; color: rgba(14,27,44,.82); }
   .globe-embed { position: relative; width: 660px; max-width: calc(100% + 100px); margin: -30px -50px -30px auto; aspect-ratio: 660 / 654; justify-self: end; }   /* no box: the transparent globe sits on the section. Same 560x594 globe stage as before, plus a 50px / 30px margin around it for the orbiting brand badges; the negative margins keep the section the same height */
   .globe-embed iframe { display: block; width: 100%; height: 100%; border: 0; }
+  /* Creator card for the embedded globe, drawn here in the free space to the right of the globe (the globe's own frame is too narrow). Fed by hover messages from the globe. */
+  .prior-card { position: absolute; top: 0; left: 100%; width: 240px; padding: 14px 16px 13px; border-radius: 18px; background: rgba(255,245,239,.8); color: var(--ocean); border: 1px solid rgba(255,255,255,.6); -webkit-backdrop-filter: blur(16px) saturate(1.2); backdrop-filter: blur(16px) saturate(1.2); box-shadow: 0 24px 50px -26px rgba(14,27,44,.5); opacity: 0; transform: translateX(-10px); transition: opacity .18s, transform .18s; pointer-events: none; z-index: 3; }
+  .prior-card.on { opacity: 1; transform: none; }
+  .prior-card b { display: block; font-family: var(--serif); font-weight: 500; font-size: 22px; line-height: 1.1; }
+  .prior-card .cat { display: block; margin-top: 4px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; font-weight: 700; color: #a85a3d; }
+  .prior-card .ig { display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-top: 10px; padding: 7px 12px; border-radius: 999px; background: #a85a3d; color: var(--sand); font-size: 12px; font-weight: 700; letter-spacing: .04em; }
+  .prior-card em { display: block; margin-top: 8px; font-style: normal; font-size: 11px; line-height: 1.35; color: rgba(14,27,44,.6); }
+  @media (max-width: 900px) { .prior-card { display: none; } }
   @media (max-width: 900px) { .globe-embed { width: calc(100% + 2 * var(--pad)); margin: -18px calc(-1 * var(--pad)); aspect-ratio: 1 / 1.1; } }
   .passports { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .passport { background: #fff5ef; color: var(--ink); border-radius: 16px; padding: 10px 10px 14px; transform: rotate(var(--r)); box-shadow: 0 18px 40px rgba(0,0,0,.2); }
@@ -419,6 +427,41 @@
       });
     }, { threshold: .15 }).observe(hero);
   }
+})();
+</script>
+<script>
+(function () {
+  // PRIOR section: the embedded globe reports which creator is under the pointer; we draw the card in the
+  // free space to the right of the globe. Below 900px (one column) the globe keeps its own card.
+  var embed = document.querySelector('.globe-embed'), ifr = embed && embed.querySelector('iframe');
+  if (!ifr || !('postMessage' in window)) return;
+  var card = document.createElement('div'); card.className = 'prior-card'; card.setAttribute('aria-hidden', 'true');
+  card.innerHTML = '<b></b><span class="cat"></span><span class="ig"></span><em>Click the photo to open Instagram</em>';
+  embed.appendChild(card);
+  var nameEl = card.querySelector('b'), catEl = card.querySelector('.cat'), igEl = card.querySelector('.ig');
+  var mq = matchMedia('(min-width: 901px)'), on = null;
+  function send(v) {
+    if (v === on) return; on = v;
+    try { ifr.contentWindow.postMessage({ source: 'atlantic-media', type: 'host-card', on: v }, location.origin); } catch (e) {}
+    if (!v) card.classList.remove('on');
+  }
+  function sync() { on = null; send(mq.matches); }
+  addEventListener('message', function (e) {
+    if (e.origin !== location.origin || e.source !== ifr.contentWindow || !e.data || e.data.source !== 'atlantic-globe') return;
+    var d = e.data;
+    if (d.type === 'ready') { sync(); return; }
+    if (d.type !== 'hover') return;
+    if (!d.creator) { card.classList.remove('on'); return; }
+    var er = embed.getBoundingClientRect(), edge = d.haloRight + 14, avail = document.documentElement.clientWidth - 16 - (er.left + edge);
+    if (avail < 150) { send(false); return; }   // no room beside the globe at this width: the globe shows its own card
+    nameEl.textContent = d.creator.name; catEl.textContent = d.creator.niche + ' \u00b7 ' + d.creator.city; igEl.textContent = '@' + d.creator.handle;
+    card.style.width = Math.min(240, avail) + 'px'; card.style.left = edge + 'px';
+    var h = card.offsetHeight, top = Math.max(0, Math.min(er.height - h, d.y - h / 2));
+    card.style.top = top + 'px'; card.classList.add('on');
+  });
+  ifr.addEventListener('load', sync);
+  mq.addEventListener('change', sync);
+  var rt; addEventListener('resize', function () { card.classList.remove('on'); clearTimeout(rt); rt = setTimeout(sync, 250); });
 })();
 </script>
 <script src="brands.js"></script>
