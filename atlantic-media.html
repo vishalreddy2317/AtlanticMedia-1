@@ -2,9 +2,24 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="robots" content="noindex, nofollow" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Atlantic Media — We Saw the Internet Changing. So We Logged In.</title>
+<meta name="description" content="Atlantic Media is a Hyderabad digital media agency: integrated brand solutions, influencer marketing, PRIOR talent management, IPs, content as a service and production." />
+<meta name="theme-color" content="#0e1b2c" />
+<!-- SITE_URL: absolute URLs below use the Netlify preview domain; search-and-replace with the final domain at go-live -->
+<link rel="canonical" href="https://atlantic-media-2.netlify.app/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Atlantic Media" />
+<meta property="og:title" content="Atlantic Media — We Saw the Internet Changing. So We Logged In." />
+<meta property="og:description" content="Brand campaigns, influencer marketing, PRIOR talent management, IPs, content on demand and production. Hyderabad, India." />
+<meta property="og:url" content="https://atlantic-media-2.netlify.app/" />
+<meta property="og:image" content="https://atlantic-media-2.netlify.app/assets/brand/og-image.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Atlantic Media — We Saw the Internet Changing. So We Logged In." />
+<meta name="twitter:description" content="Brand campaigns, influencer marketing, PRIOR talent management, IPs, content on demand and production. Hyderabad, India." />
+<meta name="twitter:image" content="https://atlantic-media-2.netlify.app/assets/brand/og-image.jpg" />
 <link rel="icon" href="/favicon.ico" sizes="48x48" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
@@ -37,6 +52,12 @@
   .nav img { height: 46px; width: auto; }
   .nav ul { display: flex; gap: 30px; list-style: none; color: var(--sand); font-weight: 500; font-size: .95rem; }
   .nav ul a { opacity: .8; } .nav ul a:hover { opacity: 1; }
+  .nav__burger { display: none; width: 44px; height: 44px; margin-left: 8px; padding: 0; border: 0; background: transparent; cursor: pointer; flex-direction: column; justify-content: center; align-items: center; gap: 5px; border-radius: 50%; }
+  .nav__burger span { display: block; width: 22px; height: 2px; background: var(--sand); border-radius: 2px; transition: transform .25s, opacity .25s; }
+  .nav.open .nav__burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav.open .nav__burger span:nth-child(2) { opacity: 0; }
+  .nav.open .nav__burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  html.menu-open { overflow: hidden; }
   .btn { display: inline-flex; align-items: center; gap: 10px; padding: 13px 22px; border-radius: 999px; font-weight: 700; font-size: .95rem; transition: transform .3s, background .3s; }
   .btn--terra { background: var(--terra); color: #fff; } .btn--terra:hover { background: #8e4d31; }
   .btn--line { border: 1px solid rgba(243,237,227,.4); color: var(--sand); } .btn--line:hover { background: rgba(243,237,227,.08); }
@@ -173,11 +194,17 @@
   footer h4 { color: var(--sand); font-family: var(--serif); font-weight: 600; margin-bottom: 12px; }
   footer ul { list-style: none; display: grid; gap: 6px; }
   .legal { max-width: var(--max); margin: 40px auto 0; padding: 20px var(--pad) 0; border-top: 1px solid rgba(243,237,227,.1); display: flex; justify-content: space-between; }
+  .legal a { color: inherit; } .legal a:hover { color: var(--sand); }
 
   @media (max-width: 1100px) { .shifts { grid-template-columns: repeat(3, 1fr); } .svc-row { grid-template-columns: 60px 1fr 1.3fr; } .svc-row img { display: none; } }
   @media (max-width: 900px) { .journey { padding-bottom: clamp(80px, 10vw, 130px); } .svc { row-gap: 18px; } .svc-row { position: static; padding: 26px 22px; min-height: 0; } .svc::after { display: none; } }   /* phones: a plain list; the stack needs a tall screen */
   @media (max-width: 900px) {
-    .nav ul { display: none; }
+    .nav .btn { margin-left: auto; }
+    .nav__burger { display: inline-flex; }
+    .nav ul { display: none; position: fixed; left: 0; right: 0; top: 78px; bottom: 0; flex-direction: column; gap: 0; padding: 20px var(--pad) 40px; background: rgba(14,27,44,.97); backdrop-filter: blur(12px); font-family: Fraunces, Georgia, serif; font-size: 1.9rem; font-weight: 600; overflow: auto; }
+    .nav.open { background: rgba(14,27,44,.97); }
+    .nav.open ul { display: flex; }
+    .nav ul a { display: block; padding: 16px 0; border-bottom: 1px solid rgba(243,237,227,.12); opacity: 1; }
     .shifts, .asks, .steps, .story .cols { grid-template-columns: 1fr; }
     .prior .wrap, .live .wrap, footer .wrap { grid-template-columns: 1fr; }
     .hero__inner { padding-top: 90px; padding-bottom: 60px; }
@@ -217,8 +244,9 @@
 <header class="nav" id="nav">
   <div class="wrap">
     <a href="/"><img src="assets/brand/logo-white.png" alt="Atlantic Media" /></a>
-    <ul><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#prior">PRIOR</a></li><li><a href="/contact">Contact</a></li></ul>
+    <ul id="site-menu"><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#prior">PRIOR</a></li><li><a href="/contact">Contact</a></li></ul>
     <a class='btn btn--terra' href="/contact">Slide into our DMs →</a>
+    <button class="nav__burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu"><span></span><span></span><span></span></button>
   </div>
   <div class="progress" aria-hidden="true"></div>
 </header>
@@ -362,7 +390,7 @@
       <p class="coords">17.4153° N · 78.3550° E</p>
       <address>Level 19 / Unit 3<br/>One West – A Terminus Project<br/>Narsing Nanakramguda Service Road<br/>Financial District, Hyderabad<br/>Telangana – 500008</address>
       <div class="contacts"><a href="mailto:connect@atlanticmedia.in">connect@atlanticmedia.in</a></div>
-      <div class="ctas" style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn--terra" href="/contact">Slide into our DMs →</a><a class="btn btn--outline-ink" href="https://www.instagram.com/atlantic.media_india/">Instagram</a></div>
+      <div class="ctas" style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn--terra" href="/contact">Slide into our DMs →</a><a class="btn btn--outline-ink" href="https://www.instagram.com/atlantic.media_india/" target="_blank" rel="noopener">Instagram</a></div>
     </div>
   </div>
 </section>
@@ -371,9 +399,9 @@
   <div class="wrap">
     <div><img src="assets/brand/logo-white.png" alt="Atlantic Media" /><p style="margin-top:14px">We’re one DM, mail or call away.</p></div>
     <div><h4>Explore</h4><ul><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#prior">PRIOR</a></li><li><a href="/contact">Contact</a></li></ul></div>
-    <div><h4>Connect</h4><ul><li><a href="mailto:connect@atlanticmedia.in">connect@atlanticmedia.in</a></li><li><a href="https://www.instagram.com/atlantic.media_india/">Instagram · @atlantic.media_india</a></li><li><a href="https://in.linkedin.com/company/atlantic-media-india">LinkedIn</a></li></ul></div>
+    <div><h4>Connect</h4><ul><li><a href="mailto:connect@atlanticmedia.in">connect@atlanticmedia.in</a></li><li><a href="https://www.instagram.com/atlantic.media_india/" target="_blank" rel="noopener">Instagram · @atlantic.media_india</a></li><li><a href="https://in.linkedin.com/company/atlantic-media-india" target="_blank" rel="noopener">LinkedIn</a></li></ul></div>
   </div>
-  <div class="legal"><span>© Atlantic Media</span><span>Privacy · Terms</span></div>
+  <div class="legal"><span>© 2026 Atlantic Media</span><span><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></span></div>
 </footer>
 
 <script>
@@ -466,6 +494,17 @@
   ifr.addEventListener('load', sync);
   mq.addEventListener('change', sync);
   var rt; addEventListener('resize', function () { card.classList.remove('on'); clearTimeout(rt); rt = setTimeout(sync, 250); });
+})();
+</script>
+<script>
+(function () {
+  var nav = document.getElementById('nav'), burger = nav && nav.querySelector('.nav__burger');
+  if (!burger) return;
+  function setOpen(open) { nav.classList.toggle('open', open); document.documentElement.classList.toggle('menu-open', open); burger.setAttribute('aria-expanded', String(open)); burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); }
+  burger.addEventListener('click', function () { setOpen(!nav.classList.contains('open')); });
+  nav.querySelectorAll('ul a').forEach(function (a) { a.addEventListener('click', function () { setOpen(false); }); });
+  addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+  addEventListener('resize', function () { if (innerWidth > 900) setOpen(false); });
 })();
 </script>
 <script src="brands.js"></script>

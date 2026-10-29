@@ -92,7 +92,7 @@
       if (shown[i] === n) return;
       shown[i] = n;
       var b = all[n], img = el.firstChild;
-      img.src = 'assets/clients/' + b[1] + '.webp';
+      img.src = 'assets/clients/' + b[1] + '.webp'; img.alt = b[0];
       el.style.setProperty('--bt-bg', b[2] || '');
       el.classList.toggle('bt-tile--tint', !!b[2]);
       el.classList.toggle('bt-tile--soft', b[3] === 'soft');

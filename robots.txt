@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# SITE_URL: change to the final domain at go-live
+Sitemap: https://atlantic-media-2.netlify.app/sitemap.xml
