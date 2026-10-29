@@ -1,6 +1,6 @@
 // Contact form + scroll reveals for the contact page.
-// No backend yet: a valid enquiry opens the visitor's email app, pre-filled,
-// addressed to connect@atlanticmedia.in.
+// A valid enquiry is posted to Netlify Forms (see data-netlify on the form); if that
+// fails it opens the visitor's email app, pre-filled, addressed to connect@atlanticmedia.in.
 (function () {
   var TO = 'connect@atlanticmedia.in';
 
@@ -52,9 +52,28 @@
     if (!ok) { var first = form.querySelector('[aria-invalid="true"]'); if (first) first.focus(); return; }
 
     try { localStorage.setItem(KEY, JSON.stringify(recent().concat(Date.now()))); } catch (e) {}
-    var body = ['Name: ' + name, 'Phone: +91 ' + phone, 'Email: ' + email, 'I am a: ' + type, 'Services: ' + services.join(', ')];
-    if (msg) body.push('', msg);
-    location.href = 'mailto:' + TO + '?subject=' + encodeURIComponent('New enquiry from ' + name) + '&body=' + encodeURIComponent(body.join('\n'));
-    form.classList.add('is-sent');
+    // Netlify Forms: post the fields as a regular form submission (the form is registered at deploy time via data-netlify).
+    var fields = { 'form-name': 'enquiry', name: name, phone: '+91 ' + phone, email: email, type: type, services: services.join(', '), message: msg, website: '' };
+    var encoded = Object.keys(fields).map(function (k) { return encodeURIComponent(k) + '=' + encodeURIComponent(fields[k]); }).join('&');
+    var btn = form.querySelector('.cf-submit'); if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+    fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: encoded })
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); form.classList.add('is-sent'); })
+      .catch(function () {
+        // Forms endpoint unavailable (e.g. local preview): fall back to the visitor's email app, pre-filled.
+        var body = ['Name: ' + name, 'Phone: +91 ' + phone, 'Email: ' + email, 'I am a: ' + type, 'Services: ' + services.join(', ')];
+        if (msg) body.push('', msg);
+        location.href = 'mailto:' + TO + '?subject=' + encodeURIComponent('New enquiry from ' + name) + '&body=' + encodeURIComponent(body.join('\n'));
+        form.classList.add('is-sent');
+      })
+      .then(function () { if (btn) { btn.disabled = false; btn.textContent = 'Send enquiry →'; } });
   });
+})();
+(function () {
+  var nav = document.getElementById('nav'), burger = nav && nav.querySelector('.nav__burger');
+  if (!burger) return;
+  function setOpen(open) { nav.classList.toggle('open', open); document.documentElement.classList.toggle('menu-open', open); burger.setAttribute('aria-expanded', String(open)); burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); }
+  burger.addEventListener('click', function () { setOpen(!nav.classList.contains('open')); });
+  nav.querySelectorAll('ul a').forEach(function (a) { a.addEventListener('click', function () { setOpen(false); }); });
+  addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+  addEventListener('resize', function () { if (innerWidth > 900) setOpen(false); });
 })();

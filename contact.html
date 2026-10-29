@@ -2,9 +2,28 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="robots" content="noindex, nofollow" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Contact · Atlantic Media</title>
+<meta name="description" content="Tell Atlantic Media about your brand. Email, call or WhatsApp us in Hyderabad, or send an enquiry and we reply within two working days." />
+<meta name="theme-color" content="#0e1b2c" />
+<!-- SITE_URL: absolute URLs below use the Netlify preview domain; search-and-replace with the final domain at go-live -->
+<link rel="canonical" href="https://atlantic-media-2.netlify.app/contact" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Atlantic Media" />
+<meta property="og:title" content="Contact · Atlantic Media" />
+<meta property="og:description" content="Email, call or WhatsApp us, or send an enquiry — we reply within two working days." />
+<meta property="og:url" content="https://atlantic-media-2.netlify.app/contact" />
+<meta property="og:image" content="https://atlantic-media-2.netlify.app/assets/brand/og-image.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Contact · Atlantic Media" />
+<meta name="twitter:description" content="Email, call or WhatsApp us, or send an enquiry — we reply within two working days." />
+<meta name="twitter:image" content="https://atlantic-media-2.netlify.app/assets/brand/og-image.jpg" />
+<link rel="icon" href="/favicon.ico" sizes="48x48" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -23,7 +42,6 @@
   .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
   .serif { font-family: var(--serif); }
   .kicker { font-size: .78rem; letter-spacing: .22em; text-transform: uppercase; font-weight: 700; color: var(--terra); display: inline-flex; align-items: center; gap: 10px; }
-  .kicker::before { content: ''; width: 26px; height: 1px; background: currentColor; }
   .reveal { opacity: 0; transform: translateY(18px); transition: opacity .8s ease, transform .8s ease; }
   .reveal.in { opacity: 1; transform: none; }
 
@@ -34,6 +52,12 @@
   .nav img { height: 46px; width: auto; }
   .nav ul { display: flex; gap: 30px; list-style: none; color: var(--sand); font-weight: 500; font-size: .95rem; }
   .nav ul a { opacity: .8; } .nav ul a:hover { opacity: 1; }
+  .nav__burger { display: none; width: 44px; height: 44px; margin-left: 8px; padding: 0; border: 0; background: transparent; cursor: pointer; flex-direction: column; justify-content: center; align-items: center; gap: 5px; border-radius: 50%; }
+  .nav__burger span { display: block; width: 22px; height: 2px; background: var(--sand); border-radius: 2px; transition: transform .25s, opacity .25s; }
+  .nav.open .nav__burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav.open .nav__burger span:nth-child(2) { opacity: 0; }
+  .nav.open .nav__burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  html.menu-open { overflow: hidden; }
   .btn { display: inline-flex; align-items: center; gap: 10px; padding: 13px 22px; border-radius: 999px; font-weight: 700; font-size: .95rem; transition: transform .3s, background .3s; }
   .btn--terra { background: var(--terra); color: #fff; } .btn--terra:hover { background: #8e4d31; }
   .btn--line { border: 1px solid rgba(243,237,227,.4); color: var(--sand); } .btn--line:hover { background: rgba(243,237,227,.08); }
@@ -135,9 +159,15 @@
   footer h4 { color: var(--sand); font-family: var(--serif); font-weight: 600; margin-bottom: 12px; }
   footer ul { list-style: none; display: grid; gap: 6px; }
   .legal { max-width: var(--max); margin: 40px auto 0; padding: 20px var(--pad) 0; border-top: 1px solid rgba(243,237,227,.1); display: flex; justify-content: space-between; }
+  .legal a { color: inherit; } .legal a:hover { color: var(--sand); }
 
   @media (max-width: 900px) {
-    .nav ul { display: none; }
+    .nav .btn { margin-left: auto; }
+    .nav__burger { display: inline-flex; }
+    .nav ul { display: none; position: fixed; left: 0; right: 0; top: 78px; bottom: 0; flex-direction: column; gap: 0; padding: 20px var(--pad) 40px; background: rgba(14,27,44,.97); backdrop-filter: blur(12px); font-family: Fraunces, Georgia, serif; font-size: 1.9rem; font-weight: 600; overflow: auto; }
+    .nav.open { background: rgba(14,27,44,.97); }
+    .nav.open ul { display: flex; }
+    .nav ul a { display: block; padding: 16px 0; border-bottom: 1px solid rgba(243,237,227,.12); opacity: 1; }
     .hero__inner, .hello .wrap, .prior .wrap, .live .wrap, footer .wrap { grid-template-columns: 1fr; }
     .proof .wrap { grid-template-columns: 1fr 1fr; }
     .route, .steps { grid-template-columns: 1fr 1fr; } .route::before { display: none; }
@@ -160,6 +190,7 @@
   .form-note { color: #d9534f; font-size: .9rem; } .form-note:empty { display: none; }
   .cf-submit { justify-self: start; font: inherit; font-weight: 700; padding: 15px 28px; border: 0; border-radius: var(--cf-radius); background: var(--cf-acc); color: var(--cf-on-acc); cursor: pointer; transition: filter .2s; }
   .cf-submit:hover { filter: brightness(1.1); }
+  #enquiry { scroll-margin-top: 96px; }   /* links to #enquiry land below the fixed nav */
   .cf-done { display: none; padding: 16px; border-radius: 10px; border: 1px solid var(--cf-line); }
   .cf.is-sent > :not(.cf-done) { display: none; } .cf.is-sent .cf-done { display: block; }
   .cd { list-style: none; display: grid; }
@@ -184,8 +215,9 @@
 <header class="nav" id="nav">
   <div class="wrap">
     <a href="/"><img src="assets/brand/logo-white.png" alt="Atlantic Media" /></a>
-    <ul><li><a href="/#about">About</a></li><li><a href="/#services">Services</a></li><li><a href="/#prior">PRIOR</a></li><li><a href="#enquiry">Contact</a></li></ul>
+    <ul id="site-menu"><li><a href="/#about">About</a></li><li><a href="/#services">Services</a></li><li><a href="/#prior">PRIOR</a></li><li><a href="#enquiry">Contact</a></li></ul>
     <a class="btn btn--terra" href="#enquiry">Start a project →</a>
+    <button class="nav__burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu"><span></span><span></span><span></span></button>
   </div>
 </header>
 <section class="c-hero"><div class="wrap"><p class="kicker reveal">Contact</p><h1 class="reveal">We are here <em>for you!</em></h1><p class="reveal">Drop us an Email or Call — or tell us about your brand below and we’ll get back within two working days.</p></div></section><section class="c-body"><div class="wrap c-grid"><div class="reveal fade up in"><h2>Drop us an Email or Call</h2><ul class="cd">
@@ -194,7 +226,8 @@
   <li><span>WhatsApp</span><a href="https://wa.me/917207974343" target="_blank" rel="noopener">Chat with us →</a></li>
   <li><span>Visit</span>Level 19 / Unit 3, One West – A Terminus Project, Narsing Nanakramguda Service Rd, Financial District, Hyderabad, Telangana 500008</li>
   <li><span>Follow</span><a href="https://in.linkedin.com/company/atlantic-media-india" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.instagram.com/atlantic.media_india/" target="_blank" rel="noopener">Instagram · @atlantic.media_india</a></li>
-</ul><div class="c-map"><iframe title="Atlantic Media office on Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=One%20West%20A%20Terminus%20Project%2C%20Financial%20District%2C%20Hyderabad%20500008&z=15&output=embed"></iframe></div><div class="c-photo"><img src="assets/brand/office-building.jpg" alt="One West, Financial District, Hyderabad" /></div></div><div class="reveal fade up in"><h2>Tell us about your brand</h2><form id="enquiry" class="cf" novalidate>
+</ul><div class="c-map"><iframe title="Atlantic Media office on Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=One%20West%20A%20Terminus%20Project%2C%20Financial%20District%2C%20Hyderabad%20500008&z=15&output=embed"></iframe></div><div class="c-photo"><img src="assets/brand/office-building.jpg" alt="One West, Financial District, Hyderabad" /></div></div><div class="reveal fade up in"><h2>Tell us about your brand</h2><form id="enquiry" class="cf" novalidate name="enquiry" method="POST" action="/contact" data-netlify="true" netlify-honeypot="website">
+  <input type="hidden" name="form-name" value="enquiry" />
   <div class="cf-row">
     <label class="cf-field"><span>Name</span><input name="name" maxlength="80" autocomplete="name" placeholder="Your name" /><em data-err="name"></em></label>
     <label class="cf-field"><span>Phone (+91)</span><input name="phone" type="tel" maxlength="15" inputmode="tel" autocomplete="tel-national" placeholder="98765 43210" /><em data-err="phone"></em></label>
@@ -213,15 +246,15 @@
   <label class="cf-hp" aria-hidden="true">Website <input name="website" tabindex="-1" autocomplete="off" /></label>
   <p class="form-note" role="alert"></p>
   <button type="submit" class="cf-submit">Send enquiry →</button>
-  <div class="cf-done" role="status"><b>Thank you!</b> Your email app should open with your enquiry filled in — just hit send. If not, write to <a href="mailto:connect@atlanticmedia.in">connect@atlanticmedia.in</a>.</div>
+  <div class="cf-done" role="status"><b>Thank you!</b> Your enquiry is with us — we’ll get back within two working days. In a hurry? Write to <a href="mailto:connect@atlanticmedia.in">connect@atlanticmedia.in</a> or <a href="https://wa.me/917207974343" target="_blank" rel="noopener">WhatsApp us</a>.</div>
 </form></div></div></section>
 <footer>
   <div class="wrap">
     <div><img src="assets/brand/logo-white.png" alt="Atlantic Media" /><p style="margin-top:14px">Amplified. Elevated. Unstoppable.</p></div>
     <div><h4>Explore</h4><ul><li><a href="/#about">About</a></li><li><a href="/#services">Services</a></li><li><a href="/#prior">PRIOR</a></li><li><a href="/contact">Contact</a></li></ul></div>
-    <div><h4>Connect</h4><ul><li><a href="mailto:connect@atlanticmedia.in">connect@atlanticmedia.in</a></li><li><a href="https://www.instagram.com/atlantic.media_india/">Instagram · @atlantic.media_india</a></li><li><a href="https://in.linkedin.com/company/atlantic-media-india">LinkedIn</a></li></ul></div>
+    <div><h4>Connect</h4><ul><li><a href="mailto:connect@atlanticmedia.in">connect@atlanticmedia.in</a></li><li><a href="https://www.instagram.com/atlantic.media_india/" target="_blank" rel="noopener">Instagram · @atlantic.media_india</a></li><li><a href="https://in.linkedin.com/company/atlantic-media-india" target="_blank" rel="noopener">LinkedIn</a></li></ul></div>
   </div>
-  <div class="legal"><span>© Atlantic Media</span><span>Privacy · Terms</span></div>
+  <div class="legal"><span>© 2026 Atlantic Media</span><span><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></span></div>
 </footer>
 <script src="contact.js"></script>
 </body>
