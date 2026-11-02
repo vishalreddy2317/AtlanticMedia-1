@@ -57,6 +57,7 @@
   .nav.open .nav__burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .nav.open .nav__burger span:nth-child(2) { opacity: 0; }
   .nav.open .nav__burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  html { overflow-x: clip; }   /* the hidden globe hover card rests past the right edge; never let it widen the page */
   html.menu-open { overflow: hidden; }
   .btn { display: inline-flex; align-items: center; gap: 10px; padding: 13px 22px; border-radius: 999px; font-weight: 700; font-size: .95rem; transition: transform .3s, background .3s; }
   .btn--terra { background: var(--terra); color: #fff; } .btn--terra:hover { background: #8e4d31; }
