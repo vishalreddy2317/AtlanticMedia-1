@@ -71,6 +71,7 @@
   .hero__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; filter: saturate(.85); background: var(--ocean); transition: opacity .6s ease; }
   .hero__video.is-on { opacity: .62; }
   .hero__veil { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(14,27,44,.9) 0%, rgba(14,27,44,.72) 42%, rgba(14,27,44,.38) 100%), linear-gradient(180deg, rgba(14,27,44,.45) 0%, rgba(14,27,44,0) 28%, rgba(14,27,44,0) 68%, var(--ocean) 100%); }
+  .hero--single .hero__video { object-position: 50% 22%; }   /* phones and tablets play one upright panel at a time: keep faces in the frame */
   @media (prefers-reduced-motion: reduce) { .hero__video { display: none; } }
   .pin { position: absolute; width: 14px; height: 14px; border-radius: 50%; background: var(--terra); box-shadow: 0 0 0 6px rgba(166,94,63,.25); }
   .pin span { position: absolute; left: 22px; top: -4px; white-space: nowrap; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
@@ -151,7 +152,7 @@
   .logos img { max-height: 100%; max-width: 100%; object-fit: contain; }
 
   /* prior */
-  .prior { background: rgba(204,90,20,.65); color: var(--ocean); }   /* see-through burnt orange over the sand page (a brighter base than --terra, which goes pink when thinned); text is dark to stay readable */
+  .prior { background: rgba(204,90,20,.65); color: var(--ocean); overflow-x: hidden; overflow-x: clip; }   /* the hover card rests past the right edge: never let it widen the page (iPads zoom the whole layout out otherwise) */   /* see-through burnt orange over the sand page (a brighter base than --terra, which goes pink when thinned); text is dark to stay readable */
   .prior .wrap { display: grid; grid-template-columns: .9fr 1.1fr; gap: 60px; align-items: center; }
   .prior .kicker { color: #4a2010; }
   .prior p { margin-top: 20px; color: rgba(14,27,44,.82); }
@@ -164,8 +165,10 @@
   .prior-card .cat { display: block; margin-top: 4px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; font-weight: 700; color: #a85a3d; }
   .prior-card .ig { display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-top: 10px; padding: 7px 12px; border-radius: 999px; background: #a85a3d; color: var(--sand); font-size: 12px; font-weight: 700; letter-spacing: .04em; }
   .prior-card em { display: block; margin-top: 8px; font-style: normal; font-size: 11px; line-height: 1.35; color: rgba(14,27,44,.6); }
-  @media (max-width: 900px) { .prior-card { display: none; } }
-  @media (max-width: 900px) { .globe-embed { width: calc(100% + 2 * var(--pad)); margin: -18px calc(-1 * var(--pad)); aspect-ratio: 1 / 1.1; } }
+  /* tablets: the copy keeps the desktop's centred column, scaled to the screen so it sits in the same place in the frame */
+  @media (min-width: 741px) and (max-width: 1100px) { .hero__inner { max-width: min(980px, 76vw); } }
+  @media (max-width: 1100px) { .prior .wrap { grid-template-columns: 1fr; } .globe-embed { justify-self: center; margin: -30px auto; max-width: 100%; } .prior-card { display: none; } }   /* tablets: the two-column PRIOR layout squeezes the text to ~200px; stack it */
+  @media (max-width: 740px) { .globe-embed { width: calc(100% + 2 * var(--pad)); margin: -18px calc(-1 * var(--pad)); aspect-ratio: 1 / 1.1; } }
   .passports { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .passport { background: #fff5ef; color: var(--ink); border-radius: 16px; padding: 10px 10px 14px; transform: rotate(var(--r)); box-shadow: 0 18px 40px rgba(0,0,0,.2); }
   .passport img { border-radius: 10px; aspect-ratio: 4/5; object-fit: cover; width: 100%; }
@@ -198,23 +201,24 @@
   .legal a { color: inherit; } .legal a:hover { color: var(--sand); }
 
   @media (max-width: 1100px) { .shifts { grid-template-columns: repeat(3, 1fr); } .svc-row { grid-template-columns: 60px 1fr 1.3fr; } .svc-row img { grid-column: 2 / -1; max-width: 460px; } }
-  @media (max-width: 900px) { .journey { padding-bottom: clamp(80px, 10vw, 130px); } .svc { row-gap: 18px; } .svc-row { position: static; padding: 26px 22px; min-height: 0; } .svc::after { display: none; } }   /* phones: a plain list; the stack needs a tall screen */
-  @media (max-width: 900px) {
+  @media (max-width: 740px), (max-height: 600px) { .journey { padding-bottom: clamp(80px, 10vw, 130px); } .svc { row-gap: 18px; } .svc-row { position: static; padding: 26px 22px; min-height: 0; } .svc::after { display: none; } }   /* phones (and landscape phones): a plain list; the stack needs a tall screen */
+  @media (max-width: 900px) {   /* iPads in portrait and phones: two-up grids */
+    .shifts, .asks, .steps, .story .cols { grid-template-columns: 1fr 1fr; }
+    .steps::before { display: none; }
+    .logos { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 740px) {   /* phones: menu button, stacked reels, one-column sections */
     .nav .btn { margin-left: auto; }
     .nav__burger { display: inline-flex; }
     .nav ul { display: none; position: fixed; left: 0; right: 0; top: 78px; bottom: 0; flex-direction: column; gap: 0; padding: 20px var(--pad) 40px; background: rgba(14,27,44,.97); backdrop-filter: blur(12px); font-family: Fraunces, Georgia, serif; font-size: 1.9rem; font-weight: 600; overflow: auto; }
     .nav.open { background: rgba(14,27,44,.97); }
     .nav.open ul { display: flex; }
     .nav ul a { display: block; padding: 16px 0; border-bottom: 1px solid rgba(243,237,227,.12); opacity: 1; }
-    .shifts, .asks, .steps, .story .cols { grid-template-columns: 1fr; }
     .prior .wrap, .live .wrap, footer .wrap { grid-template-columns: 1fr; }
     .hero__inner { padding-top: 90px; padding-bottom: 60px; }
     .hero__veil { background: linear-gradient(180deg, rgba(14,27,44,.7) 0%, rgba(14,27,44,.58) 70%, var(--ocean) 100%); }
-    .shifts, .asks, .steps, .story .cols { grid-template-columns: 1fr 1fr; }
     .reel-grid { grid-template-columns: 1fr; gap: 28px; } .reel { max-width: 300px; }
-    .steps::before { display: none; }
     .svc-row { grid-template-columns: 1fr; gap: 16px; } .svc-row img { aspect-ratio: auto; order: -1; grid-column: auto; max-width: none; } .svc-row .num { display: none; }
-    .logos { grid-template-columns: repeat(3, 1fr); }
   }
   @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
 
@@ -254,9 +258,11 @@
 
 <section class="hero">
   <div class="hero__sticky">
-  <!-- Hero video wall: three clips of Atlantic's people play one after another; a return to the hero starts the next clip. -->
-  <video class="hero__video is-on" autoplay muted playsinline preload="auto" poster="assets/video/hero-01.webp" data-clips="assets/video/hero-01.mp4,assets/video/hero-02.mp4,assets/video/hero-03.mp4" aria-hidden="true" tabindex="-1"><source src="assets/video/hero-01.mp4" type="video/mp4" /></video>
+  <!-- Hero video: on landscape screens the three-panel wall of Atlantic's people; on phones and tablets (touch devices, any orientation) and in windows up to 1100px the same three panels one at a time, in the order the wall shows them.
+       The clips play one after another; a return to the hero starts the next clip. The set is chosen by the inline script below before anything downloads. -->
+  <video class="hero__video is-on" autoplay muted playsinline preload="auto" data-clips="assets/video/hero-01.mp4,assets/video/hero-02.mp4,assets/video/hero-03.mp4" data-poster="assets/video/hero-01.webp" data-clips-portrait="assets/video/hero-01a.mp4,assets/video/hero-01b.mp4,assets/video/hero-01c.mp4,assets/video/hero-02a.mp4,assets/video/hero-02b.mp4,assets/video/hero-02c.mp4,assets/video/hero-03a.mp4,assets/video/hero-03b.mp4,assets/video/hero-03c.mp4" data-poster-portrait="assets/video/hero-01a.webp" aria-hidden="true" tabindex="-1"></video>
   <video class="hero__video" muted playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
+  <script>(function () { var v = document.currentScript.previousElementSibling.previousElementSibling; if (!v) return; var single = window.matchMedia && (matchMedia('(hover: none) and (pointer: coarse)').matches || matchMedia('(max-width: 1100px)').matches); var set = single ? 'portrait' : ''; if (single) { var stage = v.closest('.hero__sticky'); if (stage) stage.classList.add('hero--single'); } var clips = v.getAttribute('data-clips' + (set ? '-' + set : '')); var poster = v.getAttribute('data-poster' + (set ? '-' + set : '')); if (!clips) return; v.setAttribute('data-clips', clips); if (poster) v.poster = poster; v.src = clips.split(',')[0].trim(); })();</script>
   <div class="hero__veil" aria-hidden="true"></div>
   <svg class="hero__grid" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
     <g>
@@ -472,7 +478,7 @@
   card.innerHTML = '<b></b><span class="cat"></span><span class="ig"></span><em>Click the photo to open Instagram</em>';
   embed.appendChild(card);
   var nameEl = card.querySelector('b'), catEl = card.querySelector('.cat'), igEl = card.querySelector('.ig');
-  var mq = matchMedia('(min-width: 901px)'), on = null;
+  var mq = matchMedia('(min-width: 1101px)'), on = null;
   function send(v) {
     if (v === on) return; on = v;
     try { ifr.contentWindow.postMessage({ source: 'atlantic-media', type: 'host-card', on: v }, location.origin); } catch (e) {}
@@ -505,7 +511,7 @@
   burger.addEventListener('click', function () { setOpen(!nav.classList.contains('open')); });
   nav.querySelectorAll('ul a').forEach(function (a) { a.addEventListener('click', function () { setOpen(false); }); });
   addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
-  addEventListener('resize', function () { if (innerWidth > 900) setOpen(false); });
+  addEventListener('resize', function () { if (innerWidth > 740) setOpen(false); });
 })();
 </script>
 <script src="brands.js"></script>

@@ -25,6 +25,26 @@
     if (input && input.setAttribute) input.setAttribute('aria-invalid', msg ? 'true' : 'false');
     return !msg;
   }
+  // Validation rules, one per field (return '' when fine). Phone: exactly 10 digits, as dialled in India after +91.
+  var RULES = {
+    name: function (v) { v = clean(v, 80); return !v ? 'Please enter your name.' : /^[\p{L}\p{M}][\p{L}\p{M} .'-]{1,79}$/u.test(v) ? '' : 'Use letters only.'; },
+    phone: function (v) { return digits10(v).length === 10 ? '' : 'Enter your 10-digit mobile number.'; },
+    email: function (v) { v = clean(v, 254); return !v ? 'Please enter your email address.' : /^[A-Za-z0-9._%+-]{1,64}@[A-Za-z0-9.-]{1,185}\.[A-Za-z]{2,24}$/.test(v) ? '' : 'Enter a valid email address.'; },
+    type: function (v) { return ['Brand', 'Creator', 'Agency', 'Job applicant', 'Other'].indexOf(v) >= 0 ? '' : 'Please choose one.'; },
+    message: function (v) { return /<\s*\/?\s*[a-z!]|javascript:|https?:\/\/|www\./i.test(v) ? 'Please don’t include links or code.' : ''; }
+  };
+  // Phone: only digits can be typed or pasted, never more than ten. A pasted "+91 …" or a leading 0 before the ten digits is dropped.
+  function digits10(v) { var d = String(v || '').replace(/\D/g, ''); if (d.length > 10 && d.indexOf('91') === 0) d = d.slice(2); if (d.length > 10 && d.charAt(0) === '0') d = d.slice(1); return d.slice(0, 10); }
+  var phoneInput = form.querySelector('[name="phone"]');
+  if (phoneInput) phoneInput.addEventListener('input', function () { var d = digits10(phoneInput.value); if (phoneInput.value !== d) phoneInput.value = d; });
+  // Check a field when the visitor leaves it; clear its message as soon as they start fixing it.
+  Object.keys(RULES).forEach(function (name) {
+    var el = form.querySelector('[name="' + name + '"]'); if (!el) return;
+    el.addEventListener('blur', function () { if (el.value) setErr(name, RULES[name](el.value)); });
+    el.addEventListener('input', function () { if (form.querySelector('[data-err="' + name + '"]').textContent) setErr(name, RULES[name](el.value)); });
+    el.addEventListener('change', function () { setErr(name, RULES[name](el.value)); });
+  });
+  form.querySelectorAll('[name="services"]').forEach(function (c) { c.addEventListener('change', function () { setErr('services', form.querySelectorAll('[name="services"]:checked').length ? '' : 'Pick at least one service.'); }); });
   function recent() {
     try { return JSON.parse(localStorage.getItem(KEY) || '[]').filter(function (t) { return Date.now() - t < WINDOW; }); } catch (e) { return []; }
   }
@@ -38,17 +58,16 @@
     if (d.get('website') || Date.now() - started < 3000) { form.classList.add('is-sent'); return; }
     if (recent().length >= LIMIT) { note.textContent = 'Too many enquiries from this device. Please try again later or email ' + TO + '.'; return; }
 
-    var name = clean(d.get('name') || '', 80), phone = clean(d.get('phone') || '', 15), email = clean(d.get('email') || '', 254);
+    var name = clean(d.get('name') || '', 80), phone = digits10(d.get('phone')), email = clean(d.get('email') || '', 254);
     var type = d.get('type') || '', msg = String(d.get('message') || '').replace(/\r/g, '').slice(0, 2000).trim();
     var services = d.getAll('services');
-    var bad = /<\s*\/?\s*[a-z!]|javascript:|https?:\/\/|www\./i;
     var ok = true;
-    ok = setErr('name', !name ? 'Please enter your name.' : /^[\p{L}\p{M}][\p{L}\p{M} .'-]{1,79}$/u.test(name) ? '' : 'Use letters only.') && ok;
-    ok = setErr('phone', /^[0-9][0-9 -]{6,14}$/.test(phone) ? '' : 'Enter a valid phone number.') && ok;
-    ok = setErr('email', /^[A-Za-z0-9._%+-]{1,64}@[A-Za-z0-9.-]{1,185}\.[A-Za-z]{2,24}$/.test(email) ? '' : 'Enter a valid email address.') && ok;
-    ok = setErr('type', ['Brand', 'Creator', 'Agency', 'Job applicant', 'Other'].indexOf(type) >= 0 ? '' : 'Please choose one.') && ok;
+    ok = setErr('name', RULES.name(name)) && ok;
+    ok = setErr('phone', RULES.phone(phone)) && ok;
+    ok = setErr('email', RULES.email(email)) && ok;
+    ok = setErr('type', RULES.type(type)) && ok;
     ok = setErr('services', services.length ? '' : 'Pick at least one service.') && ok;
-    ok = setErr('message', bad.test(msg) ? 'Please don’t include links or code.' : '') && ok;
+    ok = setErr('message', RULES.message(msg)) && ok;
     if (!ok) { var first = form.querySelector('[aria-invalid="true"]'); if (first) first.focus(); return; }
 
     try { localStorage.setItem(KEY, JSON.stringify(recent().concat(Date.now()))); } catch (e) {}
@@ -75,5 +94,5 @@
   burger.addEventListener('click', function () { setOpen(!nav.classList.contains('open')); });
   nav.querySelectorAll('ul a').forEach(function (a) { a.addEventListener('click', function () { setOpen(false); }); });
   addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
-  addEventListener('resize', function () { if (innerWidth > 900) setOpen(false); });
+  addEventListener('resize', function () { if (innerWidth > 740) setOpen(false); });
 })();

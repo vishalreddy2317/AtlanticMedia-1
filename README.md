@@ -5,7 +5,7 @@ Plain HTML, CSS and JavaScript — no build step.
 
 ## Pages
 
-- `atlantic-media.html` — the home page, served at `/` (and `/atlantic-media`)
+- `index.html` — the home page, served at `/` (old `/atlantic-media` links redirect here)
 - `contact.html` — the contact page, at `/contact`
 - `atlantic-globe/` — the Atlantic Globe app (built output), embedded on the home page and served at `/atlantic-globe/`
 

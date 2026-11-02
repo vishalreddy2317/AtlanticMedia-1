@@ -161,18 +161,20 @@
   .legal { max-width: var(--max); margin: 40px auto 0; padding: 20px var(--pad) 0; border-top: 1px solid rgba(243,237,227,.1); display: flex; justify-content: space-between; }
   .legal a { color: inherit; } .legal a:hover { color: var(--sand); }
 
-  @media (max-width: 900px) {
+  @media (max-width: 900px) {   /* iPads in portrait and phones */
+    .hero__inner, .hello .wrap, .prior .wrap, .live .wrap, footer .wrap { grid-template-columns: 1fr; }
+    .proof .wrap { grid-template-columns: 1fr 1fr; }
+    .route, .steps { grid-template-columns: 1fr 1fr; } .route::before { display: none; }
+    .logos { grid-template-columns: repeat(3, 1fr); }
+    .step { border: 0; padding-left: 0 !important; }
+  }
+  @media (max-width: 740px) {   /* phones: menu button (same breakpoint as the home page) */
     .nav .btn { margin-left: auto; }
     .nav__burger { display: inline-flex; }
     .nav ul { display: none; position: fixed; left: 0; right: 0; top: 78px; bottom: 0; flex-direction: column; gap: 0; padding: 20px var(--pad) 40px; background: rgba(14,27,44,.97); backdrop-filter: blur(12px); font-family: Fraunces, Georgia, serif; font-size: 1.9rem; font-weight: 600; overflow: auto; }
     .nav.open { background: rgba(14,27,44,.97); }
     .nav.open ul { display: flex; }
     .nav ul a { display: block; padding: 16px 0; border-bottom: 1px solid rgba(243,237,227,.12); opacity: 1; }
-    .hero__inner, .hello .wrap, .prior .wrap, .live .wrap, footer .wrap { grid-template-columns: 1fr; }
-    .proof .wrap { grid-template-columns: 1fr 1fr; }
-    .route, .steps { grid-template-columns: 1fr 1fr; } .route::before { display: none; }
-    .logos { grid-template-columns: repeat(3, 1fr); }
-    .step { border: 0; padding-left: 0 !important; }
   }
   @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } .hero__route path { animation: none; stroke-dashoffset: 0; } }
 
@@ -229,11 +231,11 @@
 </ul><div class="c-map"><iframe title="Atlantic Media office on Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=One%20West%20A%20Terminus%20Project%2C%20Financial%20District%2C%20Hyderabad%20500008&z=15&output=embed"></iframe></div><div class="c-photo"><img src="assets/brand/office-building.jpg" alt="One West, Financial District, Hyderabad" /></div></div><div class="reveal fade up in"><h3 class="kicker">Connect With Our Team for Goals Now</h3><h3 class="c-h2">Tell us about your brand</h3><form id="enquiry" class="cf" novalidate name="enquiry" method="POST" action="/contact" data-netlify="true" netlify-honeypot="website">
   <input type="hidden" name="form-name" value="enquiry" />
   <div class="cf-row">
-    <label class="cf-field"><span>Name</span><input name="name" maxlength="80" autocomplete="name" placeholder="Your name" /><em data-err="name"></em></label>
-    <label class="cf-field"><span>Phone (+91)</span><input name="phone" type="tel" maxlength="15" inputmode="tel" autocomplete="tel-national" placeholder="98765 43210" /><em data-err="phone"></em></label>
+    <label class="cf-field"><span>Name</span><input name="name" maxlength="80" autocomplete="name" placeholder="Your name" required aria-required="true" /><em data-err="name"></em></label>
+    <label class="cf-field"><span>Phone (+91)</span><input name="phone" type="tel" maxlength="10" inputmode="numeric" pattern="[0-9]{10}" autocomplete="tel-national" placeholder="10-digit mobile number" required aria-required="true" /><em data-err="phone"></em></label>
   </div>
-  <label class="cf-field"><span>Email</span><input name="email" type="email" maxlength="254" autocomplete="email" placeholder="you@company.com" /><em data-err="email"></em></label>
-  <label class="cf-field"><span>I am a</span><select name="type"><option value="">Select one</option><option>Brand</option><option>Creator</option><option>Agency</option><option>Job applicant</option><option>Other</option></select><em data-err="type"></em></label>
+  <label class="cf-field"><span>Email</span><input name="email" type="email" maxlength="254" autocomplete="email" placeholder="you@company.com" required aria-required="true" /><em data-err="email"></em></label>
+  <label class="cf-field"><span>I am a</span><select name="type" required aria-required="true"><option value="">Select one</option><option>Brand</option><option>Creator</option><option>Agency</option><option>Job applicant</option><option>Other</option></select><em data-err="type"></em></label>
   <fieldset class="cf-field" name="services"><span>What are you looking for?</span>
     <div class="cf-checks">
       <label><input type="checkbox" name="services" value="Digital Media Marketing" /> Digital Media Marketing</label>

@@ -4,10 +4,21 @@ Everything that changed on the site from the day the project folder was created 
 
 ## Unreleased (in the working tree, not yet committed)
 
-- Home page: the page can no longer be scrolled sideways on desktop widths between about 1200 and 1700 px (the hidden globe hover card used to widen the page). The services card stack still sticks as before.
-- Globe page: canonical link, Open Graph and Twitter share tags added, with a share image made from the globe's first frame (`assets/brand/og-globe.jpg`).
+- Tablets: the hidden globe hover card no longer widens the page, which had made iPads zoom the whole layout out (small text, nav button cut off at the right). The hero keeps the desktop's centred column on tablets, scaled to the screen. The PRIOR section stacks with the globe centred (up to 1100 px) instead of squeezing the text into a 200 px column.
+- Hero video on phones and tablets (any orientation, and desktop windows up to 1100 px): the wall's three panels play one at a time, edge to edge, in the order the desktop shows them, instead of the wall cropped at the sides. The nine panels are cut from the three wall clips (`hero-01a` to `hero-03c`, 7 s each); computers keep the three-panel wall. The set is chosen before any video downloads, so phones never fetch the wall.
+- iPads in portrait (741 to 900 px) now get the desktop composition: full nav links, the services card stack, three reels side by side, two-column contact block and three-column footer. The phone layout (menu button, stacked sections) starts at 740 px on both the home and contact pages.
+- Redirects: old links to `/atlantic-media.html` and `/atlantic-media` now go to the home page; the stale rewrite to the removed file is gone.
+- Globe page: on short phones (iPhone SE size) the globe now sits clear of the act title instead of touching its last line; checked on five phone and tablet sizes.
+- Apache fallback: an `.htaccess` so the site also works if its files are uploaded to a plain Apache host (as happened on `atlanticmedia.in`): pretty URLs for `/contact`, `/privacy` and `/terms`, the globe's deep links, the 404 page, https, security headers, and the form falls back to email instead of claiming "sent". Netlify ignores the file and never serves it.
+- Contact form: the phone field accepts digits only and stops at ten (letters, spaces and a pasted "+91" are dropped as you type); name, phone, email and "I am a" are required with the site's own messages instead of the browser's bubbles; a field is checked when you leave it and its message clears as soon as it is fixed.
 
 ## 2 November 2026
+
+- Home page file renamed from `atlantic-media.html` to `index.html`.
+- SEO tags from the client's sheet (`Atlantic Media.xlsx`) applied to every page: meta titles and descriptions, share titles and descriptions, and the H1/H2/H3 phrases as the small kicker lines, with the big display headlines unchanged in appearance.
+- Home page: the page can no longer be scrolled sideways on desktop widths between about 1200 and 1700 px (the hidden globe hover card used to widen the page). The services card stack still sticks as before.
+- Globe page: canonical link, Open Graph and Twitter share tags added, with a share image made from the globe's first frame (`assets/brand/og-globe.jpg`).
+- Change log started (`change.md`).
 
 - Full pre-launch check of the live site on desktop and phone: every page, console errors, broken links and images, meta and share tags, security headers, form markup, 404 page, sitemap and robots. No broken links or images, no console errors; the two fixes above came out of it.
 - Still open for go-live: final domain in the canonical links, share tags, sitemap and robots (marked `SITE_URL` in six files), custom domain with HTTPS and the DNS switch from Wix, a test enquiry and the notification email in Netlify Forms, and optionally compressing the three reel videos (6 to 7 MB each).

@@ -1,0 +1,43 @@
+# Apache fallback for the Atlantic Media site (used only if the files are uploaded to a plain Apache host such as BigRock).
+# Netlify ignores this file and uses _redirects and _headers instead. The contact form needs Netlify Forms: on Apache the
+# form falls back to opening the visitor's email app (the POST below is refused on purpose so the page never claims "sent").
+Options -Indexes -MultiViews
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  # https everywhere
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+  # the form posts to Netlify Forms; a plain host cannot receive it, so refuse the POST and let the page use email instead
+  RewriteCond %{REQUEST_METHOD} =POST
+  RewriteRule ^(index\.html|contact|contact\.html)?$ - [R=405,L]
+  # old home page name
+  RewriteRule ^atlantic-media(\.html)?$ / [R=301,L]
+  # the globe is a single-page app: every path under it is its index.html
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^atlantic-globe/.* atlantic-globe/index.html [L]
+  # pretty URLs: /contact -> contact.html, /privacy -> privacy.html, /terms -> terms.html
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^([a-z0-9-]+)/?$ $1.html [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  <FilesMatch "\.(webp|jpg|jpeg|png|mp4|woff2|ico)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_mime.c>
+  AddType video/mp4 .mp4
+  AddType image/webp .webp
+  AddType font/woff2 .woff2
+</IfModule>
