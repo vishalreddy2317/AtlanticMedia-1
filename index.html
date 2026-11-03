@@ -83,7 +83,8 @@
   .hero .ctas { display: flex; gap: 14px; margin-top: 34px; flex-wrap: wrap; }
 
   section { padding: clamp(80px, 10vw, 130px) 0; scroll-snap-align: start; }
-  .quote, .hero { scroll-snap-align: none; }   /* the quote band belongs to the story above it; the hero is the page top */
+  .quote, .hero { scroll-snap-align: none; }
+  footer { scroll-snap-align: end; }   /* the page can rest at the very bottom: without this, snapping pulls back to the contact section and hides the footer */   /* the quote band belongs to the story above it; the hero is the page top */
   @media (prefers-reduced-motion: reduce) { html { scroll-snap-type: none; } }
   .h2 { font-family: var(--serif); font-weight: 600; font-size: clamp(36px, 4.6vw, 64px); line-height: 1.05; letter-spacing: -.015em; margin-top: 16px; }
 
@@ -406,7 +407,7 @@
   <div class="wrap">
     <div><img src="assets/brand/logo-white.png" alt="Atlantic Media" /><p style="margin-top:14px">We’re one DM, mail or call away.</p></div>
     <div><h4>Explore</h4><ul><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#prior">PRIOR</a></li><li><a href="/contact">Contact</a></li></ul></div>
-    <div><h4>Connect</h4><ul><li><a href="mailto:connect@atlanticmedia.in">connect@atlanticmedia.in</a></li><li><a href="https://www.instagram.com/atlantic.media_india/" target="_blank" rel="noopener">Instagram · @atlantic.media_india</a></li><li><a href="https://in.linkedin.com/company/atlantic-media-india" target="_blank" rel="noopener">LinkedIn</a></li></ul></div>
+    <div><h4>Connect</h4><ul><li><a href="mailto:connect@atlanticmedia.in">connect@atlanticmedia.in</a></li><li><a href="https://www.instagram.com/atlantic.media_india/" target="_blank" rel="noopener">Instagram · @atlantic.media_india</a></li><li><a href="https://in.linkedin.com/company/atlantic-media-india" target="_blank" rel="noopener">LinkedIn · atlantic-media-india</a></li></ul></div>
   </div>
   <div class="legal"><span>© 2026 Atlantic Media</span><span><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></span></div>
 </footer>
